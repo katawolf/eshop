@@ -1,21 +1,52 @@
-import {HomeComponent} from "./HomeComponent";
-import {render, RenderResult} from "@testing-library/react";
+import HomeComponent from "./HomeComponent";
+import {render, RenderResult, wait} from "@testing-library/react";
+import * as articleService from '../services/article.service';
 import React from "react";
+import IArticle from "../models/IArticle";
+import {act} from "react-dom/test-utils";
+import {anArticle} from "../data.mock";
+
+const articles: IArticle[] = [
+    anArticle({name: 'IPhone'}),
+    anArticle({name: 'Honor phone'})
+];
 
 describe('HomeComponent spec', () => {
 
     describe('On init', () => {
 
-        let homeComponent: RenderResult;
+        const mockGetArticles = jest.spyOn(articleService, 'getArticles');
 
-        beforeAll(() => {
-            homeComponent = componet();
+        let homeComponent: RenderResult
+
+        beforeAll(async () => {
+            mockGetArticles.mockReturnValue(Promise.resolve(articles))
+            await act(async () => {
+                homeComponent = component()
+            })
         })
 
-        test('Should load component', () => {
-            expect(homeComponent.queryByTestId('HomeComponent')).toBeDefined();
+        afterEach(() => {
+            mockGetArticles.mockClear()
+        })
+
+        test('Should render component', () => {
+            expect(homeComponent.queryByTestId('HomeComponent')).toBeDefined()
+        })
+
+        test('Should load articles', () => {
+            wait(() => {
+                expect(mockGetArticles).toBeCalledTimes(1)
+            })
+        })
+
+        test('Should display articles', () => {
+            wait(() => {
+                expect(homeComponent.queryByText('IPhone')).not.toBeNull()
+                expect(homeComponent.getByText('Honor phone')).not.toBeNull()
+            })
         })
     })
 })
 
-const componet = () => render(<HomeComponent/>)
+const component = () => render(<HomeComponent/>)

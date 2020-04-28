@@ -1,10 +1,13 @@
 import React from 'react';
-import {HomeComponent} from "./components/HomeComponent";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import HomeComponent from "./components/HomeComponent";
 
 const App: React.FC = () => {
     return (
         <div className="App">
             <HomeComponent/>
+            <section className="container">
+            </section>
         </div>
     );
 }
