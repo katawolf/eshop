@@ -1,52 +1,19 @@
-import HomeComponent from "./HomeComponent";
-import {render, RenderResult, wait} from "@testing-library/react";
-import * as articleService from '../services/article.service';
+import ArticlesComponent from "./articles/ArticlesComponent";
+import {render, RenderResult} from "@testing-library/react";
 import React from "react";
-import IArticle from "../models/IArticle";
-import {act} from "react-dom/test-utils";
-import {anArticle} from "../data.mock";
 
-const articles: IArticle[] = [
-    anArticle({name: 'IPhone'}),
-    anArticle({name: 'Honor phone'})
-];
+jest.mock('./articles/ArticlesComponent', () => () => <div data-testid={'articles-component'}>ArticlesComponent</div>)
 
-describe('HomeComponent spec', () => {
+describe('Home component', () => {
 
-    describe('On init', () => {
+    let homeComponent: RenderResult
 
-        const mockGetArticles = jest.spyOn(articleService, 'getArticles');
-
-        let homeComponent: RenderResult
-
-        beforeAll(async () => {
-            mockGetArticles.mockReturnValue(Promise.resolve(articles))
-            await act(async () => {
-                homeComponent = component()
-            })
-        })
-
-        afterEach(() => {
-            mockGetArticles.mockClear()
-        })
-
-        test('Should render component', () => {
-            expect(homeComponent.queryByTestId('HomeComponent')).toBeDefined()
-        })
-
-        test('Should load articles', () => {
-            wait(() => {
-                expect(mockGetArticles).toBeCalledTimes(1)
-            })
-        })
-
-        test('Should display articles', () => {
-            wait(() => {
-                expect(homeComponent.queryByText('IPhone')).not.toBeNull()
-                expect(homeComponent.getByText('Honor phone')).not.toBeNull()
-            })
-        })
+    beforeEach(() => {
+        homeComponent = component()
+    })
+    test('Should display articles component', () => {
+        expect(homeComponent.queryByTestId('articles-component')).not.toBeNull()
     })
 })
 
-const component = () => render(<HomeComponent/>)
+const component = () => render(<ArticlesComponent/>)

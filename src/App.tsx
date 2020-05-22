@@ -6,8 +6,6 @@ const App: React.FC = () => {
     return (
         <div className="App">
             <HomeComponent/>
-            <section className="container">
-            </section>
         </div>
     );
 }
