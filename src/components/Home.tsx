@@ -1,9 +1,9 @@
-import ArticlesComponent from "./articles/ArticlesComponent";
+import ArticlesViewer from "./articles/ArticlesViewer";
 import React from "react";
 
 const Home: React.FC = () => {
     return <>
-        <ArticlesComponent />
+        <ArticlesViewer />
     </>
 }
 

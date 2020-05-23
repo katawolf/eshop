@@ -1,6 +1,6 @@
 import React from "react";
-import {render, RenderResult} from "@testing-library/react";
-import ArticleSummaryComponent, {IArticleSummaryComponentProps} from "./ArticleSummaryComponent";
+import {fireEvent, render, RenderResult} from "@testing-library/react";
+import ArticleCard, {IArticleCardProps} from "./ArticleCard";
 import IArticle from "../../models/IArticle";
 import {anArticle} from "../../data.mock";
 
@@ -9,11 +9,14 @@ const article: IArticle = anArticle({
     imgSrc: '/src/image/iphone.jpg',
     description: 'a smartphone'
 })
+const addToCart = () => {}
+const removeToCart = () => {}
+
 describe('ArticleCardComponent', () => {
 
-    describe('On init', () => {
+    let articleCardComponent: RenderResult
 
-        let articleCardComponent: RenderResult
+    describe('On init', () => {
 
         const shouldDisplayDefaultArticleValues = () => {
             test('Should display name', () => {
@@ -55,7 +58,31 @@ describe('ArticleCardComponent', () => {
             })
         })
     })
+
+    describe('When add article on cart', () => {
+        const addToCart = jest.fn()
+
+        beforeEach(() => {
+            articleCardComponent = component({article, cartArticles: [], addToCart})
+            fireEvent.click(articleCardComponent.getByTestId('addToCardButton'))
+        })
+        test('should call addToCart', () => {
+            expect(addToCart).toBeCalledWith(article)
+        })
+    })
+
+    describe('When remove article on cart', () => {
+        const removeToCart = jest.fn()
+
+        beforeEach(() => {
+            articleCardComponent = component({article, cartArticles: [article], removeToCart})
+            fireEvent.click(articleCardComponent.getByTestId('removeToCardButton'))
+        })
+        test('should call addToCart', () => {
+            expect(removeToCart).toBeCalledWith(article)
+        })
+    })
 })
 
-const component = (partialProps: Partial<IArticleSummaryComponentProps> = {}) => render(
-    <ArticleSummaryComponent {...{article, cartArticles: [], ...partialProps}}/>)
+const component = (partialProps: Partial<IArticleCardProps> = {}) => render(
+    <ArticleCard {...{article, cartArticles: [], addToCart, removeToCart, ...partialProps}}/>)

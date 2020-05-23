@@ -11,7 +11,7 @@ describe('App component', () => {
     beforeEach(() => {
         app = component()
     })
-    test('should display home component', () => {
+    test('should display home', () => {
         expect(app.queryByTestId('home')).not.toBeNull()
     })
 })

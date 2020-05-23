@@ -1,19 +1,19 @@
-import ArticlesComponent from "./articles/ArticlesComponent";
+import ArticlesViewer from "./articles/ArticlesViewer";
 import {render, RenderResult} from "@testing-library/react";
 import React from "react";
 
-jest.mock('./articles/ArticlesComponent', () => () => <div data-testid={'articles-component'}>ArticlesComponent</div>)
+jest.mock('./articles/ArticlesViewer', () => () => <div data-testid={'articlesViewer'}>ArticlesViewer</div>)
 
-describe('Home component', () => {
+describe('Home spec', () => {
 
     let homeComponent: RenderResult
 
     beforeEach(() => {
         homeComponent = component()
     })
-    test('Should display articles component', () => {
-        expect(homeComponent.queryByTestId('articles-component')).not.toBeNull()
+    test('Should display articles viewer', () => {
+        expect(homeComponent.queryByTestId('articlesViewer')).not.toBeNull()
     })
 })
 
-const component = () => render(<ArticlesComponent/>)
+const component = () => render(<ArticlesViewer/>)
