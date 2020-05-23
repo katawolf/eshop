@@ -1,11 +1,11 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import HomeComponent from "./components/HomeComponent";
+import Home from "./components/Home";
 
 const App: React.FC = () => {
     return (
         <div className="App">
-            <HomeComponent/>
+            <Home/>
         </div>
     );
 }

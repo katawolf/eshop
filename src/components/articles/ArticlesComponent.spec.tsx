@@ -6,6 +6,8 @@ import {anArticle} from "../../data.mock";
 import IArticle from "../../models/IArticle";
 import ArticlesComponent from "./ArticlesComponent";
 
+jest.mock('./ArticleSummaryComponent', () => () => <div data-testid={'article-summary-component'}>ArticleSummaryComponent</div>)
+
 const articles: IArticle[] = [
     anArticle({name: 'IPhone'}),
     anArticle({name: 'Honor phone'})
@@ -41,10 +43,9 @@ describe('ArticlesComponent spec', () => {
             })
         })
 
-        test('Should display articles', () => {
+        test('Should display article summary components', () => {
             wait(() => {
-                expect(articlesComponent.queryByText('IPhone')).not.toBeNull()
-                expect(articlesComponent.getByText('Honor phone')).not.toBeNull()
+                expect(articlesComponent.queryAllByTestId('article-summary-component')).toHaveLength(2)
             })
         })
 

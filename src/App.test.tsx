@@ -2,7 +2,7 @@ import React from 'react';
 import {render, RenderResult} from '@testing-library/react';
 import App from './App';
 
-jest.mock('./components/HomeComponent', () => () => <div data-testid={'home-component'}>HomeComponent</div>)
+jest.mock('./components/Home', () => () => <div data-testid={'home'}>Home</div>)
 
 describe('App component', () => {
 
@@ -12,8 +12,8 @@ describe('App component', () => {
         app = component()
     })
     test('should display home component', () => {
-        expect(app.queryByTestId('home-component')).not.toBeNull()
+        expect(app.queryByTestId('home')).not.toBeNull()
     })
-});
+})
 
 const component = () => render(<App/>)

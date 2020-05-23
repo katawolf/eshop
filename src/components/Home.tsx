@@ -1,10 +1,10 @@
 import ArticlesComponent from "./articles/ArticlesComponent";
 import React from "react";
 
-const HomeComponent: React.FC = () => {
+const Home: React.FC = () => {
     return <>
         <ArticlesComponent />
     </>
 }
 
-export default HomeComponent
+export default Home
