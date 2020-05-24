@@ -1,10 +1,10 @@
-import ArticlesViewer from "./articles/ArticlesViewer";
 import {render, RenderResult, wait} from "@testing-library/react";
 import React from "react";
 import IArticle from "../models/IArticle";
 import {anArticle} from "../data.mock";
 import * as articleService from "../services/article.service";
 import {act} from "react-dom/test-utils";
+import Home from "./Home";
 
 jest.mock('./articles/ArticlesViewer', () => () => <div data-testid={'articlesViewer'}>ArticlesViewer</div>)
 
@@ -18,7 +18,7 @@ describe('Home spec', () => {
     const mockGetArticles = jest.spyOn(articleService, 'getArticles')
     let homeComponent: RenderResult
 
-    beforeEach(async() => {
+    beforeEach(async () => {
         mockGetArticles.mockReturnValue(Promise.resolve(articles))
         await act(async () => {
             homeComponent = component()
@@ -37,4 +37,4 @@ describe('Home spec', () => {
     })
 })
 
-const component = () => render(<ArticlesViewer/>)
+const component = () => render(<Home/>)
