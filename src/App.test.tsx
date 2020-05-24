@@ -1,11 +1,19 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import {render, RenderResult} from '@testing-library/react';
 import App from './App';
 
-jest.mock('./components/HomeComponent', () => () => <div>HomeComponent</div>)
+jest.mock('./components/Home', () => () => <div data-testid={'home'}>Home</div>)
 
-test('renders learn react link', () => {
-  const { container } = render(<App />);
-  const classElement = container.getElementsByClassName("App")
-  expect(classElement.length).toEqual(1)
-});
+describe('App component', () => {
+
+    let app: RenderResult
+
+    beforeEach(() => {
+        app = component()
+    })
+    test('should display home', () => {
+        expect(app.queryByTestId('home')).not.toBeNull()
+    })
+})
+
+const component = () => render(<App/>)
