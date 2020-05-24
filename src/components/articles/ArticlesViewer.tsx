@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {CardDeck} from "react-bootstrap";
 import {getArticles} from "../../services/article.service";
 import IArticle from "../../models/IArticle";
-import ArticleCard from "./ArticleCard";
+import ArticleCardConnector from "./ArticleCardConnector";
 
 const ArticlesViewer: React.FC = () => {
 
@@ -14,12 +14,7 @@ const ArticlesViewer: React.FC = () => {
 
     return <CardDeck>
         {articles.map(it => <div key={it.name}>
-            <ArticleCard article={it}
-                         cartArticles={[]}
-                         addToCart={() => {
-                         }}
-                         removeToCart={() => {
-                         }}/>
+            <ArticleCardConnector article={it}/>
         </div>)}
     </CardDeck>
 }

@@ -6,7 +6,7 @@ import {anArticle} from "../../data.mock";
 import IArticle from "../../models/IArticle";
 import ArticlesViewer from "./ArticlesViewer";
 
-jest.mock('./ArticleCard', () => () => <div data-testid={'articleCard'}>ArticleCard</div>)
+jest.mock('./ArticleCardConnector', () => () => <div data-testid={'articleCardConnector'}>ArticleCardConnector</div>)
 
 const articles: IArticle[] = [
     anArticle({name: 'IPhone'}),
@@ -37,7 +37,7 @@ describe('ArticlesViewer spec', () => {
         })
         test('Should display article cards', () => {
             wait(() => {
-                expect(articlesComponent.queryAllByTestId('articleCard')).toHaveLength(2)
+                expect(articlesComponent.queryAllByTestId('articleCardConnector')).toHaveLength(2)
             })
         })
     })
