@@ -1,16 +1,13 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {CardDeck} from "react-bootstrap";
-import {getArticles} from "../../services/article.service";
 import IArticle from "../../models/IArticle";
 import ArticleCardConnector from "./ArticleCardConnector";
 
-const ArticlesViewer: React.FC = () => {
+interface IProps {
+    articles: IArticle[]
+}
 
-    const [articles, setArticles] = useState([] as IArticle[])
-
-    useEffect(() => {
-        getArticles().then(setArticles);
-    }, [])
+const ArticlesViewer: React.FC<IProps> = ({articles}) => {
 
     return <CardDeck>
         {articles.map(it => <div key={it.name}>

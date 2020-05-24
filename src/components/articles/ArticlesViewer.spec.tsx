@@ -1,10 +1,8 @@
 import {render, RenderResult, wait} from "@testing-library/react";
 import React from "react";
-import {act} from "react-dom/test-utils";
-import * as articleService from '../../services/article.service';
-import {anArticle} from "../../data.mock";
-import IArticle from "../../models/IArticle";
 import ArticlesViewer from "./ArticlesViewer";
+import IArticle from "../../models/IArticle";
+import {anArticle} from "../../data.mock";
 
 jest.mock('./ArticleCardConnector', () => () => <div data-testid={'articleCardConnector'}>ArticleCardConnector</div>)
 
@@ -15,27 +13,14 @@ const articles: IArticle[] = [
 
 describe('ArticlesViewer spec', () => {
 
-    const mockGetArticles = jest.spyOn(articleService, 'getArticles');
-
     describe('On init', () => {
 
         let articlesComponent: RenderResult
 
         beforeAll(async () => {
-            mockGetArticles.mockReturnValue(Promise.resolve(articles))
-            await act(async () => {
-                articlesComponent = component()
-            })
+            articlesComponent = component()
         })
-        afterEach(() => {
-            mockGetArticles.mockClear()
-        })
-        test('Should load articles', () => {
-            wait(() => {
-                expect(mockGetArticles).toBeCalledTimes(1)
-            })
-        })
-        test('Should display article cards', () => {
+        test('Should display article cards connector', () => {
             wait(() => {
                 expect(articlesComponent.queryAllByTestId('articleCardConnector')).toHaveLength(2)
             })
@@ -44,4 +29,4 @@ describe('ArticlesViewer spec', () => {
 
 })
 
-const component = () => render(<ArticlesViewer/>)
+const component = () => render(<ArticlesViewer articles={articles}/>)
