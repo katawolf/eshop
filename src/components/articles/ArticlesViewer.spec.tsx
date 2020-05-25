@@ -1,12 +1,12 @@
 import {render, RenderResult, wait} from "@testing-library/react";
 import React from "react";
 import ArticlesViewer from "./ArticlesViewer";
-import IArticle from "../../models/IArticle";
+import IArticleSummary from "../../models/IArticleSummary";
 import {anArticle} from "../../data.mock";
 
 jest.mock('./ArticleCardConnector', () => () => <div data-testid={'articleCardConnector'}>ArticleCardConnector</div>)
 
-const articles: IArticle[] = [
+const articles: IArticleSummary[] = [
     anArticle({name: 'IPhone'}),
     anArticle({name: 'Honor phone'})
 ];

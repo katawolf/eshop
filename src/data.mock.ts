@@ -1,8 +1,11 @@
-import IArticle from "./models/IArticle";
+import IArticleSummary from "./models/IArticleSummary";
 
-export const anArticle = (partialArticle: Partial<IArticle> = {}): IArticle => ({
+export const anArticle = (partialArticle: Partial<IArticleSummary> = {}): IArticleSummary => ({
     name: 'an Article',
     imgSrc: 'src/image.jpg',
-    description: 'Some quick example text to build on the card title and make up the bulk of\n the card\'s content.',
+    price: {
+        value: 48,
+        currency: "EUR"
+    },
     ...partialArticle
 })

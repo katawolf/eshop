@@ -1,13 +1,16 @@
 import React from "react";
 import {fireEvent, render, RenderResult} from "@testing-library/react";
 import ArticleCard, {IArticleCardProps} from "./ArticleCard";
-import IArticle from "../../models/IArticle";
+import IArticleSummary from "../../models/IArticleSummary";
 import {anArticle} from "../../data.mock";
 
-const article: IArticle = anArticle({
-    name: 'IPhone',
+const article: IArticleSummary = anArticle({
+    name: 'Shoes blue',
     imgSrc: '/src/image/iphone.jpg',
-    description: 'a smartphone'
+    price: {
+        value: 128,
+        currency: "EUR"
+    }
 })
 const addToCart = () => {}
 const removeToCart = () => {}
@@ -19,16 +22,16 @@ describe('ArticleCardComponent', () => {
     describe('On init', () => {
 
         const shouldDisplayDefaultArticleValues = () => {
-            test('Should display name', () => {
-                expect(articleCardComponent.queryByText('IPhone')).not.toBeNull()
-            })
             test('Should display image', () => {
                 expect(
                     articleCardComponent.getByTestId('img').getAttribute('src')
                 ).toEqual('/src/image/iphone.jpg')
             })
-            test('Should display description', () => {
-                expect(articleCardComponent.queryByText('a smartphone')).not.toBeNull()
+            test('Should display name', () => {
+                expect(articleCardComponent.queryByText('Shoes blue')).not.toBeNull()
+            })
+            test('Should display price', () => {
+                expect(articleCardComponent.queryByText('128 €')).not.toBeNull()
             })
         }
 

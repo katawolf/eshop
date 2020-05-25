@@ -1,13 +1,13 @@
-import IArticle from "../../models/IArticle";
+import IArticleSummary from "../../models/IArticleSummary";
 
 interface IAddArticleAction {
     type: 'ADD_ARTICLE'
-    payload: IArticle
+    payload: IArticleSummary
 }
 
 interface IRemoveArticleAction {
     type: 'REMOVE_ARTICLE'
-    payload: IArticle
+    payload: IArticleSummary
 }
 
 export type CardActionType = IAddArticleAction | IRemoveArticleAction

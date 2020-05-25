@@ -1,13 +1,13 @@
 import articleResource from "../resources/article.resource";
 import {anArticle} from "../data.mock";
-import IArticle from "../models/IArticle";
+import IArticleSummary from "../models/IArticleSummary";
 import {getArticles} from "./article.service";
 
 describe('Article service', () => {
     describe('When call getArticles', () => {
         const articles = [anArticle({name: 'Iphone'}), anArticle({name: 'Honor phone'})]
         const mockGetArticles = jest.spyOn(articleResource, 'getArticles')
-        let result: IArticle[]
+        let result: IArticleSummary[]
 
         beforeEach(async () => {
             mockGetArticles.mockReturnValue(Promise.resolve(articles))

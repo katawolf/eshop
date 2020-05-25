@@ -1,12 +1,13 @@
 import React from "react";
 import {Button, Card} from "react-bootstrap";
-import IArticle from "../../models/IArticle";
+import IArticleSummary from "../../models/IArticleSummary";
+import IPrice from "../../models/IPrice";
 
 export interface IProps {
-    article: IArticle
-    cartArticles: IArticle[]
-    addToCart: (article: IArticle) => void
-    removeToCart: (article: IArticle) => void
+    article: IArticleSummary
+    cartArticles: IArticleSummary[]
+    addToCart: (article: IArticleSummary) => void
+    removeToCart: (article: IArticleSummary) => void
 }
 
 const ArticleCard: React.FC<IProps> = ({article, cartArticles, addToCart, removeToCart}) => {
@@ -15,7 +16,7 @@ const ArticleCard: React.FC<IProps> = ({article, cartArticles, addToCart, remove
         <Card.Img data-testid='img' variant="top" src={article.imgSrc}/>
         <Card.Body>
             <Card.Title>{article.name}</Card.Title>
-            <Card.Text>{article.description}</Card.Text>
+            <Card.Text>{formatPrice(article.price)}</Card.Text>
             {
                 articleIsOnCart(article, cartArticles)
                     ?
@@ -31,7 +32,9 @@ const ArticleCard: React.FC<IProps> = ({article, cartArticles, addToCart, remove
     </Card>
 }
 
-const articleIsOnCart = ({name}: IArticle, cartArticles: IArticle[]) => !!cartArticles.find(({name: it}: IArticle) => name === it)
+const articleIsOnCart = ({name}: IArticleSummary, cartArticles: IArticleSummary[]) => !!cartArticles.find(({name: it}: IArticleSummary) => name === it)
+
+const formatPrice = ({value}: IPrice) => `${value} €`
 
 export default ArticleCard
 export type IArticleCardProps = IProps

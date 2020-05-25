@@ -1,7 +1,7 @@
-interface IArticle {
-    name: string
-    imgSrc: string
-    description: string
-}
+import IArticleSummary from "./IArticleSummary";
+import Size from "./Size";
 
-export default IArticle
+interface IArticle extends IArticleSummary {
+    description: string
+    availableSizes: Size[]
+}

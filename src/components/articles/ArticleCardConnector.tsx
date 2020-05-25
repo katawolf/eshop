@@ -1,7 +1,7 @@
 import {ICardState} from "../../store/card/reducer";
 import {connect, ConnectedProps} from "react-redux";
 import {addArticleToCard, removeArticleToCard} from "../../store/card/action";
-import IArticle from "../../models/IArticle";
+import IArticleSummary from "../../models/IArticleSummary";
 import React from "react";
 import ArticleCard from "./ArticleCard";
 
@@ -17,7 +17,7 @@ const connector = connect(mapState, mapDispatch)
 type PropsFromRedux = ConnectedProps<typeof connector>
 
 interface IProps {
-    article: IArticle,
+    article: IArticleSummary,
 }
 
 const ArticleCardConnector: React.FC<IProps & PropsFromRedux> = ({article, articles, addArticleToCard, removeArticleToCard}) =>

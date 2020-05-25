@@ -1,10 +1,10 @@
 import React from "react";
 import {CardDeck} from "react-bootstrap";
-import IArticle from "../../models/IArticle";
+import IArticleSummary from "../../models/IArticleSummary";
 import ArticleCardConnector from "./ArticleCardConnector";
 
 interface IProps {
-    articles: IArticle[]
+    articles: IArticleSummary[]
 }
 
 const ArticlesViewer: React.FC<IProps> = ({articles}) => {
