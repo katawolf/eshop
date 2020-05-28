@@ -4,9 +4,8 @@ import Home from "./components/Home";
 import {Provider} from "react-redux";
 import store from "./store/configStore";
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import ArticleDetail from "./components/articles/ArticleDetail";
-import {anArticle} from "./data.mock";
-import {Nav, Navbar} from 'react-bootstrap';
+import {Navbar} from 'react-bootstrap';
+import Article from "./components/Article";
 
 const App: React.FC = () => {
     return (
@@ -20,7 +19,7 @@ const App: React.FC = () => {
                     <br/>
                     <Switch>
                         <Route path={'/article'}>
-                            <ArticleDetail article={anArticle()}/>
+                            <Article/>
                         </Route>
                         <Route path={'/'}>
                             <Home/>
