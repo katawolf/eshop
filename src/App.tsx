@@ -12,18 +12,9 @@ const App: React.FC = () => {
         <div className="App">
             <Provider store={store}>
                 <BrowserRouter>
-                    <Navbar bg="dark" variant="dark" expand="lg">
-                        <Navbar.Brand href="/">Eshop</Navbar.Brand>
-                        <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-                    </Navbar>
-                    <br/>
                     <Switch>
-                        <Route path={'/article/:id'}>
-                            <Article/>
-                        </Route>
-                        <Route path={'/'}>
-                            <Home/>
-                        </Route>
+                        <Route exact path={'/article/:id'} component={Article} />
+                        <Route path={'/'} component={Home} />
                     </Switch>
                 </BrowserRouter>
             </Provider>

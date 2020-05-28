@@ -2,6 +2,7 @@ import ArticlesViewer from "./articles/ArticlesViewer";
 import React, {useEffect, useState} from "react";
 import IArticleSummary from "../models/IArticleSummary";
 import {getArticleSummaries} from "../services/article.service";
+import Menu from "./Menu";
 
 const Home: React.FC = () => {
 
@@ -12,6 +13,7 @@ const Home: React.FC = () => {
     }, [])
 
     return <>
+        <Menu/>
         <ArticlesViewer articles={articles}/>
     </>
 }

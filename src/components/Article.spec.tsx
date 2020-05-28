@@ -9,6 +9,8 @@ import {anArticle} from "../data.mock";
 jest.mock('./articles/ArticleDetailConnector', () => () => <div
     data-testid={'articleDetailConnector'}>ArticleDetailConnector</div>)
 
+jest.mock('./Menu', () => () => <div data-testid={'menu'}>Menu</div>)
+
 describe('Article page', () => {
     const mockGetArticle = jest.spyOn(articleService, 'getArticle')
     let articlePage: RenderResult
@@ -23,10 +25,13 @@ describe('Article page', () => {
         afterEach(() => {
             mockGetArticle.mockClear()
         })
+        test('should display menu', () => {
+            expect(articlePage.queryByTestId('menu')).not.toBeNull()
+        })
         test('should load article with id 2', () => {
             expect(mockGetArticle).toBeCalledWith('2')
         })
-        test('should display article detail component', () => {
+        test('should display article detail', () => {
             expect(articlePage.queryByTestId('articleDetailConnector')).not.toBeNull()
         })
     })

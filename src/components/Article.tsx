@@ -3,6 +3,7 @@ import IArticle from "../models/IArticle";
 import {getArticle} from "../services/article.service";
 import ArticleDetailConnector from "./articles/ArticleDetailConnector";
 import {useParams} from "react-router-dom";
+import Menu from "./Menu";
 
 const Article: React.FC = () => {
     const [article, setArticle] = useState(undefined as IArticle | undefined)
@@ -12,7 +13,10 @@ const Article: React.FC = () => {
         getArticle(id).then(setArticle)
     }, [id])
 
-    return <>{article && <ArticleDetailConnector article={article}/>}</>
+    return <>
+        <Menu/>
+        {article && <ArticleDetailConnector article={article}/>}
+    </>
 }
 
 export default Article
