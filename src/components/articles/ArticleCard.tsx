@@ -8,9 +8,9 @@ export interface IProps {
     article: IArticleSummary
 }
 
-const ArticleCard: React.FC<IProps> = ({article: {imgSrc, name, price}}) => {
+const ArticleCard: React.FC<IProps> = ({article: {id, imgSrc, name, price}}) => {
     const history = useHistory()
-    const redirectOnArticle = () => history.push('/article')
+    const redirectOnArticle = () => history.push(`/article/${id}`)
 
     return <Card data-testid={'articleCard'} onClick={redirectOnArticle}>
         <Card.Img data-testid='img' variant="top" src={imgSrc}/>

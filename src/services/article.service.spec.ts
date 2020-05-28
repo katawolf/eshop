@@ -5,8 +5,9 @@ import {getArticle, getArticleSummaries} from "./article.service";
 import IArticle from "../models/IArticle";
 
 describe('Article service', () => {
+    const articles = [anArticle({id: '1', name: 'Iphone'}), anArticle({id: '2', name: 'Honor phone'})]
+
     describe('When call getArticles', () => {
-        const articles = [anArticle({name: 'Iphone'}), anArticle({name: 'Honor phone'})]
         const mockGetArticleSummaries = jest.spyOn(articleResource, 'getArticleSummaries')
         let result: IArticleSummary[]
 
@@ -29,19 +30,19 @@ describe('Article service', () => {
     })
 
     describe('when call getArticle', () => {
-        const articles = anArticle({name: 'Iphone'})
+        const [article] = articles
         const mockGetArticle = jest.spyOn(articleResource, 'getArticle')
         let result: IArticle
         beforeEach(async () => {
-            mockGetArticle.mockReturnValue(Promise.resolve(articles))
-            result = await getArticle()
+            mockGetArticle.mockReturnValue(Promise.resolve(article))
+            result = await getArticle('1')
         })
         test('Should call article resource', () => {
-            expect(mockGetArticle).toBeCalledTimes(1)
+            expect(mockGetArticle).toBeCalledWith('1')
         })
 
         test('Should return articles', () => {
-            expect(result).toEqual(articles)
+            expect(result).toEqual(article)
         })
 
     })

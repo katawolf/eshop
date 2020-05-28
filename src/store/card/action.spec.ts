@@ -1,4 +1,4 @@
-import {addArticleToCard, removeArticleToCard} from "./action";
+import {addArticleToCard} from "./action";
 import {anArticleSummary} from "../../data.mock";
 
 describe('Article actions spec', () => {
@@ -10,18 +10,6 @@ describe('Article actions spec', () => {
                 addArticleToCard(article)
             ).toEqual({
                 type: 'ADD_ARTICLE',
-                payload: article
-            })
-        })
-    })
-
-    describe('remove article to card', () => {
-        const article = anArticleSummary()
-        test('should create action "REMOVE_ARTICLE', () => {
-            expect(
-                removeArticleToCard(article)
-            ).toEqual({
-                type: 'REMOVE_ARTICLE',
                 payload: article
             })
         })

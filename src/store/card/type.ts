@@ -5,9 +5,4 @@ interface IAddArticleAction {
     payload: IArticleSummary
 }
 
-interface IRemoveArticleAction {
-    type: 'REMOVE_ARTICLE'
-    payload: IArticleSummary
-}
-
-export type CardActionType = IAddArticleAction | IRemoveArticleAction
+export type CardActionType = IAddArticleAction

@@ -7,8 +7,8 @@ import {anArticle, anArticleSummary} from "../../data.mock";
 jest.mock('./ArticleCard', () => () => <div data-testid={'articleCard'}>ArticleCard</div>)
 
 const articles: IArticleSummary[] = [
-    anArticle({name: 'IPhone'}),
-    anArticle({name: 'Honor phone'})
+    anArticle({id: '1', name: 'IPhone'}),
+    anArticle({id: '2', name: 'Honor phone'})
 ];
 
 describe('ArticlesViewer spec', () => {

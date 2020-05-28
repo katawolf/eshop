@@ -5,6 +5,7 @@ import ArticleDetail, {IArticleDetailProps} from "./ArticleDetail";
 
 const article = anArticle(
     {
+        id: '1',
         name: 'name',
         price: {value: 125, currency: 'EUR'},
         imgSrc: '/src/img',

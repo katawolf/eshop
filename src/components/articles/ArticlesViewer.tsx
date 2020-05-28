@@ -10,7 +10,7 @@ interface IProps {
 const ArticlesViewer: React.FC<IProps> = ({articles}) => {
 
     return <CardColumns>
-        {articles.map(it => <div key={it.name}>
+        {articles.map(it => <div key={it.id}>
             <ArticleCard article={it}/>
         </div>)}
     </CardColumns>

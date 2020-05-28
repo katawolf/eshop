@@ -8,6 +8,7 @@ import {createMemoryHistory} from "history";
 import {act} from "react-dom/test-utils";
 
 const article: IArticleSummary = anArticle({
+    id: '1',
     name: 'Shoes blue',
     imgSrc: '/src/image/iphone.jpg',
     price: {
@@ -48,12 +49,12 @@ describe('ArticleCardComponent', () => {
 
         beforeEach(async () => {
             await act(async () => {
-                articleCardComponent = component({}, history)
+                articleCardComponent = component({article}, history)
                 fireEvent.click(articleCardComponent.getByTestId('articleCard'))
             })
         })
         test('should redirect on article detail page', () => {
-            expect(history.location.pathname).toBe('/article')
+            expect(history.location.pathname).toBe('/article/1')
         })
     })
 

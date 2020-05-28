@@ -2,6 +2,7 @@ import IArticleSummary from "./models/IArticleSummary";
 import IArticle from "./models/IArticle";
 
 export const anArticleSummary = (partialArticle: Partial<IArticleSummary> = {}): IArticleSummary => ({
+    id: '1',
     name: 'an Article',
     imgSrc: '/basket.jpg',
     price: {

@@ -15,9 +15,9 @@ describe('reducer spec', () => {
     })
 
     describe('handle "ADD_ARTICLE"', () => {
-        const article = anArticleSummary({name: 'Iphone'})
+        const article = anArticleSummary({id: '1', name: 'Iphone'})
         const state = {
-            articles: [anArticleSummary({name: 'X1 carbon'})]
+            articles: [anArticleSummary({id: '2', name: 'X1 carbon'})]
         }
         test('should add article', () => {
             expect(
@@ -40,39 +40,5 @@ describe('reducer spec', () => {
                 articles: state.articles
             })
         })
-    })
-
-    describe('handle "REMOVE_ARTICLE', () => {
-        const articleToRemove = anArticleSummary({name: 'Iphone'})
-        test('should remove article', () => {
-            expect(
-                cardReducer({
-                    articles: [
-                        anArticleSummary({name: 'X1 carbon'}),
-                        articleToRemove
-                    ]
-                }, {
-                    type: 'REMOVE_ARTICLE',
-                    payload: articleToRemove
-                })
-            ).toEqual({
-                articles: [anArticleSummary({name: 'X1 carbon'})]
-            })
-        })
-        test('should not remove article when state no contain article', () => {
-            expect(
-                cardReducer({
-                    articles: [
-                        anArticleSummary({name: 'X1 carbon'})
-                    ]
-                }, {
-                    type: 'REMOVE_ARTICLE',
-                    payload: articleToRemove
-                })
-            ).toEqual({
-                articles: [anArticleSummary({name: 'X1 carbon'})]
-            })
-        })
-
     })
 })

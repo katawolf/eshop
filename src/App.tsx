@@ -18,7 +18,7 @@ const App: React.FC = () => {
                     </Navbar>
                     <br/>
                     <Switch>
-                        <Route path={'/article'}>
+                        <Route path={'/article/:id'}>
                             <Article/>
                         </Route>
                         <Route path={'/'}>
