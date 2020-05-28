@@ -1,8 +1,9 @@
 import {anArticle} from "../data.mock";
+import IArticle from "../models/IArticle";
 import IArticleSummary from "../models/IArticleSummary";
 
 class ArticleResource {
-    getArticles(): Promise<IArticleSummary[]> {
+    getArticleSummaries(): Promise<IArticleSummary[]> {
         return Promise.resolve([
             anArticle({name: 'IPhone'}),
             anArticle({name: 'PS4'}),
@@ -14,6 +15,10 @@ class ArticleResource {
             anArticle({name: 'Iiyama display'}),
             anArticle({name: 'Honor phone'})
         ])
+    }
+
+    getArticle(): Promise<IArticle> {
+        return Promise.resolve(anArticle({name: 'Basket Adidas'}))
     }
 }
 

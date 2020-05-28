@@ -1,7 +1,7 @@
 import {render, RenderResult, wait} from "@testing-library/react";
 import React from "react";
 import IArticleSummary from "../models/IArticleSummary";
-import {anArticle} from "../data.mock";
+import {anArticleSummary} from "../data.mock";
 import * as articleService from "../services/article.service";
 import {act} from "react-dom/test-utils";
 import Home from "./Home";
@@ -9,13 +9,13 @@ import Home from "./Home";
 jest.mock('./articles/ArticlesViewer', () => () => <div data-testid={'articlesViewer'}>ArticlesViewer</div>)
 
 const articles: IArticleSummary[] = [
-    anArticle({name: 'IPhone'}),
-    anArticle({name: 'Honor phone'})
+    anArticleSummary({name: 'IPhone'}),
+    anArticleSummary({name: 'Honor phone'})
 ];
 
 describe('Home spec', () => {
 
-    const mockGetArticles = jest.spyOn(articleService, 'getArticles')
+    const mockGetArticles = jest.spyOn(articleService, 'getArticleSummaries')
     let homeComponent: RenderResult
 
     beforeEach(async () => {

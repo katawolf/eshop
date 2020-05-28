@@ -5,3 +5,5 @@ interface IArticle extends IArticleSummary {
     description: string
     availableSizes: Size[]
 }
+
+export default IArticle

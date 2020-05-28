@@ -1,14 +1,14 @@
 import ArticlesViewer from "./articles/ArticlesViewer";
 import React, {useEffect, useState} from "react";
 import IArticleSummary from "../models/IArticleSummary";
-import {getArticles} from "../services/article.service";
+import {getArticleSummaries} from "../services/article.service";
 
 const Home: React.FC = () => {
 
     const [articles, setArticles] = useState([] as IArticleSummary[])
 
     useEffect(() => {
-        getArticles().then(setArticles);
+        getArticleSummaries().then(setArticles);
     }, [])
 
     return <>

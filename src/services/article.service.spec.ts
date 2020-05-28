@@ -1,29 +1,48 @@
 import articleResource from "../resources/article.resource";
-import {anArticle} from "../data.mock";
+import {anArticle, anArticleSummary} from "../data.mock";
 import IArticleSummary from "../models/IArticleSummary";
-import {getArticles} from "./article.service";
+import {getArticle, getArticleSummaries} from "./article.service";
+import IArticle from "../models/IArticle";
 
 describe('Article service', () => {
     describe('When call getArticles', () => {
         const articles = [anArticle({name: 'Iphone'}), anArticle({name: 'Honor phone'})]
-        const mockGetArticles = jest.spyOn(articleResource, 'getArticles')
+        const mockGetArticleSummaries = jest.spyOn(articleResource, 'getArticleSummaries')
         let result: IArticleSummary[]
 
         beforeEach(async () => {
-            mockGetArticles.mockReturnValue(Promise.resolve(articles))
-            result = await getArticles()
+            mockGetArticleSummaries.mockReturnValue(Promise.resolve(articles))
+            result = await getArticleSummaries()
         })
 
         afterEach(() => {
-            mockGetArticles.mockClear()
+            mockGetArticleSummaries.mockClear()
         })
 
         test('Should call article resource', () => {
-            expect(mockGetArticles).toBeCalledTimes(1)
+            expect(mockGetArticleSummaries).toBeCalledTimes(1)
         })
 
         test('Should return articles', () => {
             expect(result).toEqual(articles)
         })
+    })
+
+    describe('when call getArticle', () => {
+        const articles = anArticle({name: 'Iphone'})
+        const mockGetArticle = jest.spyOn(articleResource, 'getArticle')
+        let result: IArticle
+        beforeEach(async () => {
+            mockGetArticle.mockReturnValue(Promise.resolve(articles))
+            result = await getArticle()
+        })
+        test('Should call article resource', () => {
+            expect(mockGetArticle).toBeCalledTimes(1)
+        })
+
+        test('Should return articles', () => {
+            expect(result).toEqual(articles)
+        })
+
     })
 })

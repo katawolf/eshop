@@ -1,7 +1,7 @@
 import React from "react";
-import {CardDeck} from "react-bootstrap";
+import {CardColumns} from "react-bootstrap";
 import IArticleSummary from "../../models/IArticleSummary";
-import ArticleCardConnector from "./ArticleCardConnector";
+import ArticleCard from "./ArticleCard";
 
 interface IProps {
     articles: IArticleSummary[]
@@ -9,11 +9,11 @@ interface IProps {
 
 const ArticlesViewer: React.FC<IProps> = ({articles}) => {
 
-    return <CardDeck>
+    return <CardColumns>
         {articles.map(it => <div key={it.name}>
-            <ArticleCardConnector article={it}/>
+            <ArticleCard article={it}/>
         </div>)}
-    </CardDeck>
+    </CardColumns>
 }
 
 export default ArticlesViewer

@@ -1,6 +1,6 @@
 import cardReducer from "./reducer";
 import {CardActionType} from "./type";
-import {anArticle} from "../../data.mock";
+import {anArticleSummary} from "../../data.mock";
 
 describe('reducer spec', () => {
 
@@ -15,9 +15,9 @@ describe('reducer spec', () => {
     })
 
     describe('handle "ADD_ARTICLE"', () => {
-        const article = anArticle({name: 'Iphone'})
+        const article = anArticleSummary({name: 'Iphone'})
         const state = {
-            articles: [anArticle({name: 'X1 carbon'})]
+            articles: [anArticleSummary({name: 'X1 carbon'})]
         }
         test('should add article', () => {
             expect(
@@ -43,12 +43,12 @@ describe('reducer spec', () => {
     })
 
     describe('handle "REMOVE_ARTICLE', () => {
-        const articleToRemove = anArticle({name: 'Iphone'})
+        const articleToRemove = anArticleSummary({name: 'Iphone'})
         test('should remove article', () => {
             expect(
                 cardReducer({
                     articles: [
-                        anArticle({name: 'X1 carbon'}),
+                        anArticleSummary({name: 'X1 carbon'}),
                         articleToRemove
                     ]
                 }, {
@@ -56,21 +56,21 @@ describe('reducer spec', () => {
                     payload: articleToRemove
                 })
             ).toEqual({
-                articles: [anArticle({name: 'X1 carbon'})]
+                articles: [anArticleSummary({name: 'X1 carbon'})]
             })
         })
         test('should not remove article when state no contain article', () => {
             expect(
                 cardReducer({
                     articles: [
-                        anArticle({name: 'X1 carbon'})
+                        anArticleSummary({name: 'X1 carbon'})
                     ]
                 }, {
                     type: 'REMOVE_ARTICLE',
                     payload: articleToRemove
                 })
             ).toEqual({
-                articles: [anArticle({name: 'X1 carbon'})]
+                articles: [anArticleSummary({name: 'X1 carbon'})]
             })
         })
 

@@ -3,6 +3,9 @@ import {fireEvent, render, RenderResult} from "@testing-library/react";
 import ArticleCard, {IArticleCardProps} from "./ArticleCard";
 import IArticleSummary from "../../models/IArticleSummary";
 import {anArticle} from "../../data.mock";
+import {Router} from "react-router-dom";
+import {createMemoryHistory} from "history";
+import {act} from "react-dom/test-utils";
 
 const article: IArticleSummary = anArticle({
     name: 'Shoes blue',
@@ -12,8 +15,10 @@ const article: IArticleSummary = anArticle({
         currency: "EUR"
     }
 })
-const addToCart = () => {}
-const removeToCart = () => {}
+const addToCart = () => {
+}
+const removeToCart = () => {
+}
 
 describe('ArticleCardComponent', () => {
 
@@ -21,71 +26,40 @@ describe('ArticleCardComponent', () => {
 
     describe('On init', () => {
 
-        const shouldDisplayDefaultArticleValues = () => {
-            test('Should display image', () => {
-                expect(
-                    articleCardComponent.getByTestId('img').getAttribute('src')
-                ).toEqual('/src/image/iphone.jpg')
-            })
-            test('Should display name', () => {
-                expect(articleCardComponent.queryByText('Shoes blue')).not.toBeNull()
-            })
-            test('Should display price', () => {
-                expect(articleCardComponent.queryByText('128 €')).not.toBeNull()
-            })
-        }
-
-        describe('When article is NOT on cart', () => {
-            beforeEach(() => {
-                articleCardComponent = component({article, cartArticles: []})
-            })
-            shouldDisplayDefaultArticleValues()
-            test('should display "Add to basket" button', () => {
-                expect(articleCardComponent.queryByText('Add to cart')).not.toBeNull()
-            })
-            test('should not display "Remove to basket" button', () => {
-                expect(articleCardComponent.queryByText('Remove to cart')).toBeNull()
-            })
-        })
-
-        describe('When article is on cart', () => {
-            beforeEach(() => {
-                articleCardComponent = component({article, cartArticles: [article]})
-            })
-            shouldDisplayDefaultArticleValues()
-            test('should not display "Add to cart" button', () => {
-                expect(articleCardComponent.queryByText('Add to cart')).toBeNull()
-            })
-            test('should display "Remove to basket" button', () => {
-                expect(articleCardComponent.queryByText('Remove to cart')).not.toBeNull()
-            })
-        })
-    })
-
-    describe('When add article on cart', () => {
-        const addToCart = jest.fn()
-
         beforeEach(() => {
-            articleCardComponent = component({article, cartArticles: [], addToCart})
-            fireEvent.click(articleCardComponent.getByTestId('addToCardButton'))
+            articleCardComponent = component({article})
         })
-        test('should call addToCart', () => {
-            expect(addToCart).toBeCalledWith(article)
+        test('Should display image', () => {
+            expect(
+                articleCardComponent.getByTestId('img').getAttribute('src')
+            ).toEqual('/src/image/iphone.jpg')
+        })
+        test('Should display name', () => {
+            expect(articleCardComponent.queryByText('Shoes blue')).not.toBeNull()
+        })
+        test('Should display price', () => {
+            expect(articleCardComponent.queryByText('128 €')).not.toBeNull()
         })
     })
 
-    describe('When remove article on cart', () => {
-        const removeToCart = jest.fn()
+    describe('When click on article card', () => {
 
-        beforeEach(() => {
-            articleCardComponent = component({article, cartArticles: [article], removeToCart})
-            fireEvent.click(articleCardComponent.getByTestId('removeToCardButton'))
+        const history = createMemoryHistory()
+
+        beforeEach(async () => {
+            await act(async () => {
+                articleCardComponent = component({}, history)
+                fireEvent.click(articleCardComponent.getByTestId('articleCard'))
+            })
         })
-        test('should call addToCart', () => {
-            expect(removeToCart).toBeCalledWith(article)
+        test('should redirect on article detail page', () => {
+            expect(history.location.pathname).toBe('/article')
         })
     })
+
 })
 
-const component = (partialProps: Partial<IArticleCardProps> = {}) => render(
-    <ArticleCard {...{article, cartArticles: [], addToCart, removeToCart, ...partialProps}}/>)
+const component = (partialProps: Partial<IArticleCardProps> = {}, history = createMemoryHistory()) => render(
+    <Router history={history}>
+        <ArticleCard {...{article, ...partialProps}}/>
+    </Router>)
