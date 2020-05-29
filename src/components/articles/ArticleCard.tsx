@@ -1,37 +1,26 @@
 import React from "react";
-import {Button, Card} from "react-bootstrap";
-import IArticle from "../../models/IArticle";
+import {Card} from "react-bootstrap";
+import IArticleSummary from "../../models/IArticleSummary";
+import {useHistory} from "react-router-dom";
+import {formatPrice} from "../../services/format.service";
 
 export interface IProps {
-    article: IArticle
-    cartArticles: IArticle[]
-    addToCart: (article: IArticle) => void
-    removeToCart: (article: IArticle) => void
+    article: IArticleSummary
 }
 
-const ArticleCard: React.FC<IProps> = ({article, cartArticles, addToCart, removeToCart}) => {
+const ArticleCard: React.FC<IProps> = ({article: {id, imgSrc, name, price}}) => {
+    const history = useHistory()
+    const redirectOnArticle = () => history.push(`/article/${id}`)
 
-    return <Card>
-        <Card.Img data-testid='img' variant="top" src={article.imgSrc}/>
+    return <Card data-testid={'articleCard'} onClick={redirectOnArticle}>
+        <Card.Img data-testid='img' variant="top" src={imgSrc}/>
         <Card.Body>
-            <Card.Title>{article.name}</Card.Title>
-            <Card.Text>{article.description}</Card.Text>
-            {
-                articleIsOnCart(article, cartArticles)
-                    ?
-                    <Button data-testid='removeToCardButton' variant="primary" onClick={() => removeToCart(article)}>
-                        Remove to cart
-                    </Button>
-                    :
-                    <Button data-testid='addToCardButton' variant="primary" onClick={() => addToCart(article)}>
-                        Add to cart
-                    </Button>
-            }
+            <Card.Title>{name}</Card.Title>
+            <Card.Text>Shoes</Card.Text>
+            <Card.Text>{formatPrice(price)}</Card.Text>
         </Card.Body>
     </Card>
 }
-
-const articleIsOnCart = ({name}: IArticle, cartArticles: IArticle[]) => !!cartArticles.find(({name: it}: IArticle) => name === it)
 
 export default ArticleCard
 export type IArticleCardProps = IProps

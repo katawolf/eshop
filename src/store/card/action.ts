@@ -1,12 +1,7 @@
-import IArticle from "../../models/IArticle";
+import IArticleSummary from "../../models/IArticleSummary";
 import {CardActionType} from "./type";
 
-export const addArticleToCard = (article: IArticle): CardActionType => ({
+export const addArticleToCard = (article: IArticleSummary): CardActionType => ({
     type: "ADD_ARTICLE",
-    payload: article
-})
-
-export const removeArticleToCard = (article: IArticle): CardActionType => ({
-    type: "REMOVE_ARTICLE",
     payload: article
 })

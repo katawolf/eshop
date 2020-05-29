@@ -1,14 +1,14 @@
 import {render, RenderResult, wait} from "@testing-library/react";
 import React from "react";
 import ArticlesViewer from "./ArticlesViewer";
-import IArticle from "../../models/IArticle";
-import {anArticle} from "../../data.mock";
+import IArticleSummary from "../../models/IArticleSummary";
+import {anArticle, anArticleSummary} from "../../data.mock";
 
-jest.mock('./ArticleCardConnector', () => () => <div data-testid={'articleCardConnector'}>ArticleCardConnector</div>)
+jest.mock('./ArticleCard', () => () => <div data-testid={'articleCard'}>ArticleCard</div>)
 
-const articles: IArticle[] = [
-    anArticle({name: 'IPhone'}),
-    anArticle({name: 'Honor phone'})
+const articles: IArticleSummary[] = [
+    anArticle({id: '1', name: 'IPhone'}),
+    anArticle({id: '2', name: 'Honor phone'})
 ];
 
 describe('ArticlesViewer spec', () => {

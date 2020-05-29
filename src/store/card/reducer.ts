@@ -1,12 +1,12 @@
 import {CardActionType} from "./type";
-import IArticle from "../../models/IArticle";
+import IArticleSummary from "../../models/IArticleSummary";
 
 const initialState: ICardState = {
     articles: []
 }
 
 export interface ICardState {
-    articles: IArticle[]
+    articles: IArticleSummary[]
 }
 
 const cardReducer = (state = initialState, action: CardActionType): ICardState => {
@@ -16,22 +16,14 @@ const cardReducer = (state = initialState, action: CardActionType): ICardState =
                 ...state,
                 articles: addArticle(state.articles, action.payload)
             }
-        case "REMOVE_ARTICLE":
-            return {
-                ...state,
-                articles: removeArticle(state.articles, action.payload)
-            }
         default:
             return {...state}
     }
 }
 
-const addArticle = (articles: IArticle[], article: IArticle) =>
-    articles.find(({name}: IArticle) => article.name === name)
+const addArticle = (articles: IArticleSummary[], article: IArticleSummary) =>
+    articles.find(({name}: IArticleSummary) => article.name === name)
         ? [...articles]
         : [...articles, article]
-
-const removeArticle = (articles: IArticle[], article: IArticle) =>
-    articles.filter(({name}: IArticle) => name !== article.name)
 
 export default cardReducer

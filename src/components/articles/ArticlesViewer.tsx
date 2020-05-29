@@ -1,19 +1,19 @@
 import React from "react";
-import {CardDeck} from "react-bootstrap";
-import IArticle from "../../models/IArticle";
-import ArticleCardConnector from "./ArticleCardConnector";
+import {CardColumns} from "react-bootstrap";
+import IArticleSummary from "../../models/IArticleSummary";
+import ArticleCard from "./ArticleCard";
 
 interface IProps {
-    articles: IArticle[]
+    articles: IArticleSummary[]
 }
 
 const ArticlesViewer: React.FC<IProps> = ({articles}) => {
 
-    return <CardDeck>
-        {articles.map(it => <div key={it.name}>
-            <ArticleCardConnector article={it}/>
+    return <CardColumns>
+        {articles.map(it => <div key={it.id}>
+            <ArticleCard article={it}/>
         </div>)}
-    </CardDeck>
+    </CardColumns>
 }
 
 export default ArticlesViewer
