@@ -23,23 +23,26 @@ const removeToCart = () => {
 
 describe('Article card spec', () => {
 
-    let articleCardComponent: RenderResult
+    let articleCard: RenderResult
 
     describe('On init', () => {
 
         beforeEach(() => {
-            articleCardComponent = component({article})
+            articleCard = component({article})
+        })
+        test('should display component', () => {
+            expect(articleCard.queryByTestId('articleCard')).toBeInTheDocument()
         })
         test('Should display image', () => {
             expect(
-                articleCardComponent.getByTestId('img').getAttribute('src')
-            ).toEqual('/src/image/iphone.jpg')
+                articleCard.getByTestId('img').getAttribute('src')
+            ).toBe('/src/image/iphone.jpg')
         })
         test('Should display name', () => {
-            expect(articleCardComponent.queryByText('Shoes blue')).not.toBeNull()
+            expect(articleCard.queryByText('Shoes blue')).toBeInTheDocument()
         })
         test('Should display price', () => {
-            expect(articleCardComponent.queryByText('128 €')).not.toBeNull()
+            expect(articleCard.queryByText('128 €')).toBeInTheDocument()
         })
     })
 
@@ -47,11 +50,9 @@ describe('Article card spec', () => {
 
         const history = createMemoryHistory()
 
-        beforeEach(async () => {
-            await act(async () => {
-                articleCardComponent = component({article}, history)
-                fireEvent.click(articleCardComponent.getByTestId('articleCard'))
-            })
+        beforeEach(() => {
+            articleCard = component({article}, history)
+            fireEvent.click(articleCard.getByTestId('articleCard'))
         })
         test('should redirect on article detail page', () => {
             expect(history.location.pathname).toBe('/article/1')

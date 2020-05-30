@@ -18,7 +18,7 @@ describe('cart articles viewer spec', () => {
             cartArticleViewer = component()
         })
         test('should display component', () => {
-            expect(cartArticleViewer.queryByTestId('cartArticlesViewer')).not.toBeNull()
+            expect(cartArticleViewer.queryByTestId('cartArticlesViewer')).toBeInTheDocument()
         })
         test('should display 3 cart article card', () => {
             expect(cartArticleViewer.queryAllByTestId('cartArticleCard')).toHaveLength(3)

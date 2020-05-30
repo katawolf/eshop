@@ -28,16 +28,19 @@ describe('Home spec', () => {
         afterEach(() => {
             mockGetArticles.mockClear()
         })
-        test('should display menu', () => {
-            expect(homeComponent.queryByTestId('menu')).not.toBeNull()
+        test('should display component', () => {
+            expect(homeComponent.queryByTestId('home')).toBeInTheDocument()
         })
-        test('Should load articles', () => {
-            wait(() => {
+        test('should display menu', () => {
+            expect(homeComponent.queryByTestId('menu')).toBeInTheDocument()
+        })
+        test('Should load articles', async () => {
+            await wait(async () => {
                 expect(mockGetArticles).toBeCalledTimes(1)
             })
         })
         test('Should display articles viewer', () => {
-            expect(homeComponent.queryByTestId('articlesViewer')).not.toBeNull()
+            expect(homeComponent.queryByTestId('articlesViewer')).toBeInTheDocument()
         })
     })
 })

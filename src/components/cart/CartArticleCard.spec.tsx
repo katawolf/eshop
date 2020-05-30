@@ -21,21 +21,21 @@ describe('cart article card spec', () => {
             cartArticleCard = component({cartArticle})
         })
         test('should display component', () => {
-            expect(cartArticleCard.queryByTestId('cartArticleCard')).not.toBeNull()
+            expect(cartArticleCard.queryByTestId('cartArticleCard')).toBeInTheDocument()
         })
         test('Should display image', () => {
             expect(
                 cartArticleCard.getByTestId('img').getAttribute('src')
-            ).toEqual('path/to/img.jpg')
+            ).toBe('path/to/img.jpg')
         })
         test('Should display title (name + type)', () => {
-            expect(cartArticleCard.queryByText('Shoes blue (shoes)')).not.toBeNull()
+            expect(cartArticleCard.queryByText('Shoes blue (shoes)')).toBeInTheDocument()
         })
         test('Should display price', () => {
-            expect(cartArticleCard.queryByText('Price : 128 €')).not.toBeNull()
+            expect(cartArticleCard.queryByText('Price : 128 €')).toBeInTheDocument()
         })
         test('Should display size', () => {
-            expect(cartArticleCard.queryByText('Size : M')).not.toBeNull()
+            expect(cartArticleCard.queryByText('Size : M')).toBeInTheDocument()
         })
     });
 

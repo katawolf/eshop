@@ -10,7 +10,7 @@ describe('not found spec', () => {
             notFound = component()
         })
         test('should display "404 - page not found"', () => {
-            expect(notFound.queryByText('404 - page not found')).not.toBeNull()
+            expect(notFound.queryByText('404 - page not found')).toBeInTheDocument()
         })
     })
 })

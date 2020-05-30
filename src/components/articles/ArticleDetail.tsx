@@ -22,7 +22,7 @@ const ArticleDetail: React.FC<IProps> = ({article, addCartArticle}) => {
             addCartArticle(toCartArticle(article, sizeSelected))
         }
     }
-    return <>
+    return <div data-testid={'articleDetail'}>
         {errorMsg && <div>{errorMsg}</div>}
         <Image data-testid='img' src={imgSrc}/>
         <div>{name}</div>
@@ -33,7 +33,7 @@ const ArticleDetail: React.FC<IProps> = ({article, addCartArticle}) => {
             {availableSizes.map((size, index) => <option key={index}>{size}</option>)}
         </Form.Control>
         <Button onClick={() => addOnCart(article)}>Add on cart</Button>
-    </>
+    </div>
 }
 
 const toCartArticle = ({id, name, imgSrc, price}: IArticle, size: Size): ICartArticle => ({

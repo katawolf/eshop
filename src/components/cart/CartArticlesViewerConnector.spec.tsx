@@ -14,10 +14,10 @@ describe('cart articles viewer connector spec', () => {
             articlesViewerConnector = component()
         })
         test('should display component', () => {
-            expect(articlesViewerConnector.queryByTestId('cartArticlesViewerConnector')).not.toBeNull()
+            expect(articlesViewerConnector.queryByTestId('cartArticlesViewerConnector')).toBeInTheDocument()
         })
         test('should display cart articles viewer component', () => {
-            expect(articlesViewerConnector.queryByTestId('cartArticlesViewer')).not.toBeNull()
+            expect(articlesViewerConnector.queryByTestId('cartArticlesViewer')).toBeInTheDocument()
         })
     })
 })

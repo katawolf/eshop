@@ -28,28 +28,28 @@ describe('Article detail spec', () => {
         beforeEach(() => {
             articleDetail = component({article})
         })
+        test('should display component', () => {
+            expect(articleDetail.queryByTestId('articleDetail')).toBeInTheDocument()
+        })
         test('should display main image', () => {
             expect(
                 articleDetail.getByTestId('img').getAttribute('src')
             ).toEqual('/src/img')
         })
         test('should display price', () => {
-            expect(articleDetail.queryByText('125 €')).not.toBeNull()
+            expect(articleDetail.queryByText('125 €')).toBeInTheDocument()
         })
         test('should display name', () => {
-            expect(articleDetail.queryByText('name')).not.toBeNull()
+            expect(articleDetail.queryByText('name')).toBeInTheDocument()
         })
         test('should display description', () => {
-            expect(articleDetail.queryByText('a description')).not.toBeNull()
-        })
-        test('should display default placeholder option on select', () => {
-            expect(articleDetail.getByText('Select available size').getAttribute('selected')).not.toBeTruthy()
+            expect(articleDetail.queryByText('a description')).toBeInTheDocument()
         })
         test.each(['XS', 'S', 'M'] as Size[])('should display %s available sizes', (size: Size) => {
-            expect(articleDetail.queryByText(size)).not.toBeNull()
+            expect(articleDetail.queryByText(size)).toBeInTheDocument()
         })
         test('should display "Add on cart" button', () => {
-            expect(articleDetail.queryByText('Add on cart')).not.toBeNull()
+            expect(articleDetail.queryByText('Add on cart')).toBeInTheDocument()
         })
     })
     describe('when not selected size', () => {
@@ -65,7 +65,7 @@ describe('Article detail spec', () => {
                 fireEvent.click(articleDetail.getByText('Add on cart'))
             })
             test('should display "Please select size" text', () => {
-                expect(articleDetail.queryByText('Please select a size')).not.toBeNull()
+                expect(articleDetail.queryByText('Please select a size')).toBeInTheDocument()
             })
             test('should not call addCartArticle', () => {
                 expect(addCartArticle).not.toBeCalled()
@@ -86,7 +86,7 @@ describe('Article detail spec', () => {
                 fireEvent.click(articleDetail.getByText('Add on cart'))
             })
             test('should not display "Please select size" text', () => {
-                expect(articleDetail.queryByText('Please select a size')).toBeNull()
+                expect(articleDetail.queryByText('Please select a size')).not.toBeInTheDocument()
             })
             test('should call addCartArticle', () => {
                 expect(addCartArticle).toBeCalledWith({...cartArticle, size})
