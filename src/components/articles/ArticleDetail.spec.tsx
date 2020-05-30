@@ -1,5 +1,5 @@
 import {render, RenderResult, fireEvent} from "@testing-library/react"
-import {anArticle, anArticleSummary} from "../../data.mock";
+import {aCartArticle, anArticle, anArticleSummary} from "../../data.mock";
 import React from "react";
 import ArticleDetail, {IArticleDetailProps} from "./ArticleDetail";
 
@@ -12,6 +12,14 @@ const article = anArticle(
         description: 'a description',
         availableSizes: ['XS', "S", "M"]
     })
+
+const cartArticle = aCartArticle({
+    id: '1',
+    name: 'name',
+    price: {value: 125, currency: 'EUR'},
+    imgSrc: '/src/img',
+    size: 'M'
+})
 
 describe('Article detail spec', () => {
     let articleDetail: RenderResult
@@ -42,17 +50,17 @@ describe('Article detail spec', () => {
     })
 
     describe('Should click on "Add to cart" button', () => {
-        const addOnCart = jest.fn()
+        const addCartArticle = jest.fn()
 
         beforeEach(() => {
-            articleDetail = component({article, addOnCart})
+            articleDetail = component({article, addCartArticle})
             fireEvent.click(articleDetail.getByText('Add on cart'))
         })
         test('should call addOnCart prop', () => {
-            expect(addOnCart).toBeCalledWith(article)
+            expect(addCartArticle).toBeCalledWith(cartArticle)
         })
     })
 })
 
 const component = (partialProps: Partial<IArticleDetailProps> = {}) => render(
-    <ArticleDetail {...{article, addOnCart: () => {}, ...partialProps}} />)
+    <ArticleDetail {...{article, addCartArticle: () => {}, ...partialProps}} />)

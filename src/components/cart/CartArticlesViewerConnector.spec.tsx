@@ -1,12 +1,12 @@
 import {render, RenderResult} from "@testing-library/react";
 import React from "react";
-import ArticlesViewerConnector from "./ArticlesViewerConnector";
+import ArticlesViewerConnector from "./CartArticlesViewerConnector";
 import {Provider} from "react-redux";
 import configStore from "../../store/configStore";
 
-jest.mock('../articles/ArticlesViewer', () => () => <div data-testid={'articlesViewer'}>component</div>)
+jest.mock('./CartArticlesViewer', () => () => <div data-testid={'cartArticlesViewer'}>CartArticleViewer</div>)
 
-describe('cart articles viewer spec', () => {
+describe('cart articles viewer connector spec', () => {
     let articlesViewerConnector: RenderResult
 
     describe('on init', () => {
@@ -14,10 +14,10 @@ describe('cart articles viewer spec', () => {
             articlesViewerConnector = component()
         })
         test('should display component', () => {
-            expect(articlesViewerConnector.queryByTestId('articlesViewerConnector')).not.toBeNull()
+            expect(articlesViewerConnector.queryByTestId('cartArticlesViewerConnector')).not.toBeNull()
         })
-        test('should display article viewer component', () => {
-            expect(articlesViewerConnector.queryByTestId('articlesViewer')).not.toBeNull()
+        test('should display cart articles viewer component', () => {
+            expect(articlesViewerConnector.queryByTestId('cartArticlesViewer')).not.toBeNull()
         })
     })
 })
