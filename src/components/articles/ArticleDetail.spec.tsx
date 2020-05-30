@@ -89,7 +89,7 @@ describe('Article detail spec', () => {
                 expect(articleDetail.queryByText('Please select a size')).not.toBeInTheDocument()
             })
             test('should call addCartArticle', () => {
-                expect(addCartArticle).toBeCalledWith({...cartArticle, size})
+                expect(addCartArticle).toBeCalledWith({...cartArticle, size, quantity: 1})
             })
         })
     })

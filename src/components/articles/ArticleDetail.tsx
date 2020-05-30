@@ -41,7 +41,8 @@ const toCartArticle = ({id, name, imgSrc, price}: IArticle, size: Size): ICartAr
     name,
     imgSrc,
     price,
-    size
+    size,
+    quantity: 1
 })
 
 export default ArticleDetail

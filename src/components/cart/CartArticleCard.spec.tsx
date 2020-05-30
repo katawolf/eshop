@@ -11,7 +11,8 @@ const cartArticle = aCartArticle({
     name: 'Shoes blue',
     imgSrc: 'path/to/img.jpg',
     price: {value: 128, currency: "EUR"},
-    size: 'M'
+    size: 'M',
+    quantity: 12
 })
 
 describe('cart article card spec', () => {
@@ -36,6 +37,9 @@ describe('cart article card spec', () => {
         })
         test('Should display size', () => {
             expect(cartArticleCard.queryByText('Size : M')).toBeInTheDocument()
+        })
+        test('Should display quantity', () => {
+            expect(cartArticleCard.queryByText('Quantity : 12')).toBeInTheDocument()
         })
     });
 

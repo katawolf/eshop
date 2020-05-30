@@ -3,4 +3,5 @@ import Size from "./Size";
 
 export default interface ICartArticle extends IArticleSummary {
     size: Size
+    quantity: number
 }
