@@ -1,5 +1,6 @@
 import IArticleSummary from "./models/IArticleSummary";
 import IArticle from "./models/IArticle";
+import ICartArticle from "./models/ICartArticle";
 
 export const anArticleSummary = (partialArticle: Partial<IArticleSummary> = {}): IArticleSummary => ({
     id: '1',
@@ -17,4 +18,10 @@ export const anArticle = (partialArticle: Partial<IArticle> = {}): IArticle => (
     availableSizes: ['XS', "S", "M", "L", "XL"],
     description: 'a description',
     ...partialArticle
+})
+
+export const aCartArticle = (partialCartArticle: Partial<ICartArticle> = {}): ICartArticle => ({
+    ...anArticleSummary(),
+    size: 'XS',
+    ...partialCartArticle
 })

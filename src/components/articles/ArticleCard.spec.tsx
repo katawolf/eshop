@@ -21,7 +21,7 @@ const addToCart = () => {
 const removeToCart = () => {
 }
 
-describe('ArticleCardComponent', () => {
+describe('Article card spec', () => {
 
     let articleCardComponent: RenderResult
 

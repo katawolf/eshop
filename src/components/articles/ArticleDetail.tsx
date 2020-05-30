@@ -1,24 +1,48 @@
-import React from "react";
-import {Button, Image} from "react-bootstrap";
+import React, {useState} from "react";
+import {Button, Form, Image} from "react-bootstrap";
 import IArticle from "../../models/IArticle";
 import {formatPrice} from "../../services/format.service";
+import ICartArticle from "../../models/ICartArticle";
+import Size from "../../models/Size";
 
 interface IProps {
     article: IArticle
-    addOnCart: (article: IArticle) => void
+    addCartArticle: (cartArticle: ICartArticle) => void
 }
 
-const ArticleDetail: React.FC<IProps> = ({article, addOnCart}) => {
+const ArticleDetail: React.FC<IProps> = ({article, addCartArticle}) => {
     const {name, imgSrc, description, availableSizes, price} = article
+    const [sizeSelected, setSizeSelected] = useState(undefined as Size | undefined)
+    const [errorMsg, setErrorMsg] = useState(undefined as string | undefined)
+    const addOnCart = (article: IArticle) => {
+        if (!sizeSelected) {
+            setErrorMsg('Please select a size')
+        } else {
+            setErrorMsg(undefined)
+            addCartArticle(toCartArticle(article, sizeSelected))
+        }
+    }
     return <>
+        {errorMsg && <div>{errorMsg}</div>}
         <Image data-testid='img' src={imgSrc}/>
         <div>{name}</div>
         <div>{formatPrice(price)}</div>
         <div>{description}</div>
-        <div>{availableSizes.join(', ')}</div>
+        <Form.Control data-testid={'select'} as="select" onChange={(event: any) => setSizeSelected(event.target.value)}>
+            <option key={-1} value=''>Select available size</option>
+            {availableSizes.map((size, index) => <option key={index}>{size}</option>)}
+        </Form.Control>
         <Button onClick={() => addOnCart(article)}>Add on cart</Button>
     </>
 }
+
+const toCartArticle = ({id, name, imgSrc, price}: IArticle, size: Size): ICartArticle => ({
+    id,
+    name,
+    imgSrc,
+    price,
+    size
+})
 
 export default ArticleDetail
 export type IArticleDetailProps = IProps

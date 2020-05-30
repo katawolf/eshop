@@ -1,7 +1,7 @@
-import IArticleSummary from "../../models/IArticleSummary";
 import {CartActionType} from "./type";
+import ICartArticle from "../../models/ICartArticle";
 
-export const addArticleToCart = (article: IArticleSummary): CartActionType => ({
-    type: "ADD_ARTICLE",
+export const addCartArticle = (article: ICartArticle): CartActionType => ({
+    type: "ADD_CART_ARTICLE",
     payload: article
 })

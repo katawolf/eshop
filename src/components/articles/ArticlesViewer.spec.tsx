@@ -1,8 +1,8 @@
-import {render, RenderResult, wait} from "@testing-library/react";
+import {render, RenderResult} from "@testing-library/react";
 import React from "react";
 import ArticlesViewer from "./ArticlesViewer";
 import IArticleSummary from "../../models/IArticleSummary";
-import {anArticle, anArticleSummary} from "../../data.mock";
+import {anArticle} from "../../data.mock";
 
 jest.mock('./ArticleCard', () => () => <div data-testid={'articleCard'}>ArticleCard</div>)
 
@@ -21,9 +21,7 @@ describe('ArticlesViewer spec', () => {
             articlesComponent = component()
         })
         test('Should display article cards connector', () => {
-            wait(() => {
-                expect(articlesComponent.queryAllByTestId('articleCardConnector')).toHaveLength(2)
-            })
+            expect(articlesComponent.queryAllByTestId('articleCard')).toHaveLength(2)
         })
     })
 
