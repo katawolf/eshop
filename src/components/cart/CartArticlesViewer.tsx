@@ -9,7 +9,7 @@ interface IProps {
 
 const CartArticlesViewer: React.FC<IProps> = ({cartArticles}) =>
     <CardColumns data-testid={'cartArticlesViewer'}>
-        {cartArticles.map(cartArticle => <div key={cartArticle.id}>
+        {cartArticles.map((cartArticle, index) => <div key={index}>
             <CartArticleCard {...{cartArticle}}/>
         </div>)}
     </CardColumns>
