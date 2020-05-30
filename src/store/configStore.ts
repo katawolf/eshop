@@ -1,4 +1,4 @@
 import { createStore } from "redux";
-import cardReducer from "./card/reducer";
+import cartReducer from "./cart/reducer";
 
-export default createStore(cardReducer)
+export default createStore(cartReducer)

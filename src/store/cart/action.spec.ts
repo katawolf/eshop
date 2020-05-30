@@ -1,4 +1,4 @@
-import {addArticleToCard} from "./action";
+import {addArticleToCart} from "./action";
 import {anArticleSummary} from "../../data.mock";
 
 describe('Article actions spec', () => {
@@ -7,7 +7,7 @@ describe('Article actions spec', () => {
         const article = anArticleSummary()
         test('should create action "ADD_ARTICLE"', () => {
             expect(
-                addArticleToCard(article)
+                addArticleToCart(article)
             ).toEqual({
                 type: 'ADD_ARTICLE',
                 payload: article

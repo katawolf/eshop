@@ -1,11 +1,11 @@
-import {addArticleToCard} from "../../store/card/action";
+import {addArticleToCart} from "../../store/cart/action";
 import {connect, ConnectedProps} from "react-redux";
 import React from "react";
 import IArticle from "../../models/IArticle";
 import ArticleDetail from "./ArticleDetail";
 
 const mapDispatch = {
-    addArticleToCard,
+    addArticleToCard: addArticleToCart,
 }
 
 const connector = connect(undefined, mapDispatch)
