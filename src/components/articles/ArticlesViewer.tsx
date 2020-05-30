@@ -7,13 +7,11 @@ interface IProps {
     articles: IArticleSummary[]
 }
 
-const ArticlesViewer: React.FC<IProps> = ({articles}) => {
-
-    return <CardColumns>
+const ArticlesViewer: React.FC<IProps> = ({articles}) =>
+    <CardColumns data-testid={'articlesViewer'}>
         {articles.map(it => <div key={it.id}>
             <ArticleCard article={it}/>
         </div>)}
     </CardColumns>
-}
 
 export default ArticlesViewer

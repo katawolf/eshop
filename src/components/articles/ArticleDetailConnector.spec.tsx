@@ -16,10 +16,10 @@ describe('article detail connector spec', () => {
             articleDetailConnector = component()
         })
         test('should display component', () => {
-            expect(articleDetailConnector.queryByTestId('articleDetailConnector')).not.toBeNull()
+            expect(articleDetailConnector.queryByTestId('articleDetailConnector')).toBeInTheDocument()
         })
         test('should display article detail component', () => {
-            expect(articleDetailConnector.queryByTestId('articleDetail')).not.toBeNull()
+            expect(articleDetailConnector.queryByTestId('articleDetail')).toBeInTheDocument()
         })
     })
 })

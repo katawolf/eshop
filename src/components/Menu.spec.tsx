@@ -13,7 +13,7 @@ describe('menu component', () => {
             menu = component()
         })
         test('should display component', () => {
-            expect(menu.queryByTestId('menu')).not.toBeNull()
+            expect(menu.queryByTestId('menu')).toBeInTheDocument()
         })
     })
     describe('when click on "Eshop"', () => {

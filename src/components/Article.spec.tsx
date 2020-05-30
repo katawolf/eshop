@@ -25,14 +25,17 @@ describe('Article page', () => {
         afterEach(() => {
             mockGetArticle.mockClear()
         })
+        test('should display component', () => {
+            expect(articlePage.queryByTestId('articlePage')).toBeInTheDocument()
+        })
         test('should display menu', () => {
-            expect(articlePage.queryByTestId('menu')).not.toBeNull()
+            expect(articlePage.queryByTestId('menu')).toBeInTheDocument()
         })
         test('should load article with id 2', () => {
             expect(mockGetArticle).toBeCalledWith('2')
         })
         test('should display article detail', () => {
-            expect(articlePage.queryByTestId('articleDetailConnector')).not.toBeNull()
+            expect(articlePage.queryByTestId('articleDetailConnector')).toBeInTheDocument()
         })
     })
 })

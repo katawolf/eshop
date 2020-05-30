@@ -12,10 +12,10 @@ const Home: React.FC = () => {
         getArticleSummaries().then(setArticles);
     }, [])
 
-    return <>
+    return <div data-testid={'home'}>
         <Menu/>
         <ArticlesViewer articles={articles}/>
-    </>
+    </div>
 }
 
 export default Home

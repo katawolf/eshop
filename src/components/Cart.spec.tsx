@@ -12,13 +12,13 @@ describe('cart spec', () => {
             cartPage = component()
         })
         test('should display component', () => {
-            expect(cartPage.queryByTestId('cart')).not.toBeNull()
+            expect(cartPage.queryByTestId('cart')).toBeInTheDocument()
         })
         test('should display menu', () => {
-            expect(cartPage.queryByTestId('menu')).not.toBeNull()
+            expect(cartPage.queryByTestId('menu')).toBeInTheDocument()
         })
         test('should display articles viewer connector', () => {
-            expect(cartPage.queryByTestId('cartArticlesViewerConnector')).not.toBeNull()
+            expect(cartPage.queryByTestId('cartArticlesViewerConnector')).toBeInTheDocument()
         })
     })
 })

@@ -13,10 +13,10 @@ const Article: React.FC = () => {
         getArticle(id).then(setArticle)
     }, [id])
 
-    return <>
+    return <div data-testid={'articlePage'}>
         <Menu/>
         {article && <ArticleDetailConnector article={article}/>}
-    </>
+    </div>
 }
 
 export default Article

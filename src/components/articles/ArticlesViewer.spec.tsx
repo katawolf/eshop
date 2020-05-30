@@ -14,14 +14,16 @@ const articles: IArticleSummary[] = [
 describe('ArticlesViewer spec', () => {
 
     describe('On init', () => {
+        let articlesViewer: RenderResult
 
-        let articlesComponent: RenderResult
-
-        beforeAll(async () => {
-            articlesComponent = component()
+        beforeEach(async () => {
+            articlesViewer = component()
+        })
+        test('should display component', () => {
+            expect(articlesViewer.queryByTestId('articlesViewer')).toBeInTheDocument()
         })
         test('Should display article cards connector', () => {
-            expect(articlesComponent.queryAllByTestId('articleCard')).toHaveLength(2)
+            expect(articlesViewer.queryAllByTestId('articleCard')).toHaveLength(2)
         })
     })
 
