@@ -5,4 +5,4 @@ interface IAddArticleAction {
     payload: IArticleSummary
 }
 
-export type CardActionType = IAddArticleAction
+export type CartActionType = IAddArticleAction

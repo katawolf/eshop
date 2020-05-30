@@ -1,15 +1,15 @@
-import {CardActionType} from "./type";
+import {CartActionType} from "./type";
 import IArticleSummary from "../../models/IArticleSummary";
 
-const initialState: ICardState = {
+const initialState: ICartState = {
     articles: []
 }
 
-export interface ICardState {
+export interface ICartState {
     articles: IArticleSummary[]
 }
 
-const cardReducer = (state = initialState, action: CardActionType): ICardState => {
+const cartReducer = (state = initialState, action: CartActionType): ICartState => {
     switch (action.type) {
         case 'ADD_ARTICLE':
             return {
@@ -26,4 +26,4 @@ const addArticle = (articles: IArticleSummary[], article: IArticleSummary) =>
         ? [...articles]
         : [...articles, article]
 
-export default cardReducer
+export default cartReducer

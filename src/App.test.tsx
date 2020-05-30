@@ -6,6 +6,7 @@ import { MemoryRouter } from 'react-router-dom';
 jest.mock('./components/Home', () => () => <div data-testid={'home'}>Home</div>)
 jest.mock('./components/Article', () => () => <div data-testid={'article'}>Article</div>)
 jest.mock('./components/NotFound', () => () => <div data-testid={'notFound'}>notFound</div>)
+jest.mock('./components/Cart', () => () => <div data-testid={'cart'}>cart</div>)
 
 describe('App component', () => {
     let app: RenderResult
@@ -19,6 +20,9 @@ describe('App component', () => {
         })
         test('should not display article page', () => {
             expect(app.queryByTestId('article')).toBeNull()
+        })
+        test('should not display cart page', () => {
+            expect(app.queryByTestId('cart')).toBeNull()
         })
         test('should not display not found page', () => {
             expect(app.queryByTestId('notFound')).toBeNull()
@@ -34,6 +38,26 @@ describe('App component', () => {
         test('should display article page', () => {
             expect(app.queryByTestId('article')).not.toBeNull()
         })
+        test('should not display cart page', () => {
+            expect(app.queryByTestId('cart')).toBeNull()
+        })
+        test('should not display not found page', () => {
+            expect(app.queryByTestId('notFound')).toBeNull()
+        })
+    })
+    describe('path as /cart', () => {
+        beforeEach(() => {
+            app = component('/cart')
+        })
+        test('should not display home page', () => {
+            expect(app.queryByTestId('home')).toBeNull()
+        })
+        test('should not display article page', () => {
+            expect(app.queryByTestId('article')).toBeNull()
+        })
+        test('should display cart page', () => {
+            expect(app.queryByTestId('cart')).not.toBeNull()
+        })
         test('should not display not found page', () => {
             expect(app.queryByTestId('notFound')).toBeNull()
         })
@@ -47,6 +71,9 @@ describe('App component', () => {
         })
         test('should not display article page', () => {
             expect(app.queryByTestId('article')).toBeNull()
+        })
+        test('should not display cart page', () => {
+            expect(app.queryByTestId('cart')).toBeNull()
         })
         test('should display not found page', () => {
             expect(app.queryByTestId('notFound')).not.toBeNull()

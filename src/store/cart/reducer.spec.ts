@@ -1,5 +1,5 @@
-import cardReducer from "./reducer";
-import {CardActionType} from "./type";
+import cartReducer from "./reducer";
+import {CartActionType} from "./type";
 import {anArticleSummary} from "../../data.mock";
 
 describe('reducer spec', () => {
@@ -7,7 +7,7 @@ describe('reducer spec', () => {
     describe('default handle', () => {
         test('should return initial state', () => {
             expect(
-                cardReducer(undefined, {} as CardActionType)
+                cartReducer(undefined, {} as CartActionType)
             ).toEqual({
                 articles: []
             })
@@ -21,7 +21,7 @@ describe('reducer spec', () => {
         }
         test('should add article', () => {
             expect(
-                cardReducer(state, {
+                cartReducer(state, {
                     type: 'ADD_ARTICLE',
                     payload: article
                 })
@@ -32,7 +32,7 @@ describe('reducer spec', () => {
         test('should not add article when article is already added', () => {
             const [articleAlreadyAdded] = state.articles
             expect(
-                cardReducer(state, {
+                cartReducer(state, {
                     type: 'ADD_ARTICLE',
                     payload: articleAlreadyAdded
                 })
