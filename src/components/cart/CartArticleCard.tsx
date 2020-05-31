@@ -1,14 +1,16 @@
 import React from "react";
-import {Card} from "react-bootstrap";
+import {Button, Card} from "react-bootstrap";
 import {formatPrice} from "../../services/format.service";
 import ICartArticle from "../../models/ICartArticle";
 import {useHistory} from "react-router-dom";
 
 interface IProps {
     cartArticle: ICartArticle
+    deleteCartArticle: (cartArticle: ICartArticle) => void
 }
 
-const CartArticleCard: React.FC<IProps> = ({cartArticle: {id, imgSrc, name, price, size, quantity}}) => {
+const CartArticleCard: React.FC<IProps> = ({cartArticle, deleteCartArticle}) => {
+    const {id, imgSrc, name, price, size, quantity} = cartArticle
     const history = useHistory()
 
     return <Card data-testid={'cartArticleCard'} onClick={() => history.push(`/article/${id}`)}>
@@ -18,6 +20,7 @@ const CartArticleCard: React.FC<IProps> = ({cartArticle: {id, imgSrc, name, pric
             <Card.Text>Price : {formatPrice(price)}</Card.Text>
             <Card.Text>Size : {size}</Card.Text>
             <Card.Text>Quantity : {quantity}</Card.Text>
+            <Button onClick={() => deleteCartArticle(cartArticle)}>Delete</Button>
         </Card.Body>
     </Card>
 }

@@ -15,7 +15,7 @@ describe('reducer spec', () => {
         })
     })
 
-    describe('handle "ADD_ARTICLE"', () => {
+    describe('handle "ADD_CART_ARTICLE"', () => {
         const article = aCartArticle({id: '1', name: 'Iphone', size: 'M', quantity: 1})
         const state = {
             articles: [aCartArticle({id: '2', name: 'X1 carbon', size: 'S', quantity: 1})]
@@ -56,6 +56,46 @@ describe('reducer spec', () => {
                 ).toEqual({
                     articles: [article, {...articleAlreadyAdded, quantity: 2}]
                 })
+            })
+        })
+    })
+
+    describe('handle "REMOVE_CART_ARTICLE"', () => {
+        test('should remove article', () => {
+            expect(
+                cartReducer({
+                    articles: [
+                        aCartArticle({id: '1', name: 'Iphone', size: 'M', quantity: 1}),
+                        aCartArticle({id: '1', name: 'Iphone', size: 'L', quantity: 1}),
+                        aCartArticle({id: '2', name: 'X1 carbon', size: 'S', quantity: 1})
+                    ]
+                }, {
+                    type: 'REMOVE_CART_ARTICLE',
+                    payload: aCartArticle({id: '1', name: 'Iphone', size: 'M', quantity: 1})
+                })
+            ).toEqual({
+                articles: [
+                    aCartArticle({id: '1', name: 'Iphone', size: 'L', quantity: 1}),
+                    aCartArticle({id: '2', name: 'X1 carbon', size: 'S', quantity: 1})
+                ]
+            })
+        })
+        test('should not remove article when size is different', () => {
+            expect(
+                cartReducer({
+                    articles: [
+                        aCartArticle({id: '1', name: 'Iphone', size: 'L', quantity: 1}),
+                        aCartArticle({id: '2', name: 'X1 carbon', size: 'S', quantity: 1})
+                    ]
+                }, {
+                    type: 'REMOVE_CART_ARTICLE',
+                    payload: aCartArticle({id: '1', name: 'Iphone', size: 'M', quantity: 1})
+                })
+            ).toEqual({
+                articles: [
+                    aCartArticle({id: '1', name: 'Iphone', size: 'L', quantity: 1}),
+                    aCartArticle({id: '2', name: 'X1 carbon', size: 'S', quantity: 1})
+                ]
             })
         })
     })

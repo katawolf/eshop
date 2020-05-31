@@ -16,6 +16,11 @@ const cartReducer = (state = initialState, action: CartActionType): ICartState =
                 ...state,
                 articles: addCartArticle(state.articles, action.payload)
             }
+        case "REMOVE_CART_ARTICLE":
+            return {
+                ...state,
+                articles: removeCartArticle(state.articles, action.payload)
+            }
         default:
             return {...state}
     }

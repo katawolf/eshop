@@ -41,6 +41,9 @@ describe('cart article card spec', () => {
         test('Should display quantity', () => {
             expect(cartArticleCard.queryByText('Quantity : 12')).toBeInTheDocument()
         })
+        test('should display "Delete" button', () => {
+            expect(cartArticleCard.queryByText('Delete')).toBeInTheDocument()
+        })
     });
 
     describe('When click on cart article card', () => {
@@ -57,9 +60,24 @@ describe('cart article card spec', () => {
             expect(history.location.pathname).toBe('/article/2')
         })
     })
+
+    describe('when click on delete button', () => {
+        const deleteCartArticle = jest.fn()
+
+        beforeEach(() => {
+            cartArticleCard = component({deleteCartArticle})
+            fireEvent.click(cartArticleCard.getByText('Delete'))
+        })
+        afterEach(() => {
+            deleteCartArticle.mockClear()
+        })
+        test('should call delete prop', () => {
+            expect(deleteCartArticle).toBeCalledWith(cartArticle)
+        })
+    })
 })
 
 const component = (partialProps: Partial<ICartArticleCardProps> = {}, history = createMemoryHistory()) => render(
     <Router history={history}>
-        <CartArticleCard {...{cartArticle, ...partialProps}}/>
+        <CartArticleCard {...{cartArticle, deleteCartArticle: () => {} , ...partialProps}}/>
     </Router>)
