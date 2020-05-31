@@ -1,4 +1,3 @@
-import IArticleSummary from "../../models/IArticleSummary";
 import ICartArticle from "../../models/ICartArticle";
 
 interface IAddCartArticleAction {

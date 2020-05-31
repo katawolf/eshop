@@ -1,7 +1,11 @@
-import IArticleSummary from "./IArticleSummary";
 import Size from "./Size";
+import IPrice from "./IPrice";
 
-interface IArticle extends IArticleSummary {
+interface IArticle {
+    id: string
+    name: string
+    price: IPrice
+    imgSrc: string
     description: string
     availableSizes: Size[]
 }

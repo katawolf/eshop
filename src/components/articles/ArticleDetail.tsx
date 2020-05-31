@@ -36,11 +36,13 @@ const ArticleDetail: React.FC<IProps> = ({article, addCartArticle}) => {
     </div>
 }
 
-const toCartArticle = ({id, name, imgSrc, price}: IArticle, size: Size): ICartArticle => ({
+const toCartArticle = ({id, name, imgSrc, price, description, availableSizes}: IArticle, size: Size): ICartArticle => ({
     id,
     name,
     imgSrc,
     price,
+    description,
+    availableSizes,
     size,
     quantity: 1
 })
