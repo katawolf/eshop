@@ -10,4 +10,8 @@ interface IRemoveCartArticleAction {
     payload: ICartArticle
 }
 
-export type CartActionType = IAddCartArticleAction | IRemoveCartArticleAction
+interface IUpdateCartArticleAction {
+    type: 'UPDATE_CART_ARTICLE'
+    payload: ICartArticle
+}
+export type CartActionType = IAddCartArticleAction | IRemoveCartArticleAction | IUpdateCartArticleAction

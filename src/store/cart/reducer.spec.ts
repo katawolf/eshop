@@ -109,4 +109,58 @@ describe('reducer spec', () => {
             })
         })
     })
+    describe('handle "UPDATE_CART_ARTICLE"', () => {
+        test('should update article', () => {
+            expect(
+                cartReducer({
+                    cartArticles: [
+                        aCartArticle({id: '1', name: 'Iphone', size: 'L', quantity: 1}),
+                        aCartArticle({id: '2', name: 'X1 carbon', size: 'S', quantity: 5})
+                    ]
+                }, {
+                    type: 'UPDATE_CART_ARTICLE',
+                    payload: aCartArticle({id: '2', name: 'X1 carbon', size: 'S', quantity: 10})
+                })
+            ).toEqual({
+                cartArticles: [
+                    aCartArticle({id: '1', name: 'Iphone', size: 'L', quantity: 1}),
+                    aCartArticle({id: '2', name: 'X1 carbon', size: 'S', quantity: 10})
+                ]
+            })
+        })
+        test('should not update articles when article is already added but the size is different', () => {
+            expect(
+                cartReducer({
+                    cartArticles: [
+                        aCartArticle({id: '1', name: 'Iphone', size: 'L', quantity: 1}),
+                        aCartArticle({id: '2', name: 'X1 carbon', size: 'S', quantity: 5})
+                    ]
+                }, {
+                    type: 'UPDATE_CART_ARTICLE',
+                    payload: aCartArticle({id: '2', name: 'X1 carbon', size: 'M', quantity: 10})
+                })
+            ).toEqual({
+                cartArticles: [
+                    aCartArticle({id: '1', name: 'Iphone', size: 'L', quantity: 1}),
+                    aCartArticle({id: '2', name: 'X1 carbon', size: 'S', quantity: 5})
+                ]
+            })
+        })
+        test('should not update articles when article is not already added', () => {
+            expect(
+                cartReducer({
+                    cartArticles: [
+                        aCartArticle({id: '1', name: 'Iphone', size: 'L', quantity: 1}),
+                    ]
+                }, {
+                    type: 'UPDATE_CART_ARTICLE',
+                    payload: aCartArticle({id: '2', name: 'X1 carbon', size: 'M', quantity: 10})
+                })
+            ).toEqual({
+                cartArticles: [
+                    aCartArticle({id: '1', name: 'Iphone', size: 'L', quantity: 1}),
+                ]
+            })
+        })
+    })
 })

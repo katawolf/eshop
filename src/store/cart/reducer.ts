@@ -21,6 +21,11 @@ const cartReducer = (state = initialState, action: CartActionType): ICartState =
                 ...state,
                 cartArticles: removeCartArticle(state.cartArticles, action.payload)
             }
+        case "UPDATE_CART_ARTICLE":
+            return {
+                ...state,
+                cartArticles: updateCartArticle(state.cartArticles, action.payload)
+            }
         default:
             return {...state}
     }
@@ -34,6 +39,11 @@ const addCartArticle = (cartArticles: ICartArticle[], cartArticle: ICartArticle)
 }
 
 const removeCartArticle = (cartArticles: ICartArticle[], cartArticle: ICartArticle) => cartArticles.filter(it => !cartArticlesAreEquals(it, cartArticle))
+
+const updateCartArticle = (cartArticles: ICartArticle[], cartArticle: ICartArticle) =>
+    cartArticles.find(it => cartArticlesAreEquals(it, cartArticle))
+        ? [...removeCartArticle(cartArticles, cartArticle), cartArticle]
+        : [...cartArticles]
 
 const cartArticlesAreEquals = (cartArticle1: ICartArticle, cartArticle2: ICartArticle) =>
     cartArticle1.id === cartArticle2.id && cartArticle1.size === cartArticle2.size
