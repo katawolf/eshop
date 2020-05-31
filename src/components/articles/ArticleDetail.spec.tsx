@@ -47,7 +47,7 @@ describe('Article detail spec', () => {
         test('should display description', () => {
             expect(articleDetail.queryByText('a description')).toBeInTheDocument()
         })
-        test.each(['XS', 'S', 'M'] as Size[])('should display %s available sizes', (size: Size) => {
+        test.each(['XS', 'S', 'M'] as Size[])('should propose %s available sizes', (size: Size) => {
             expect(articleDetail.queryByText(size)).toBeInTheDocument()
         })
         test('should display "Add on cart" button', () => {
@@ -78,7 +78,7 @@ describe('Article detail spec', () => {
         const addCartArticle = jest.fn()
         beforeEach(() => {
             articleDetail = component({article, addCartArticle})
-            fireEvent.change(articleDetail.getByTestId('select'), {target: {value: size}})
+            fireEvent.change(articleDetail.getByTestId('sizeSelect'), {target: {value: size}})
         })
         afterEach(() => {
             addCartArticle.mockClear()

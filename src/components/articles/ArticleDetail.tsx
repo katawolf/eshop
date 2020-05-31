@@ -28,7 +28,7 @@ const ArticleDetail: React.FC<IProps> = ({article, addCartArticle}) => {
         <div>{name}</div>
         <div>{formatPrice(price)}</div>
         <div>{description}</div>
-        <Form.Control data-testid={'select'} as="select" onChange={(event: any) => setSizeSelected(event.target.value)}>
+        <Form.Control data-testid={'sizeSelect'} as="select" onChange={(event: any) => setSizeSelected(event.target.value)}>
             <option key={-1} value=''>Select available size</option>
             {availableSizes.map((size, index) => <option key={index}>{size}</option>)}
         </Form.Control>
