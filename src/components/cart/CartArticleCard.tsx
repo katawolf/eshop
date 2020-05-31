@@ -6,10 +6,10 @@ import {useHistory} from "react-router-dom";
 
 interface IProps {
     cartArticle: ICartArticle
-    deleteCartArticle: (cartArticle: ICartArticle) => void
+    removeCartArticle: (cartArticle: ICartArticle) => void
 }
 
-const CartArticleCard: React.FC<IProps> = ({cartArticle, deleteCartArticle}) => {
+const CartArticleCard: React.FC<IProps> = ({cartArticle, removeCartArticle}) => {
     const {id, imgSrc, name, price, size, quantity} = cartArticle
     const history = useHistory()
 
@@ -21,7 +21,7 @@ const CartArticleCard: React.FC<IProps> = ({cartArticle, deleteCartArticle}) => 
             <Card.Text>Size : {size}</Card.Text>
             <Card.Text>Quantity : {quantity}</Card.Text>
             <Button onClick={() => history.push(`/article/${id}`)}>Details</Button>
-            <Button onClick={() => deleteCartArticle(cartArticle)}>Delete</Button>
+            <Button onClick={() => removeCartArticle(cartArticle)}>Remove</Button>
         </Card.Body>
     </Card>
 }

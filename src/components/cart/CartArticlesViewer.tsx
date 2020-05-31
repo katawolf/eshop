@@ -5,13 +5,13 @@ import CartArticleCard from "./CartArticleCard";
 
 interface IProps {
     cartArticles: ICartArticle[]
-    deleteCartArticle: (cartArticle: ICartArticle) => void
+    removeCartArticle: (cartArticle: ICartArticle) => void
 }
 
-const CartArticlesViewer: React.FC<IProps> = ({cartArticles, deleteCartArticle}) =>
+const CartArticlesViewer: React.FC<IProps> = ({cartArticles, removeCartArticle}) =>
     <CardColumns data-testid={'cartArticlesViewer'}>
         {cartArticles.map((cartArticle, index) => <div key={index}>
-            <CartArticleCard {...{cartArticle, deleteCartArticle}}/>
+            <CartArticleCard {...{cartArticle, removeCartArticle}}/>
         </div>)}
     </CardColumns>
 

@@ -44,8 +44,8 @@ describe('cart article card spec', () => {
         test('should display "Details" button', () => {
             expect(cartArticleCard.queryByText('Details')).toBeInTheDocument()
         })
-        test('should display "Delete" button', () => {
-            expect(cartArticleCard.queryByText('Delete')).toBeInTheDocument()
+        test('should display "Remove" button', () => {
+            expect(cartArticleCard.queryByText('Remove')).toBeInTheDocument()
         })
     });
 
@@ -64,23 +64,23 @@ describe('cart article card spec', () => {
         })
     })
 
-    describe('when click on "Delete" button', () => {
-        const deleteCartArticle = jest.fn()
+    describe('when click on "Remove" button', () => {
+        const removeCartArticle = jest.fn()
 
         beforeEach(() => {
-            cartArticleCard = component({deleteCartArticle})
-            fireEvent.click(cartArticleCard.getByText('Delete'))
+            cartArticleCard = component({removeCartArticle})
+            fireEvent.click(cartArticleCard.getByText('Remove'))
         })
         afterEach(() => {
-            deleteCartArticle.mockClear()
+            removeCartArticle.mockClear()
         })
-        test('should call delete prop', () => {
-            expect(deleteCartArticle).toBeCalledWith(cartArticle)
+        test('should call remove cart article prop', () => {
+            expect(removeCartArticle).toBeCalledWith(cartArticle)
         })
     })
 })
 
 const component = (partialProps: Partial<ICartArticleCardProps> = {}, history = createMemoryHistory()) => render(
     <Router history={history}>
-        <CartArticleCard {...{cartArticle, deleteCartArticle: () => {} , ...partialProps}}/>
+        <CartArticleCard {...{cartArticle, removeCartArticle: jest.fn(), ...partialProps}}/>
     </Router>)

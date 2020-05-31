@@ -27,4 +27,4 @@ describe('cart articles viewer spec', () => {
 })
 
 const component = (partialProps: Partial<ICartArticlesViewerProps> = {}) => render(
-    <CartArticlesViewer {...{cartArticles, deleteCartArticle: jest.fn(), ...partialProps}}/>)
+    <CartArticlesViewer {...{cartArticles, removeCartArticle: jest.fn(), ...partialProps}}/>)
