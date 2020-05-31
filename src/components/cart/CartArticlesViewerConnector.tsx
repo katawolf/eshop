@@ -2,16 +2,21 @@ import React from "react";
 import {ICartState} from "../../store/cart/reducer";
 import {connect, ConnectedProps} from "react-redux";
 import CartArticlesViewer from "./CartArticlesViewer";
+import {removeCartArticle} from "../../store/cart/action";
 
-const mapState = ({articles}: ICartState) => ({articles})
+const mapState = ({cartArticles}: ICartState) => ({cartArticles})
 
-const connector = connect(mapState)
+const mapDispatch = {
+    removeCartArticle,
+}
+
+const connector = connect(mapState, mapDispatch)
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-const CartArticlesViewerConnector: React.FC<PropsFromRedux> = ({articles}) =>
+const CartArticlesViewerConnector: React.FC<PropsFromRedux> = (props) =>
     <div data-testid={'cartArticlesViewerConnector'}>
-        <CartArticlesViewer cartArticles={articles}/>
+        <CartArticlesViewer {...props}/>
     </div>
 
 export default connector(CartArticlesViewerConnector)

@@ -1,9 +1,14 @@
 import IArticleSummary from "../../models/IArticleSummary";
 import ICartArticle from "../../models/ICartArticle";
 
-interface IAddArticleAction {
+interface IAddCartArticleAction {
     type: 'ADD_CART_ARTICLE'
     payload: ICartArticle
 }
 
-export type CartActionType = IAddArticleAction
+interface IRemoveCartArticleAction {
+    type: 'REMOVE_CART_ARTICLE'
+    payload: ICartArticle
+}
+
+export type CartActionType = IAddCartArticleAction | IRemoveCartArticleAction

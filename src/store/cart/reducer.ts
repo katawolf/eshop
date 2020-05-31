@@ -2,11 +2,11 @@ import {CartActionType} from "./type";
 import ICartArticle from "../../models/ICartArticle";
 
 const initialState: ICartState = {
-    articles: []
+    cartArticles: []
 }
 
 export interface ICartState {
-    articles: ICartArticle[]
+    cartArticles: ICartArticle[]
 }
 
 const cartReducer = (state = initialState, action: CartActionType): ICartState => {
@@ -14,7 +14,12 @@ const cartReducer = (state = initialState, action: CartActionType): ICartState =
         case 'ADD_CART_ARTICLE':
             return {
                 ...state,
-                articles: addCartArticle(state.articles, action.payload)
+                cartArticles: addCartArticle(state.cartArticles, action.payload)
+            }
+        case "REMOVE_CART_ARTICLE":
+            return {
+                ...state,
+                cartArticles: removeCartArticle(state.cartArticles, action.payload)
             }
         default:
             return {...state}
