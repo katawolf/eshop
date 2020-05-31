@@ -16,7 +16,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>
 
 const CartArticlesViewerConnector: React.FC<PropsFromRedux> = (props) =>
     <div data-testid={'cartArticlesViewerConnector'}>
-        <CartArticlesViewer {...props}/>
+        <CartArticlesViewer {...{...props, updateCartArticle: () => {}}}/>
     </div>
 
 export default connector(CartArticlesViewerConnector)

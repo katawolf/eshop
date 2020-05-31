@@ -44,11 +44,13 @@ describe('cart article card spec', () => {
         test('should display "Details" button', () => {
             expect(cartArticleCard.queryByText('Details')).toBeInTheDocument()
         })
+        test('should display "Update" button', () => {
+            expect(cartArticleCard.queryByText('Update')).toBeInTheDocument()
+        })
         test('should display "Remove" button', () => {
             expect(cartArticleCard.queryByText('Remove')).toBeInTheDocument()
         })
     });
-
     describe('When click on "Details" button', () => {
 
         const history = createMemoryHistory()
@@ -63,7 +65,20 @@ describe('cart article card spec', () => {
             expect(history.location.pathname).toBe('/article/2')
         })
     })
+    describe('when click on "Update" button', () => {
+        const updateCartArticle = jest.fn()
 
+        beforeEach(() => {
+            cartArticleCard = component({updateCartArticle})
+            fireEvent.click(cartArticleCard.getByText('Update'))
+        })
+        afterEach(() => {
+            updateCartArticle.mockClear()
+        })
+        test('should call update cart article prop', () => {
+            expect(updateCartArticle).toBeCalledWith(cartArticle)
+        })
+    })
     describe('when click on "Remove" button', () => {
         const removeCartArticle = jest.fn()
 
@@ -82,5 +97,10 @@ describe('cart article card spec', () => {
 
 const component = (partialProps: Partial<ICartArticleCardProps> = {}, history = createMemoryHistory()) => render(
     <Router history={history}>
-        <CartArticleCard {...{cartArticle, removeCartArticle: jest.fn(), ...partialProps}}/>
+        <CartArticleCard {...{
+            cartArticle,
+            updateCartArticle: jest.fn(),
+            removeCartArticle: jest.fn(),
+            ...partialProps
+        }}/>
     </Router>)
