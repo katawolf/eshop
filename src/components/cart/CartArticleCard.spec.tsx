@@ -41,19 +41,22 @@ describe('cart article card spec', () => {
         test('Should display quantity', () => {
             expect(cartArticleCard.queryByText('Quantity : 12')).toBeInTheDocument()
         })
+        test('should display "Details" button', () => {
+            expect(cartArticleCard.queryByText('Details')).toBeInTheDocument()
+        })
         test('should display "Delete" button', () => {
             expect(cartArticleCard.queryByText('Delete')).toBeInTheDocument()
         })
     });
 
-    describe('When click on cart article card', () => {
+    describe('When click on "Details" button', () => {
 
         const history = createMemoryHistory()
 
         beforeEach(async () => {
             await act(async () => {
                 cartArticleCard = component({cartArticle}, history)
-                fireEvent.click(cartArticleCard.getByTestId('cartArticleCard'))
+                fireEvent.click(cartArticleCard.getByText('Details'))
             })
         })
         test('should redirect on article detail page', () => {
