@@ -1,10 +1,10 @@
 import React from "react";
 import {CardColumns} from "react-bootstrap";
-import IArticleSummary from "../../models/IArticleSummary";
 import ArticleCard from "./ArticleCard";
+import IArticle from "../../models/IArticle";
 
 interface IProps {
-    articles: IArticleSummary[]
+    articles: IArticle[]
 }
 
 const ArticlesViewer: React.FC<IProps> = ({articles}) =>

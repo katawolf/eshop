@@ -1,11 +1,11 @@
 import React from "react";
 import {Card} from "react-bootstrap";
-import IArticleSummary from "../../models/IArticleSummary";
 import {useHistory} from "react-router-dom";
 import {formatPrice} from "../../services/format.service";
+import IArticle from "../../models/IArticle";
 
 export interface IProps {
-    article: IArticleSummary
+    article: IArticle
 }
 
 const ArticleCard: React.FC<IProps> = ({article: {id, imgSrc, name, price}}) => {

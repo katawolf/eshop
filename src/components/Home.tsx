@@ -1,15 +1,15 @@
 import ArticlesViewer from "./articles/ArticlesViewer";
 import React, {useEffect, useState} from "react";
-import IArticleSummary from "../models/IArticleSummary";
-import {getArticleSummaries} from "../services/article.service";
+import {getArticles} from "../services/article.service";
 import Menu from "./Menu";
+import IArticle from "../models/IArticle";
 
 const Home: React.FC = () => {
 
-    const [articles, setArticles] = useState([] as IArticleSummary[])
+    const [articles, setArticles] = useState([] as IArticle[])
 
     useEffect(() => {
-        getArticleSummaries().then(setArticles);
+        getArticles().then(setArticles);
     }, [])
 
     return <div data-testid={'home'}>

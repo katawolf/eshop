@@ -1,5 +1,5 @@
-import {render, RenderResult, fireEvent} from "@testing-library/react"
-import {aCartArticle, anArticle, anArticleSummary} from "../../data.mock";
+import {fireEvent, render, RenderResult} from "@testing-library/react"
+import {aCartArticle, anArticle} from "../../data.mock";
 import React from "react";
 import ArticleDetail, {IArticleDetailProps} from "./ArticleDetail";
 import Size from "../../models/Size";
@@ -19,6 +19,8 @@ const cartArticle = aCartArticle({
     name: 'name',
     price: {value: 125, currency: 'EUR'},
     imgSrc: '/src/img',
+    description: 'a description',
+    availableSizes: ['XS', "S", "M"],
     size: 'M'
 })
 

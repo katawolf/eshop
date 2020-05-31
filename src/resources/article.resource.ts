@@ -1,6 +1,5 @@
 import {anArticle} from "../data.mock";
 import IArticle from "../models/IArticle";
-import IArticleSummary from "../models/IArticleSummary";
 
 const articles = [
     anArticle({id: '1', name: 'IPhone'}),
@@ -15,7 +14,7 @@ const articles = [
 ]
 
 class ArticleResource {
-    getArticleSummaries(): Promise<IArticleSummary[]> {
+    getArticles(): Promise<IArticle[]> {
         return Promise.resolve(articles)
     }
 

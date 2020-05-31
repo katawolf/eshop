@@ -1,13 +1,12 @@
 import React from "react";
 import {fireEvent, render, RenderResult} from "@testing-library/react";
 import ArticleCard, {IArticleCardProps} from "./ArticleCard";
-import IArticleSummary from "../../models/IArticleSummary";
 import {anArticle} from "../../data.mock";
 import {Router} from "react-router-dom";
 import {createMemoryHistory} from "history";
-import {act} from "react-dom/test-utils";
+import IArticle from "../../models/IArticle";
 
-const article: IArticleSummary = anArticle({
+const article: IArticle = anArticle({
     id: '1',
     name: 'Shoes blue',
     imgSrc: '/src/image/iphone.jpg',
@@ -16,10 +15,6 @@ const article: IArticleSummary = anArticle({
         currency: "EUR"
     }
 })
-const addToCart = () => {
-}
-const removeToCart = () => {
-}
 
 describe('Article card spec', () => {
 

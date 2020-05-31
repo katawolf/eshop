@@ -1,24 +1,24 @@
 import {render, RenderResult, wait} from "@testing-library/react";
 import React from "react";
-import IArticleSummary from "../models/IArticleSummary";
-import {anArticleSummary} from "../data.mock";
+import {anArticle} from "../data.mock";
 import * as articleService from "../services/article.service";
 import {act} from "react-dom/test-utils";
 import Home from "./Home";
+import IArticle from "../models/IArticle";
 
 jest.mock('./articles/ArticlesViewer', () => () => <div data-testid={'articlesViewer'}>ArticlesViewer</div>)
 jest.mock('./Menu', () => () => <div data-testid={'menu'}>Menu</div>)
 
-const articles: IArticleSummary[] = [
-    anArticleSummary({id: '1', name: 'IPhone'}),
-    anArticleSummary({id: '2', name: 'Honor phone'})
+const articles: IArticle[] = [
+    anArticle({id: '1', name: 'IPhone'}),
+    anArticle({id: '2', name: 'Honor phone'})
 ];
 
 describe('Home spec', () => {
     let homeComponent: RenderResult
 
     describe('on init', () => {
-        const mockGetArticles = jest.spyOn(articleService, 'getArticleSummaries')
+        const mockGetArticles = jest.spyOn(articleService, 'getArticles')
         beforeEach(async () => {
             mockGetArticles.mockReturnValue(Promise.resolve(articles))
             await act(async () => {
