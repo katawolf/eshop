@@ -64,7 +64,7 @@ describe('cart article card spec', () => {
         })
     })
 
-    describe('when click on delete button', () => {
+    describe('when click on "Delete" button', () => {
         const deleteCartArticle = jest.fn()
 
         beforeEach(() => {
