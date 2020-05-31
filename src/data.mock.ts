@@ -23,5 +23,6 @@ export const anArticle = (partialArticle: Partial<IArticle> = {}): IArticle => (
 export const aCartArticle = (partialCartArticle: Partial<ICartArticle> = {}): ICartArticle => ({
     ...anArticleSummary(),
     size: 'XS',
+    quantity: 2,
     ...partialCartArticle
 })

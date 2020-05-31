@@ -14,16 +14,28 @@ const cartReducer = (state = initialState, action: CartActionType): ICartState =
         case 'ADD_CART_ARTICLE':
             return {
                 ...state,
-                articles: addArticle(state.articles, action.payload)
+                articles: addCartArticle(state.articles, action.payload)
             }
         default:
             return {...state}
     }
 }
 
-const addArticle = (articles: ICartArticle[], article: ICartArticle) =>
-    articles.find(({name, size}: ICartArticle) => article.name === name && article.size === size)
-        ? [...articles]
-        : [...articles, article]
+const addCartArticle = (cartArticles: ICartArticle[], cartArticle: ICartArticle): ICartArticle[] => {
+    const oldCartArticle = cartArticles.find(it => cartArticlesAreEquals(it, cartArticle))
+    return oldCartArticle
+        ? [...removeCartArticle(cartArticles, oldCartArticle), concatCardArticle(oldCartArticle, cartArticle)]
+        : [...cartArticles, cartArticle]
+}
+
+const removeCartArticle = (cartArticles: ICartArticle[], cartArticle: ICartArticle) => cartArticles.filter(it => !cartArticlesAreEquals(it, cartArticle))
+
+const cartArticlesAreEquals = (cartArticle1: ICartArticle, cartArticle2: ICartArticle) =>
+    cartArticle1.id === cartArticle2.id && cartArticle1.size === cartArticle2.size
+
+const concatCardArticle = (cartArticle: ICartArticle, {quantity}: ICartArticle) => ({
+    ...cartArticle,
+    quantity: cartArticle.quantity + quantity
+})
 
 export default cartReducer

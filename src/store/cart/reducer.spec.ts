@@ -16,9 +16,9 @@ describe('reducer spec', () => {
     })
 
     describe('handle "ADD_ARTICLE"', () => {
-        const article = aCartArticle({id: '1', name: 'Iphone', size: 'M'})
+        const article = aCartArticle({id: '1', name: 'Iphone', size: 'M', quantity: 1})
         const state = {
-            articles: [aCartArticle({id: '2', name: 'X1 carbon', size: 'S'})]
+            articles: [aCartArticle({id: '2', name: 'X1 carbon', size: 'S', quantity: 1})]
         }
         test('should add article', () => {
             expect(
@@ -43,15 +43,18 @@ describe('reducer spec', () => {
                     articles: [...state.articles, articleAlreadyAdded]
                 })
             })
-            test('should not add article when is the same size', () => {
-                const [articleAlreadyAdded] = state.articles
+            test('should update quantity of article when is the same size', () => {
+                const articleAlreadyAdded = aCartArticle({id: '2', name: 'X1 carbon', size: 'S', quantity: 1})
                 expect(
-                    cartReducer(state, {
+                    cartReducer({
+                        articles: [article, articleAlreadyAdded]
+
+                    }, {
                         type: 'ADD_CART_ARTICLE',
-                        payload: articleAlreadyAdded
+                        payload: {...articleAlreadyAdded, quantity: 1}
                     })
                 ).toEqual({
-                    articles: state.articles
+                    articles: [article, {...articleAlreadyAdded, quantity: 2}]
                 })
             })
         })
