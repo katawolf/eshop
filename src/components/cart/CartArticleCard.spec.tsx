@@ -12,7 +12,8 @@ const cartArticle = aCartArticle({
     imgSrc: 'path/to/img.jpg',
     price: {value: 128, currency: "EUR"},
     size: 'M',
-    quantity: 8
+    quantity: 8,
+    maxQuantityByCart: 20
 })
 
 describe('cart article card spec', () => {
@@ -41,8 +42,8 @@ describe('cart article card spec', () => {
         test('Should display quantity', () => {
             expect((cartArticleCard.getByTestId('quantitySelect') as HTMLSelectElement).value).toEqual('8')
         })
-        test('should propose only 10 available quantities option', () => {
-            expect(cartArticleCard.queryAllByTestId('quantityOption')).toHaveLength(10)
+        test('should propose only quantity option inferior or equal to max quantity by cart of article', () => {
+            expect(cartArticleCard.queryAllByTestId('quantityOption')).toHaveLength(20)
         })
         test('should display "Details" button', () => {
             expect(cartArticleCard.queryByText('Details')).toBeInTheDocument()

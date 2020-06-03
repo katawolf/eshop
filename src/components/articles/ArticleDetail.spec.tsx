@@ -26,9 +26,13 @@ const cartArticle = aCartArticle({
 
 describe('Article detail spec', () => {
     let articleDetail: RenderResult
+    const cleanError = jest.fn()
     describe('on init', () => {
         beforeEach(() => {
-            articleDetail = component({article})
+            articleDetail = componentRender({article, cleanError})
+        })
+        afterEach(() => {
+            cleanError.mockClear()
         })
         test('should display component', () => {
             expect(articleDetail.queryByTestId('articleDetail')).toBeInTheDocument()
@@ -53,11 +57,30 @@ describe('Article detail spec', () => {
         test('should display "Add on cart" button', () => {
             expect(articleDetail.queryByText('Add on cart')).toBeInTheDocument()
         })
+        test('should not display error', () => {
+            expect(articleDetail.queryByText('an error')).not.toBeInTheDocument()
+        })
+        describe('when there are an error', () => {
+            beforeEach(() => {
+                articleDetail.rerender(component({error: 'an error'}))
+            })
+            test('should display error', () => {
+                expect(articleDetail.queryByText('an error')).toBeInTheDocument()
+            })
+        })
+        describe('when unmount component', () => {
+            beforeEach(() => {
+                articleDetail.unmount()
+            })
+            test('should call clean error method', () => {
+                expect(cleanError).toBeCalledTimes(1)
+            })
+        })
     })
     describe('when not selected size', () => {
         const addCartArticle = jest.fn()
         beforeEach(() => {
-            articleDetail = component({article, addCartArticle})
+            articleDetail = componentRender({article, addCartArticle})
         })
         afterEach(() => {
             addCartArticle.mockClear()
@@ -77,7 +100,7 @@ describe('Article detail spec', () => {
     describe.each(['XS', 'S', 'M'] as Size[])('when selected %s size', (size: Size) => {
         const addCartArticle = jest.fn()
         beforeEach(() => {
-            articleDetail = component({article, addCartArticle})
+            articleDetail = componentRender({article, addCartArticle})
             fireEvent.change(articleDetail.getByTestId('sizeSelect'), {target: {value: size}})
         })
         afterEach(() => {
@@ -97,5 +120,7 @@ describe('Article detail spec', () => {
     })
 })
 
-const component = (partialProps: Partial<IArticleDetailProps> = {}) => render(
-    <ArticleDetail {...{article, addCartArticle: () => {}, ...partialProps}} />)
+const componentRender = (partialProps: Partial<IArticleDetailProps> = {}) => render(component(partialProps))
+
+const component = (partialProps: Partial<IArticleDetailProps> = {}) =>
+    <ArticleDetail {...{article, addCartArticle: () => {}, ...partialProps}} />

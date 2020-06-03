@@ -13,7 +13,7 @@ interface IProps {
 const CartArticleCard: React.FC<IProps> = ({cartArticle : cartArticleFromProps, updateCartArticle, removeCartArticle}) => {
     const history = useHistory()
     const [cartArticle, setCartArticle] = useState(cartArticleFromProps)
-    const {id, imgSrc, name, price, size, quantity} = cartArticle
+    const {id, imgSrc, name, price, size, quantity, maxQuantityByCart} = cartArticle
 
     const updateQuantity = (quantity: number) => {
         setCartArticle({...cartArticle, quantity})
@@ -30,7 +30,7 @@ const CartArticleCard: React.FC<IProps> = ({cartArticle : cartArticleFromProps, 
                 <Form.Control data-testid={'quantitySelect'} value={quantity}
                               as={'select'}
                               onChange={event => updateQuantity(Number(event.target.value))}>
-                    {getAvailableQuantities(10).map(it => <option data-testid={`quantityOption`} key={it}>{it}</option>)}
+                    {getAvailableQuantities(maxQuantityByCart).map(it => <option data-testid={`quantityOption`} key={it}>{it}</option>)}
                 </Form.Control>
             </Card.Text>
             <Button onClick={() => history.push(`/article/${id}`)}>Details</Button>

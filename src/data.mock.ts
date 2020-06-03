@@ -11,6 +11,7 @@ export const anArticle = (partialArticle: Partial<IArticle> = {}): IArticle => (
     },
     availableSizes: ['XS', "S", "M", "L", "XL"],
     description: 'a description',
+    maxQuantityByCart: 10,
     ...partialArticle
 })
 
