@@ -6,7 +6,7 @@ const initialState: ICartState = {
 }
 
 export interface ICartState {
-    addCartArticleError?: string
+    error?: string
     cartArticles: ICartArticle[]
 }
 
@@ -21,10 +21,10 @@ const cartReducer = (state = initialState, action: CartActionType): ICartState =
             }
         case "UPDATE_CART_ARTICLE":
             return updateCartArticleReducer(state, action.payload)
-        case "CLEAN_ADD_CART_ARTICLE_ERROR":
+        case "CLEAN_CART_ERROR":
             return {
                 ...state,
-                addCartArticleError: undefined
+                error: undefined
             }
         default:
             return {...state}

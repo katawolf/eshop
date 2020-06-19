@@ -1,7 +1,6 @@
 import cartReducer from "./reducer";
 import {CartActionType} from "./type";
 import {aCartArticle} from "../../data.mock";
-import ICartArticle from "../../models/ICartArticle";
 
 describe('reducer spec', () => {
     describe('default handle', () => {
@@ -218,12 +217,12 @@ describe('reducer spec', () => {
         test('should clean error', () => {
             expect(
                 cartReducer({
-                    addCartArticleError: 'An error',
+                    error: 'An error',
                     cartArticles: [
                         aCartArticle({id: '2', name: 'X1 carbon', size: 'S', quantity: 5})
                     ]
                 }, {
-                    type: 'CLEAN_ADD_CART_ARTICLE_ERROR',
+                    type: 'CLEAN_CART_ERROR',
                 })
             ).toEqual({
                 cartArticles: [

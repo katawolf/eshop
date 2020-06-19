@@ -30,7 +30,7 @@ describe('Article detail spec', () => {
     describe('on init', () => {
         beforeEach(() => {
             cleanAddCartArticleError.mockClear()
-            articleDetail = componentRender({article, cleanAddCartArticleError})
+            articleDetail = componentRender({article, cleanCartError: cleanAddCartArticleError})
         })
         afterEach(() => {
             cleanAddCartArticleError.mockClear()
@@ -103,15 +103,15 @@ describe('Article detail spec', () => {
     })
     describe.each(['XS', 'S', 'M'] as Size[])('when selected %s size', (size: Size) => {
         const addCartArticle = jest.fn()
-        const cleanAddCartArticleError = jest.fn()
+        const cleanCartError = jest.fn()
         beforeEach(() => {
-            cleanAddCartArticleError.mockClear()
-            articleDetail = componentRender({article, addCartArticle, cleanAddCartArticleError})
+            cleanCartError.mockClear()
+            articleDetail = componentRender({article, addCartArticle, cleanCartError})
             fireEvent.change(articleDetail.getByTestId('sizeSelect'), {target: {value: size}})
         })
         afterEach(() => {
             addCartArticle.mockClear()
-            cleanAddCartArticleError.mockClear()
+            cleanCartError.mockClear()
         })
         describe('and click on "Add to cart" button', () => {
             beforeEach(() => {
@@ -121,7 +121,7 @@ describe('Article detail spec', () => {
                 expect(articleDetail.queryByText('Please select a size')).not.toBeInTheDocument()
             })
             test('should call cleanAddCartArticleError', () => {
-                expect(cleanAddCartArticleError).toBeCalledTimes(1)
+                expect(cleanCartError).toBeCalledTimes(1)
             })
             test('should call addCartArticle', () => {
                 expect(addCartArticle).toBeCalledWith({...cartArticle, size, quantity: 1})
@@ -135,6 +135,6 @@ const componentRender = (partialProps: Partial<IArticleDetailProps> = {}) => ren
 const component = (partialProps: Partial<IArticleDetailProps> = {}) =>
     <ArticleDetail {...{
         article, addCartArticle: () => {
-        }, cleanAddCartArticleError: () => {
+        }, cleanCartError: () => {
         }, ...partialProps
     }} />

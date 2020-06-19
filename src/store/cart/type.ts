@@ -15,8 +15,8 @@ interface IUpdateCartArticleAction {
     payload: ICartArticle
 }
 
-interface ICleanErrorAction {
-    type: 'CLEAN_ADD_CART_ARTICLE_ERROR'
+interface ICleanCartErrorAction {
+    type: 'CLEAN_CART_ERROR'
 }
 
-export type CartActionType = IAddCartArticleAction | IRemoveCartArticleAction | IUpdateCartArticleAction | ICleanErrorAction
+export type CartActionType = IAddCartArticleAction | IRemoveCartArticleAction | IUpdateCartArticleAction | ICleanCartErrorAction

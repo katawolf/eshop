@@ -9,19 +9,19 @@ interface IProps {
     addCartArticleError?: string
     article: IArticle
     addCartArticle: (cartArticle: ICartArticle) => void
-    cleanAddCartArticleError: () => void
+    cleanCartError: () => void
 }
 
-const ArticleDetail: React.FC<IProps> = ({article, addCartArticle, addCartArticleError, cleanAddCartArticleError}) => {
+const ArticleDetail: React.FC<IProps> = ({article, addCartArticle, addCartArticleError, cleanCartError}) => {
     const {name, imgSrc, description, availableSizes, price} = article
     const [sizeSelected, setSizeSelected] = useState(undefined as Size | undefined)
     const [displaySizeError, setDisplaySizeError] = useState(false)
     const addOnCart = (article: IArticle) => {
-        cleanAddCartArticleError()
+        cleanCartError()
         setDisplaySizeError(!sizeSelected)
         if (sizeSelected) addCartArticle(toCartArticle(article, sizeSelected))
     }
-    useEffect(() => cleanAddCartArticleError, [cleanAddCartArticleError])
+    useEffect(() => cleanCartError, [cleanCartError])
 
     return <div data-testid={'articleDetail'}>
         {displaySizeError && <div>{'Please select a size'}</div>}
