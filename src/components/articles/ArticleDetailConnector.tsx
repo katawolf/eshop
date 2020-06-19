@@ -1,15 +1,15 @@
-import {addCartArticle, cleanError} from "../../store/cart/action";
+import {addCartArticle, cleanAddCartArticleError} from "../../store/cart/action";
 import {connect, ConnectedProps} from "react-redux";
 import React from "react";
 import IArticle from "../../models/IArticle";
 import ArticleDetail from "./ArticleDetail";
 import {ICartState} from "../../store/cart/reducer";
 
-const mapState = ({error}: ICartState) => ({error})
+const mapState = ({addCartArticleError}: ICartState) => ({addCartArticleError: addCartArticleError})
 
 const mapDispatch = {
     addCartArticle,
-    cleanError
+    cleanAddCartArticleError
 }
 
 const connector = connect(mapState, mapDispatch)

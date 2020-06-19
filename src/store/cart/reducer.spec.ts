@@ -29,16 +29,18 @@ describe('reducer spec', () => {
                 ]
             })
         })
-        test('should not return error when article is added', () => {
+        test('should not add and return error when the quantity is superior of max quantity by cart', () => {
             expect(
                 cartReducer({
-                    error: 'an error',
-                    cartArticles: []
+                    cartArticles: [
+                        aCartArticle({id: '1', name: 'Iphone', size: 'M', quantity: 1}),
+                    ]
                 }, {
                     type: 'ADD_CART_ARTICLE',
-                    payload: aCartArticle({id: '1', name: 'Iphone', size: 'M', quantity: 1})
+                    payload: aCartArticle({id: '2', name: 'X1 carbon', size: 'S', quantity: 9, maxQuantityByCart: 8})
                 })
             ).toEqual({
+                error: 'You can\'t add more quantity of max quantity article in cart',
                 cartArticles: [
                     aCartArticle({id: '1', name: 'Iphone', size: 'M', quantity: 1}),
                 ]
@@ -82,7 +84,7 @@ describe('reducer spec', () => {
                     ]
                 })
             })
-            test('should not add article when the max number of article is exceeded', () => {
+            test('should not add article and return error when the max quantity of article in cart is exceeded', () => {
                 expect(
                     cartReducer({
                         cartArticles: [
@@ -91,10 +93,10 @@ describe('reducer spec', () => {
                         ]
                     }, {
                         type: 'ADD_CART_ARTICLE',
-                        payload: aCartArticle({id: '2', name: 'X1 carbon', size: 'S', quantity: 1})
+                        payload: aCartArticle({id: '2', name: 'X1 carbon', size: 'S', quantity: 1, maxQuantityByCart: 8})
                     })
                 ).toEqual({
-                    error: 'You can\'t add this article because The maximum quantity of this article in your cart is reached',
+                    error: 'You can\'t add more quantity of max quantity article in cart',
                     cartArticles: [
                         aCartArticle({id: '1', name: 'Iphone', size: 'M', quantity: 1}),
                         aCartArticle({id: '2', name: 'X1 carbon', size: 'S', quantity: 8, maxQuantityByCart: 8})
@@ -121,21 +123,6 @@ describe('reducer spec', () => {
                     aCartArticle({id: '1', name: 'Iphone', size: 'L', quantity: 1}),
                     aCartArticle({id: '2', name: 'X1 carbon', size: 'S', quantity: 1})
                 ]
-            })
-        })
-        test('should not return error when article is removed', () => {
-            expect(
-                cartReducer({
-                    error: 'an error',
-                    cartArticles: [
-                        aCartArticle({id: '1', name: 'Iphone', size: 'M', quantity: 1}),
-                    ]
-                }, {
-                    type: 'REMOVE_CART_ARTICLE',
-                    payload: aCartArticle({id: '1', name: 'Iphone', size: 'M', quantity: 1})
-                })
-            ).toEqual({
-                cartArticles: []
             })
         })
         test('should not remove article when size is different', () => {
@@ -176,23 +163,6 @@ describe('reducer spec', () => {
                 ]
             })
         })
-        test('should not return error when article is updated', () => {
-            expect(
-                cartReducer({
-                    error: 'An error',
-                    cartArticles: [
-                        aCartArticle({id: '2', name: 'X1 carbon', size: 'S', quantity: 5})
-                    ]
-                }, {
-                    type: 'UPDATE_CART_ARTICLE',
-                    payload: aCartArticle({id: '2', name: 'X1 carbon', size: 'S', quantity: 10})
-                })
-            ).toEqual({
-                cartArticles: [
-                    aCartArticle({id: '2', name: 'X1 carbon', size: 'S', quantity: 10})
-                ]
-            })
-        })
         test('should not update articles when article is already added but the size is different', () => {
             expect(
                 cartReducer({
@@ -227,17 +197,33 @@ describe('reducer spec', () => {
                 ]
             })
         })
+        test('should not update when the quantity is superior of max quantity by cart', () => {
+            expect(
+                cartReducer({
+                    cartArticles: [
+                        aCartArticle({id: '2', name: 'X1 carbon', size: 'S', quantity: 5})
+                    ]
+                }, {
+                    type: 'UPDATE_CART_ARTICLE',
+                    payload: aCartArticle({id: '2', name: 'X1 carbon', size: 'S', quantity: 10, maxQuantityByCart: 8})
+                })
+            ).toEqual({
+                cartArticles: [
+                    aCartArticle({id: '2', name: 'X1 carbon', size: 'S', quantity: 5})
+                ]
+            })
+        })
     })
     describe('handle "CLEAN ERROR"', () => {
         test('should clean error', () => {
             expect(
                 cartReducer({
-                    error: 'An error',
+                    addCartArticleError: 'An error',
                     cartArticles: [
                         aCartArticle({id: '2', name: 'X1 carbon', size: 'S', quantity: 5})
                     ]
                 }, {
-                    type: 'CLEAN_ERROR',
+                    type: 'CLEAN_ADD_CART_ARTICLE_ERROR',
                 })
             ).toEqual({
                 cartArticles: [

@@ -26,13 +26,14 @@ const cartArticle = aCartArticle({
 
 describe('Article detail spec', () => {
     let articleDetail: RenderResult
-    const cleanError = jest.fn()
+    const cleanAddCartArticleError = jest.fn()
     describe('on init', () => {
         beforeEach(() => {
-            articleDetail = componentRender({article, cleanError})
+            cleanAddCartArticleError.mockClear()
+            articleDetail = componentRender({article, cleanAddCartArticleError})
         })
         afterEach(() => {
-            cleanError.mockClear()
+            cleanAddCartArticleError.mockClear()
         })
         test('should display component', () => {
             expect(articleDetail.queryByTestId('articleDetail')).toBeInTheDocument()
@@ -60,9 +61,12 @@ describe('Article detail spec', () => {
         test('should not display error', () => {
             expect(articleDetail.queryByText('an error')).not.toBeInTheDocument()
         })
-        describe('when there are an error', () => {
+        test('should not call clean add cart article error method', () => {
+            expect(cleanAddCartArticleError).not.toBeCalled()
+        })
+        describe('when there are an add cart article error', () => {
             beforeEach(() => {
-                articleDetail.rerender(component({error: 'an error'}))
+                articleDetail.rerender(component({addCartArticleError: 'an error'}))
             })
             test('should display error', () => {
                 expect(articleDetail.queryByText('an error')).toBeInTheDocument()
@@ -72,8 +76,8 @@ describe('Article detail spec', () => {
             beforeEach(() => {
                 articleDetail.unmount()
             })
-            test('should call clean error method', () => {
-                expect(cleanError).toBeCalledTimes(1)
+            test('should call clean add cart article error method', () => {
+                expect(cleanAddCartArticleError).toBeCalledTimes(1)
             })
         })
     })
@@ -99,12 +103,15 @@ describe('Article detail spec', () => {
     })
     describe.each(['XS', 'S', 'M'] as Size[])('when selected %s size', (size: Size) => {
         const addCartArticle = jest.fn()
+        const cleanAddCartArticleError = jest.fn()
         beforeEach(() => {
-            articleDetail = componentRender({article, addCartArticle})
+            cleanAddCartArticleError.mockClear()
+            articleDetail = componentRender({article, addCartArticle, cleanAddCartArticleError})
             fireEvent.change(articleDetail.getByTestId('sizeSelect'), {target: {value: size}})
         })
         afterEach(() => {
             addCartArticle.mockClear()
+            cleanAddCartArticleError.mockClear()
         })
         describe('and click on "Add to cart" button', () => {
             beforeEach(() => {
@@ -112,6 +119,9 @@ describe('Article detail spec', () => {
             })
             test('should not display "Please select size" text', () => {
                 expect(articleDetail.queryByText('Please select a size')).not.toBeInTheDocument()
+            })
+            test('should call cleanAddCartArticleError', () => {
+                expect(cleanAddCartArticleError).toBeCalledTimes(1)
             })
             test('should call addCartArticle', () => {
                 expect(addCartArticle).toBeCalledWith({...cartArticle, size, quantity: 1})
@@ -123,4 +133,8 @@ describe('Article detail spec', () => {
 const componentRender = (partialProps: Partial<IArticleDetailProps> = {}) => render(component(partialProps))
 
 const component = (partialProps: Partial<IArticleDetailProps> = {}) =>
-    <ArticleDetail {...{article, addCartArticle: () => {}, ...partialProps}} />
+    <ArticleDetail {...{
+        article, addCartArticle: () => {
+        }, cleanAddCartArticleError: () => {
+        }, ...partialProps
+    }} />

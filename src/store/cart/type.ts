@@ -16,7 +16,7 @@ interface IUpdateCartArticleAction {
 }
 
 interface ICleanErrorAction {
-    type: 'CLEAN_ERROR'
+    type: 'CLEAN_ADD_CART_ARTICLE_ERROR'
 }
 
 export type CartActionType = IAddCartArticleAction | IRemoveCartArticleAction | IUpdateCartArticleAction | ICleanErrorAction

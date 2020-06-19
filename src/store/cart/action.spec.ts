@@ -1,4 +1,4 @@
-import {addCartArticle, cleanError, removeCartArticle, updateCartArticle} from "./action";
+import {addCartArticle, cleanAddCartArticleError, removeCartArticle, updateCartArticle} from "./action";
 import {aCartArticle} from "../../data.mock";
 
 describe('Article actions spec', () => {
@@ -32,12 +32,12 @@ describe('Article actions spec', () => {
             })
         })
     })
-    describe('should clean error', () => {
+    describe('should clean add cart article error', () => {
         test('should create action CLEAN_ERROR', () => {
             expect(
-                cleanError()
+                cleanAddCartArticleError()
             ).toEqual({
-                type: 'CLEAN_ERROR',
+                type: 'CLEAN_ADD_CART_ARTICLE_ERROR',
             })
         })
     })

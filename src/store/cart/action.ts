@@ -16,6 +16,6 @@ export const updateCartArticle = (cartArticle: ICartArticle): CartActionType => 
     payload: cartArticle
 })
 
-export const cleanError = (): CartActionType => ({
-    type: "CLEAN_ERROR"
+export const cleanAddCartArticleError = (): CartActionType => ({
+    type: "CLEAN_ADD_CART_ARTICLE_ERROR"
 })

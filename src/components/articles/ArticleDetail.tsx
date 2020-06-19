@@ -6,25 +6,26 @@ import ICartArticle from "../../models/ICartArticle";
 import Size from "../../models/Size";
 
 interface IProps {
-    error?: string
+    addCartArticleError?: string
     article: IArticle
     addCartArticle: (cartArticle: ICartArticle) => void
-    cleanError: () => void
+    cleanAddCartArticleError: () => void
 }
 
-const ArticleDetail: React.FC<IProps> = ({article, addCartArticle, error, cleanError}) => {
+const ArticleDetail: React.FC<IProps> = ({article, addCartArticle, addCartArticleError, cleanAddCartArticleError}) => {
     const {name, imgSrc, description, availableSizes, price} = article
     const [sizeSelected, setSizeSelected] = useState(undefined as Size | undefined)
     const [displaySizeError, setDisplaySizeError] = useState(false)
     const addOnCart = (article: IArticle) => {
+        cleanAddCartArticleError()
         setDisplaySizeError(!sizeSelected)
         if (sizeSelected) addCartArticle(toCartArticle(article, sizeSelected))
     }
-    useEffect(() => cleanError, [cleanError])
+    useEffect(() => cleanAddCartArticleError, [cleanAddCartArticleError])
 
     return <div data-testid={'articleDetail'}>
         {displaySizeError && <div>{'Please select a size'}</div>}
-        {error && <div>{error}</div>}
+        {addCartArticleError && <div>{addCartArticleError}</div>}
         <Image data-testid='img' src={imgSrc}/>
         <div>{name}</div>
         <div>{formatPrice(price)}</div>
