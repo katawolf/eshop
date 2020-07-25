@@ -102,6 +102,21 @@ describe('reducer spec', () => {
                     ]
                 })
             })
+            test('should not return error when article is added', () => {
+                expect(
+                    cartReducer({
+                        error: 'an error',
+                        cartArticles: []
+                    }, {
+                        type: 'ADD_CART_ARTICLE',
+                        payload: aCartArticle({id: '1', name: 'Iphone', size: 'M', quantity: 1})
+                    })
+                ).toEqual({
+                    cartArticles: [
+                        aCartArticle({id: '1', name: 'Iphone', size: 'M', quantity: 1}),
+                    ]
+                })
+            })
         })
     })
     describe('handle "REMOVE_CART_ARTICLE"', () => {
@@ -140,6 +155,21 @@ describe('reducer spec', () => {
                     aCartArticle({id: '1', name: 'Iphone', size: 'L', quantity: 1}),
                     aCartArticle({id: '2', name: 'X1 carbon', size: 'S', quantity: 1})
                 ]
+            })
+        })
+        test('should not return error when article is removed', () => {
+            expect(
+                cartReducer({
+                    error: 'an error',
+                    cartArticles: [
+                        aCartArticle({id: '1', name: 'Iphone', size: 'M', quantity: 1}),
+                    ]
+                }, {
+                    type: 'REMOVE_CART_ARTICLE',
+                    payload: aCartArticle({id: '1', name: 'Iphone', size: 'M', quantity: 1})
+                })
+            ).toEqual({
+                cartArticles: []
             })
         })
     })
@@ -209,6 +239,23 @@ describe('reducer spec', () => {
             ).toEqual({
                 cartArticles: [
                     aCartArticle({id: '2', name: 'X1 carbon', size: 'S', quantity: 5})
+                ]
+            })
+        })
+        test('should not return error when article is updated', () => {
+            expect(
+                cartReducer({
+                    error: 'An error',
+                    cartArticles: [
+                        aCartArticle({id: '2', name: 'X1 carbon', size: 'S', quantity: 5})
+                    ]
+                }, {
+                    type: 'UPDATE_CART_ARTICLE',
+                    payload: aCartArticle({id: '2', name: 'X1 carbon', size: 'S', quantity: 10})
+                })
+            ).toEqual({
+                cartArticles: [
+                    aCartArticle({id: '2', name: 'X1 carbon', size: 'S', quantity: 10})
                 ]
             })
         })

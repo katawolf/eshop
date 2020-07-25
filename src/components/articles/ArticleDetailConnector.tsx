@@ -5,7 +5,7 @@ import IArticle from "../../models/IArticle";
 import ArticleDetail from "./ArticleDetail";
 import {ICartState} from "../../store/cart/reducer";
 
-const mapState = ({error}: ICartState) => ({addCartArticleError: error})
+const mapState = ({error}: ICartState) => ({cartError: error})
 
 const mapDispatch = {
     addCartArticle,

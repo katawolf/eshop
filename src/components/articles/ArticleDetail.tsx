@@ -6,18 +6,17 @@ import ICartArticle from "../../models/ICartArticle";
 import Size from "../../models/Size";
 
 interface IProps {
-    addCartArticleError?: string
+    cartError?: string
     article: IArticle
     addCartArticle: (cartArticle: ICartArticle) => void
     cleanCartError: () => void
 }
 
-const ArticleDetail: React.FC<IProps> = ({article, addCartArticle, addCartArticleError, cleanCartError}) => {
+const ArticleDetail: React.FC<IProps> = ({article, addCartArticle, cartError, cleanCartError}) => {
     const {name, imgSrc, description, availableSizes, price} = article
     const [sizeSelected, setSizeSelected] = useState(undefined as Size | undefined)
     const [displaySizeError, setDisplaySizeError] = useState(false)
     const addOnCart = (article: IArticle) => {
-        cleanCartError()
         setDisplaySizeError(!sizeSelected)
         if (sizeSelected) addCartArticle(toCartArticle(article, sizeSelected))
     }
@@ -25,7 +24,7 @@ const ArticleDetail: React.FC<IProps> = ({article, addCartArticle, addCartArticl
 
     return <div data-testid={'articleDetail'}>
         {displaySizeError && <div>{'Please select a size'}</div>}
-        {addCartArticleError && <div>{addCartArticleError}</div>}
+        {cartError && <div>{cartError}</div>}
         <Image data-testid='img' src={imgSrc}/>
         <div>{name}</div>
         <div>{formatPrice(price)}</div>

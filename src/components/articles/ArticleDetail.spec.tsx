@@ -66,7 +66,7 @@ describe('Article detail spec', () => {
         })
         describe('when there are an add cart article error', () => {
             beforeEach(() => {
-                articleDetail.rerender(component({addCartArticleError: 'an error'}))
+                articleDetail.rerender(component({cartError: 'an error'}))
             })
             test('should display error', () => {
                 expect(articleDetail.queryByText('an error')).toBeInTheDocument()
@@ -119,9 +119,6 @@ describe('Article detail spec', () => {
             })
             test('should not display "Please select size" text', () => {
                 expect(articleDetail.queryByText('Please select a size')).not.toBeInTheDocument()
-            })
-            test('should call cleanAddCartArticleError', () => {
-                expect(cleanCartError).toBeCalledTimes(1)
             })
             test('should call addCartArticle', () => {
                 expect(addCartArticle).toBeCalledWith({...cartArticle, size, quantity: 1})

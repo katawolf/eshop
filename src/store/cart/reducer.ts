@@ -17,6 +17,7 @@ const cartReducer = (state = initialState, action: CartActionType): ICartState =
         case "REMOVE_CART_ARTICLE":
             return {
                 ...state,
+                error: undefined,
                 cartArticles: removeCartArticle(state.cartArticles, action.payload)
             }
         case "UPDATE_CART_ARTICLE":
@@ -36,6 +37,7 @@ const addCartArticleReducer = (state: ICartState, cartArticle: ICartArticle) => 
     if (canAddCardArticle(state.cartArticles, cartArticle)) {
         newState = {
             ...state,
+            error: undefined,
             cartArticles: addCartArticle(state.cartArticles, cartArticle)
         }
     } else {
@@ -68,6 +70,7 @@ const updateCartArticleReducer = (state: ICartState, cartArticle: ICartArticle) 
     if (canUpdateCardArticle(state.cartArticles, cartArticle)) {
         newState = {
             ...state,
+            error: undefined,
             cartArticles: updateCartArticle(state.cartArticles, cartArticle)
         }
     } else {
