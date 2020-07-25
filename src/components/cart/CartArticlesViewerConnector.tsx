@@ -2,11 +2,12 @@ import React from "react";
 import {ICartState} from "../../store/cart/reducer";
 import {connect, ConnectedProps} from "react-redux";
 import CartArticlesViewer from "./CartArticlesViewer";
-import {removeCartArticle} from "../../store/cart/action";
+import {removeCartArticle, updateCartArticle} from "../../store/cart/action";
 
 const mapState = ({cartArticles}: ICartState) => ({cartArticles})
 
 const mapDispatch = {
+    updateCartArticle,
     removeCartArticle,
 }
 

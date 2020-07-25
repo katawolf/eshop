@@ -8,6 +8,7 @@ interface IArticle {
     imgSrc: string
     description: string
     availableSizes: Size[]
+    maxQuantityByCart: number
 }
 
 export default IArticle

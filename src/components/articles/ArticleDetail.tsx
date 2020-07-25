@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Button, Form, Image} from "react-bootstrap";
 import IArticle from "../../models/IArticle";
 import {formatPrice} from "../../services/format.service";
@@ -6,29 +6,31 @@ import ICartArticle from "../../models/ICartArticle";
 import Size from "../../models/Size";
 
 interface IProps {
+    cartError?: string
     article: IArticle
     addCartArticle: (cartArticle: ICartArticle) => void
+    cleanCartError: () => void
 }
 
-const ArticleDetail: React.FC<IProps> = ({article, addCartArticle}) => {
+const ArticleDetail: React.FC<IProps> = ({article, addCartArticle, cartError, cleanCartError}) => {
     const {name, imgSrc, description, availableSizes, price} = article
     const [sizeSelected, setSizeSelected] = useState(undefined as Size | undefined)
-    const [errorMsg, setErrorMsg] = useState(undefined as string | undefined)
+    const [displaySizeError, setDisplaySizeError] = useState(false)
     const addOnCart = (article: IArticle) => {
-        if (!sizeSelected) {
-            setErrorMsg('Please select a size')
-        } else {
-            setErrorMsg(undefined)
-            addCartArticle(toCartArticle(article, sizeSelected))
-        }
+        setDisplaySizeError(!sizeSelected)
+        if (sizeSelected) addCartArticle(toCartArticle(article, sizeSelected))
     }
+    useEffect(() => cleanCartError, [cleanCartError])
+
     return <div data-testid={'articleDetail'}>
-        {errorMsg && <div>{errorMsg}</div>}
+        {displaySizeError && <div>{'Please select a size'}</div>}
+        {cartError && <div>{cartError}</div>}
         <Image data-testid='img' src={imgSrc}/>
         <div>{name}</div>
         <div>{formatPrice(price)}</div>
         <div>{description}</div>
-        <Form.Control data-testid={'select'} as="select" onChange={(event: any) => setSizeSelected(event.target.value)}>
+        <Form.Control data-testid={'sizeSelect'} as="select"
+                      onChange={(event: any) => setSizeSelected(event.target.value)}>
             <option key={-1} value=''>Select available size</option>
             {availableSizes.map((size, index) => <option key={index}>{size}</option>)}
         </Form.Control>
@@ -36,13 +38,14 @@ const ArticleDetail: React.FC<IProps> = ({article, addCartArticle}) => {
     </div>
 }
 
-const toCartArticle = ({id, name, imgSrc, price, description, availableSizes}: IArticle, size: Size): ICartArticle => ({
+const toCartArticle = ({id, name, imgSrc, price, description, availableSizes, maxQuantityByCart}: IArticle, size: Size): ICartArticle => ({
     id,
     name,
     imgSrc,
     price,
     description,
     availableSizes,
+    maxQuantityByCart,
     size,
     quantity: 1
 })
