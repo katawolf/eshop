@@ -6,7 +6,7 @@ import {act} from "react-dom/test-utils";
 import {MemoryRouter, Route, Switch} from "react-router-dom";
 import {anArticle} from "../data.mock";
 
-jest.mock('./articles/ArticleDetailConnector', () => () => <div
+jest.mock('../connectors/article/ArticleDetailConnector', () => () => <div
     data-testid={'articleDetailConnector'}>ArticleDetailConnector</div>)
 
 jest.mock('./Menu', () => () => <div data-testid={'menu'}>Menu</div>)

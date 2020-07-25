@@ -1,6 +1,6 @@
 import React from "react";
 import Menu from "./Menu";
-import ArticlesViewerConnector from "./cart/CartArticlesViewerConnector";
+import ArticlesViewerConnector from "../connectors/cart/CartArticlesViewerConnector";
 
 const Cart: React.FC = () =>
     <div data-testid={'cart'}>

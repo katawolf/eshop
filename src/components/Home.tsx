@@ -1,4 +1,4 @@
-import ArticlesViewer from "./articles/ArticlesViewer";
+import ArticlesViewer from "./article/ArticlesViewer";
 import React, {useEffect, useState} from "react";
 import {getArticles} from "../services/article.service";
 import Menu from "./Menu";

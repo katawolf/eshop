@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import IArticle from "../models/IArticle";
 import {getArticle} from "../services/article.service";
-import ArticleDetailConnector from "./articles/ArticleDetailConnector";
+import ArticleDetailConnector from "../connectors/article/ArticleDetailConnector";
 import {useParams} from "react-router-dom";
 import Menu from "./Menu";
 
