@@ -4,7 +4,7 @@ import ArticlesViewerConnector from "./CartArticlesViewerConnector";
 import {Provider} from "react-redux";
 import configStore from "../../store/configStore";
 
-jest.mock('./CartArticlesViewer', () => () => <div data-testid={'cartArticlesViewer'}>CartArticleViewer</div>)
+jest.mock('../../components/cart/CartArticlesViewer', () => () => <div data-testid={'cartArticlesViewer'}>CartArticleViewer</div>)
 
 describe('cart articles viewer connector spec', () => {
     let articlesViewerConnector: RenderResult

@@ -5,7 +5,7 @@ import ArticleDetailConnector from "./ArticleDetailConnector";
 import React from "react";
 import {anArticle} from "../../data.mock";
 
-jest.mock('./ArticleDetail', () => () => <div data-testid={'articleDetail'}>ArticleDetail</div>)
+jest.mock('../../components/article/ArticleDetail', () => () => <div data-testid={'articleDetail'}>ArticleDetail</div>)
 
 const article = anArticle()
 

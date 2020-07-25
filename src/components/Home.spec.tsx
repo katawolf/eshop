@@ -6,7 +6,7 @@ import {act} from "react-dom/test-utils";
 import Home from "./Home";
 import IArticle from "../models/IArticle";
 
-jest.mock('./articles/ArticlesViewer', () => () => <div data-testid={'articlesViewer'}>ArticlesViewer</div>)
+jest.mock('./article/ArticlesViewer', () => () => <div data-testid={'articlesViewer'}>ArticlesViewer</div>)
 jest.mock('./Menu', () => () => <div data-testid={'menu'}>Menu</div>)
 
 const articles: IArticle[] = [

@@ -3,7 +3,8 @@ import React from "react";
 import Cart from "./Cart";
 
 jest.mock('./Menu', () => () => <div data-testid={'menu'}>Menu</div>)
-jest.mock('./cart/CartArticlesViewerConnector', () => () => <div data-testid={'cartArticlesViewerConnector'}>CartArticlesViewerConnector</div>)
+jest.mock('../connectors/cart/CartArticlesViewerConnector',
+    () => () => <div data-testid={'cartArticlesViewerConnector'}>CartArticlesViewerConnector</div>)
 
 describe('cart spec', () => {
     let cartPage: RenderResult
