@@ -12,14 +12,14 @@ interface IProps {
 
 const CartArticlesViewer: React.FC<IProps> = ({cartArticles, updateCartArticle, removeCartArticle}) => {
     const history = useHistory()
-    return <>
-        <CardColumns data-testid={'cartArticlesViewer'}>
+    return <div data-testid={'cartArticlesViewer'}>
+        <CardColumns>
             {cartArticles.map((cartArticle, index) => <div key={index}>
                 <CartArticleCard {...{cartArticle, updateCartArticle, removeCartArticle}}/>
             </div>)}
         </CardColumns>
-        <Button onClick={() => history.push('/cart/payment')}>{'Pay cart'}</Button>
-    </>
+        <Button onClick={() => history.push('/payment')}>{'Pay cart'}</Button>
+    </div>
 }
 
 export default CartArticlesViewer

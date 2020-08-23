@@ -40,7 +40,7 @@ describe('cart articles viewer spec', () => {
             })
         })
         test('should redirect on cart payment page', () => {
-            expect(history.location.pathname).toBe('/cart/payment')
+            expect(history.location.pathname).toBe('/payment')
         })
     })
 })
