@@ -20,7 +20,15 @@ const ArticleDetail: React.FC<IProps> = ({article, addCartArticle, cartError, cl
         setDisplaySizeError(!sizeSelected)
         if (sizeSelected) addCartArticle(toCartArticle(article, sizeSelected))
     }
+
     useEffect(() => cleanCartError, [cleanCartError])
+
+    const selectSizeRender = () =>
+        <Form.Control data-testid={'sizeSelect'} as="select"
+                      onChange={(event: any) => setSizeSelected(event.target.value)}>
+            <option key={-1} value=''>Select available size</option>
+            {availableSizes.map((size, index) => <option key={index}>{size}</option>)}
+        </Form.Control>
 
     return <div data-testid={'articleDetail'}>
         {displaySizeError && <div>{'Please select a size'}</div>}
@@ -29,11 +37,7 @@ const ArticleDetail: React.FC<IProps> = ({article, addCartArticle, cartError, cl
         <div>{name}</div>
         <div>{formatPrice(price)}</div>
         <div>{description}</div>
-        <Form.Control data-testid={'sizeSelect'} as="select"
-                      onChange={(event: any) => setSizeSelected(event.target.value)}>
-            <option key={-1} value=''>Select available size</option>
-            {availableSizes.map((size, index) => <option key={index}>{size}</option>)}
-        </Form.Control>
+        {selectSizeRender()}
         <Button onClick={() => addOnCart(article)}>Add on cart</Button>
     </div>
 }

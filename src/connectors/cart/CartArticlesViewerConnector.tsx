@@ -13,9 +13,9 @@ const mapDispatch = {
 
 const connector = connect(mapState, mapDispatch)
 
-type PropsFromRedux = ConnectedProps<typeof connector>
+type IProps = ConnectedProps<typeof connector>
 
-const CartArticlesViewerConnector: React.FC<PropsFromRedux> = (props) =>
+const CartArticlesViewerConnector: React.FC<IProps> = (props: IProps) =>
     <div data-testid={'cartArticlesViewerConnector'}>
         <CartArticlesViewer {...props}/>
     </div>
