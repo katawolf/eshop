@@ -14,13 +14,11 @@ const mapDispatch = {
 
 const connector = connect(mapState, mapDispatch)
 
-type PropsFromRedux = ConnectedProps<typeof connector>
-
-interface IProps {
+interface IProps extends ConnectedProps<typeof connector> {
     article: IArticle,
 }
 
-const ArticleDetailConnector: React.FC<IProps & PropsFromRedux> = (props) =>
+const ArticleDetailConnector: React.FC<IProps> = (props: IProps) =>
     <div data-testid={'articleDetailConnector'}>
         <ArticleDetail {...props}/>
     </div>
