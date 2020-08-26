@@ -1,26 +1,34 @@
 import {render, RenderResult} from "@testing-library/react"
 import React from "react";
-import Cart from "./Cart";
 import Payment from "./Payment";
 
 jest.mock('./Menu', () => () => <div data-testid={'menu'}>Menu</div>)
 jest.mock('../connectors/payment/CartPaymentConnector',
     () => () => <div data-testid={'cartPaymentConnector'}>CartPaymentConnector</div>)
+jest.mock('./payment/BankCardForm', () => () => <div data-testid={'bankCardForm'}>BankCardForm</div>)
+jest.mock('../connectors/cart/CartSummaryConnector', () => () => <div
+    data-testid={'cartSummaryConnector'}>CartSummaryConnector</div>)
 
 describe('payment spec', () => {
-    let cartPage: RenderResult
+    let paymentPage: RenderResult
     describe('on init', () => {
         beforeEach(() => {
-            cartPage = component()
+            paymentPage = component()
         })
         test('should display component', () => {
-            expect(cartPage.queryByTestId('payment')).toBeInTheDocument()
+            expect(paymentPage.queryByTestId('payment')).toBeInTheDocument()
         })
         test('should display menu', () => {
-            expect(cartPage.queryByTestId('menu')).toBeInTheDocument()
+            expect(paymentPage.queryByTestId('menu')).toBeInTheDocument()
+        })
+        test('should display cart summary connector', () => {
+            expect(paymentPage.queryByTestId('cartSummaryConnector')).toBeInTheDocument()
+        })
+        test('should display bank card form component', () => {
+            expect(paymentPage.queryByTestId('bankCardForm')).toBeInTheDocument()
         })
         test('should display cart payment connector', () => {
-            expect(cartPage.queryByTestId('cartPaymentConnector')).toBeInTheDocument()
+            expect(paymentPage.queryByTestId('cartPaymentConnector')).toBeInTheDocument()
         })
     })
 })
