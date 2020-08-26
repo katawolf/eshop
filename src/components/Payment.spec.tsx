@@ -8,6 +8,7 @@ jest.mock('../connectors/payment/CartPaymentConnector',
 jest.mock('./payment/BankCardForm', () => () => <div data-testid={'bankCardForm'}>BankCardForm</div>)
 jest.mock('../connectors/cart/CartSummaryConnector', () => () => <div
     data-testid={'cartSummaryConnector'}>CartSummaryConnector</div>)
+jest.mock('./user/UserForm', () => () => <div data-testid={'userForm'}>UserForm</div>)
 
 describe('payment spec', () => {
     let paymentPage: RenderResult
@@ -23,6 +24,9 @@ describe('payment spec', () => {
         })
         test('should display cart summary connector', () => {
             expect(paymentPage.queryByTestId('cartSummaryConnector')).toBeInTheDocument()
+        })
+        test('should display user form component', () => {
+            expect(paymentPage.queryByTestId('userForm')).toBeInTheDocument()
         })
         test('should display bank card form component', () => {
             expect(paymentPage.queryByTestId('bankCardForm')).toBeInTheDocument()

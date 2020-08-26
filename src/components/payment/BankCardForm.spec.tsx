@@ -11,8 +11,11 @@ describe('bank card form spec', () => {
         test('should display component', () => {
             expect(bankCardForm.queryByTestId('bankCardForm')).toBeInTheDocument()
         })
+        test('should display bank card title', () => {
+            expect(bankCardForm.queryByText('Bank card')).toBeInTheDocument()
+        })
         test('should display bank card number label', () => {
-            expect(bankCardForm.queryByText('Bank card number :')).toBeInTheDocument()
+            expect(bankCardForm.queryByText('number :')).toBeInTheDocument()
         })
         test('should display bank card number input', () => {
             expect(bankCardForm.queryByTestId('inputBankCardNumber')).toBeInTheDocument()

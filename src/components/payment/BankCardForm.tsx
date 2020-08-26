@@ -7,7 +7,8 @@ interface IProps {
 
 const BankCardForm: React.FC<IProps> = ({updateBankCard}) =>
     <div data-testid={'bankCardForm'}>
-        <label>Bank card number :</label>
+        <h3>Bank card</h3>
+        <label>number :</label>
         <input data-testid={'inputBankCardNumber'} onChange={event => updateBankCard({number: event.target.value})}/>
         <label>Expiration date :</label>
         <input data-testid={'inputExpirationDate'} type={'date'} onChange={event => updateBankCard({expirationDate: event.target.value})}/>
