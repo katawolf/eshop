@@ -3,6 +3,7 @@ import React from "react";
 import Command from "./Command";
 
 jest.mock('./Menu', () => () => <div data-testid={'menu'}/>)
+jest.mock('../connectors/ErrorConnector', () => () => <div data-testid={'errorConnector'}/>)
 jest.mock('../connectors/cart/CartSummaryConnector', () => () => <div data-testid={'cartSummaryConnector'}/>)
 jest.mock('../connectors/command/CommandFormConnector', () => () => <div data-testid={'commandFormConnector'}/>)
 
@@ -17,6 +18,9 @@ describe('payment spec', () => {
         })
         test('should display menu', () => {
             expect(paymentPage.queryByTestId('menu')).toBeInTheDocument()
+        })
+        test('should display error connector', () => {
+            expect(paymentPage.queryByTestId('errorConnector')).toBeInTheDocument()
         })
         test('should display cart summary connector', () => {
             expect(paymentPage.queryByTestId('cartSummaryConnector')).toBeInTheDocument()
