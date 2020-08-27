@@ -1,5 +1,5 @@
 import {addCartArticle, cleanCartError, createCommand, removeCartArticle, updateCartArticle} from "./action";
-import {aCartArticle} from "../../data.mock";
+import {aBankCard, aCartArticle, aUser} from "../../data.mock";
 
 describe('Article actions spec', () => {
     describe('add cart article', () => {
@@ -43,10 +43,13 @@ describe('Article actions spec', () => {
     })
     describe('should create command', () => {
         test('should create action CREATE_COMMAND', () => {
+            const user = aUser()
+            const bankCard = aBankCard()
             expect(
-                createCommand()
+                createCommand(user, bankCard)
             ).toEqual({
                 type: 'CREATE_COMMAND',
+                payload: {user, bankCard}
             })
         })
     })

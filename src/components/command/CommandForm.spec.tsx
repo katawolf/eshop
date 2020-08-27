@@ -44,7 +44,7 @@ describe('command form spec', () => {
                 fireEvent.click(commandForm.getByText('Submit'))
             })
             test('should call create command function with default values', () => {
-                expect(createCommand).toBeCalledWith({user: emptyUser(), bankCard: emptyBankCard()})
+                expect(createCommand).toBeCalledWith(emptyUser(), emptyBankCard())
             })
         })
         describe('and the user and the bank card are updated', () => {
@@ -56,7 +56,7 @@ describe('command form spec', () => {
                 fireEvent.click(commandForm.getByText('Submit'))
             })
             test('should call create command function with user and bank card updated', () => {
-                expect(createCommand).toBeCalledWith({user, bankCard})
+                expect(createCommand).toBeCalledWith(user, bankCard)
             })
         })
     })

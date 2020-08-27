@@ -6,7 +6,7 @@ import IUser, {emptyUser} from "../../models/IUser";
 import IBankCard, {emptyBankCard} from "../../models/IBankCard";
 
 interface IProps {
-    createCommand: (value: { user: IUser, bankCard: IBankCard }) => void
+    createCommand: (user: IUser, bankCard: IBankCard) => void
 }
 
 const CommandForm: React.FC<IProps> = ({createCommand}) => {
@@ -20,7 +20,7 @@ const CommandForm: React.FC<IProps> = ({createCommand}) => {
     return <div data-testid={'commandForm'}>
         <UserForm updateUser={updateUser}/>
         <BankCardForm updateBankCard={updateBankCard}/>
-        <Button onClick={() => createCommand({user, bankCard})}>Submit</Button>
+        <Button onClick={() => createCommand(user, bankCard)}>Submit</Button>
     </div>
 }
 
