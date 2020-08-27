@@ -5,4 +5,11 @@ interface IUser {
     address: string
 }
 
+export const emptyUser = (): IUser => ({
+    firstName: '',
+    lastName: '',
+    email: '',
+    address: ''
+})
+
 export default IUser

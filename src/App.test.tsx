@@ -3,11 +3,11 @@ import {render, RenderResult} from '@testing-library/react';
 import App from './App';
 import { MemoryRouter } from 'react-router-dom';
 
-jest.mock('./components/Home', () => () => <div data-testid={'home'}>Home</div>)
-jest.mock('./components/Article', () => () => <div data-testid={'article'}>Article</div>)
-jest.mock('./components/NotFound', () => () => <div data-testid={'notFound'}>notFound</div>)
-jest.mock('./components/Cart', () => () => <div data-testid={'cart'}>cart</div>)
-jest.mock('./components/Payment', () => () => <div data-testid={'payment'}>payment</div>)
+jest.mock('./components/Home', () => () => <div data-testid={'home'} />)
+jest.mock('./components/Article', () => () => <div data-testid={'article'} />)
+jest.mock('./components/NotFound', () => () => <div data-testid={'notFound'} />)
+jest.mock('./components/Cart', () => () => <div data-testid={'cart'} />)
+jest.mock('./components/Command', () => () => <div data-testid={'command'} />)
 
 describe('App component', () => {
     let app: RenderResult
@@ -28,8 +28,8 @@ describe('App component', () => {
         })
     }
     const shouldNotDisplayPaymentPage = () => {
-        test('should not display payment page', () => {
-            expect(app.queryByTestId('payment')).not.toBeInTheDocument()
+        test('should not display command page', () => {
+            expect(app.queryByTestId('command')).not.toBeInTheDocument()
         })
     }
     const shouldNotDisplayNotFoundPage = () => {
@@ -74,12 +74,12 @@ describe('App component', () => {
         shouldNotDisplayPaymentPage()
         shouldNotDisplayNotFoundPage()
     })
-    describe('path as /payment', () => {
+    describe('path as /command', () => {
         beforeEach(() => {
-            app = component('/payment')
+            app = component('/command')
         })
-        test('should display payment page', () => {
-            expect(app.queryByTestId('payment')).toBeInTheDocument()
+        test('should display command page', () => {
+            expect(app.queryByTestId('command')).toBeInTheDocument()
         })
         shouldNotDisplayHomePage()
         shouldNotDisplayArticlePage()

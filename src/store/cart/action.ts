@@ -19,3 +19,7 @@ export const updateCartArticle = (cartArticle: ICartArticle): CartActionType => 
 export const cleanCartError = (): CartActionType => ({
     type: "CLEAN_CART_ERROR"
 })
+
+export const createCommand = (): CartActionType => ({
+    type: "CREATE_COMMAND"
+})

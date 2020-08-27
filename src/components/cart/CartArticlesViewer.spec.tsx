@@ -6,7 +6,7 @@ import {createMemoryHistory} from "history";
 import {act} from "react-dom/test-utils";
 import {Router} from "react-router-dom";
 
-jest.mock('./CartArticleCard', () => () => <div data-testid={'cartArticleCard'}>CartArticleCard</div>)
+jest.mock('./CartArticleCard', () => () => <div data-testid={'cartArticleCard'} />)
 
 const cartArticles = [
     aCartArticle({id: '1'}),
@@ -26,21 +26,21 @@ describe('cart articles viewer spec', () => {
         test('should display 3 cart article card', () => {
             expect(cartArticleViewer.queryAllByTestId('cartArticleCard')).toHaveLength(3)
         })
-        test('should display "Pay cart" button', () => {
-            expect(cartArticleViewer.queryByText('Pay cart')).toBeInTheDocument()
+        test('should display "Command" button', () => {
+            expect(cartArticleViewer.queryByText('Command')).toBeInTheDocument()
         })
     })
-    describe('When click on "Pay cart" button', () => {
+    describe('When click on "Command" button', () => {
         const history = createMemoryHistory()
 
         beforeEach(async () => {
             await act(async () => {
                 cartArticleViewer = component({}, history)
-                fireEvent.click(cartArticleViewer.getByText('Pay cart'))
+                fireEvent.click(cartArticleViewer.getByText('Command'))
             })
         })
-        test('should redirect on cart payment page', () => {
-            expect(history.location.pathname).toBe('/payment')
+        test('should redirect on command page', () => {
+            expect(history.location.pathname).toBe('/command')
         })
     })
 })

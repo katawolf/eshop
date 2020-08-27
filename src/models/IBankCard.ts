@@ -4,4 +4,10 @@ interface IBankCard {
     secretCode: string
 }
 
+export const emptyBankCard = (): IBankCard => ({
+    number: '',
+    expirationDate: '',
+    secretCode: ''
+})
+
 export default IBankCard

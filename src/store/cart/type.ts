@@ -19,4 +19,8 @@ interface ICleanCartErrorAction {
     type: 'CLEAN_CART_ERROR'
 }
 
-export type CartActionType = IAddCartArticleAction | IRemoveCartArticleAction | IUpdateCartArticleAction | ICleanCartErrorAction
+interface ICreateCommandAction {
+    type: 'CREATE_COMMAND'
+}
+
+export type CartActionType = IAddCartArticleAction | IRemoveCartArticleAction | IUpdateCartArticleAction | ICleanCartErrorAction | ICreateCommandAction
