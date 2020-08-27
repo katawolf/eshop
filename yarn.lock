@@ -8722,11 +8722,6 @@ react-dev-utils@^10.2.1:
     strip-ansi "6.0.0"
     text-table "0.2.0"
 
-react-dom-instance@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/react-dom-instance/-/react-dom-instance-2.0.0.tgz#562d7c4a0f140aa1ddd45ee72dadc5336aec6fa1"
-  integrity sha512-DH5IQOCm2pkRwAuWcNyILQBkmt5JS019LqH7KeakTAK2jMl2v1crLO5oXqqGPXsxP0arjRG7OPO8h/mZVuHADQ==
-
 react-dom@^16.13.1:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.13.1.tgz#c1bd37331a0486c078ee54c4740720993b2e0e7f"
