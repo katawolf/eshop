@@ -3,12 +3,12 @@ import {render, RenderResult} from '@testing-library/react';
 import App from './App';
 import { MemoryRouter } from 'react-router-dom';
 
-jest.mock('./components/Home', () => () => <div data-testid={'home'} />)
-jest.mock('./components/Article', () => () => <div data-testid={'article'} />)
-jest.mock('./components/NotFound', () => () => <div data-testid={'not-found'} />)
-jest.mock('./components/Cart', () => () => <div data-testid={'cart'} />)
-jest.mock('./components/Command', () => () => <div data-testid={'command'} />)
-jest.mock('./components/CommandSuccess', () => () => <div data-testid={'command-success'} />)
+jest.mock('./views/Home', () => () => <div data-testid={'home'} />)
+jest.mock('./views/Article', () => () => <div data-testid={'article'} />)
+jest.mock('./views/NotFound', () => () => <div data-testid={'not-found'} />)
+jest.mock('./views/Cart', () => () => <div data-testid={'cart'} />)
+jest.mock('./views/Command', () => () => <div data-testid={'command'} />)
+jest.mock('./views/CommandSuccess', () => () => <div data-testid={'command-success'} />)
 
 describe('App component', () => {
     let app: RenderResult

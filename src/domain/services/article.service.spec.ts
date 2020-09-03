@@ -1,5 +1,5 @@
-import articleResource from "../resources/article.resource";
-import {anArticle} from "../data.mock";
+import articleResource from "../../resources/article.resource";
+import {anArticle} from "../../data.mock";
 import {getArticle, getArticles} from "./article.service";
 import IArticle from "../models/IArticle";
 

@@ -11,9 +11,9 @@ const connector = connect(undefined, mapDispatch)
 
 type IProps = ConnectedProps<typeof connector>
 
-const CommandFormConnector: React.FC<IProps> = (props: IProps) =>
+const CommandFormContainer: React.FC<IProps> = (props: IProps) =>
     <div data-testid={'commandFormConnector'}>
         <CommandForm {...props}/>
     </div>
 
-export default connector(CommandFormConnector)
+export default connector(CommandFormContainer)

@@ -1,7 +1,7 @@
-import IArticle from "./models/IArticle";
-import ICartArticle from "./models/ICartArticle";
-import IUser from "./models/IUser";
-import IBankCard from "./models/IBankCard";
+import IArticle from "./domain/models/IArticle";
+import ICartArticle from "./domain/models/ICartArticle";
+import IUser from "./domain/models/IUser";
+import IBankCard from "./domain/models/IBankCard";
 
 export const anArticle = (partialArticle: Partial<IArticle> = {}): IArticle => ({
     id: '1',

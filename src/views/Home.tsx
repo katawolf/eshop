@@ -1,8 +1,8 @@
-import ArticlesViewer from "./article/ArticlesViewer";
+import ArticlesViewer from "../components/article/ArticlesViewer";
 import React, {useEffect, useState} from "react";
-import {getArticles} from "../services/article.service";
-import Menu from "./Menu";
-import IArticle from "../models/IArticle";
+import {getArticles} from "../domain/services/article.service";
+import Menu from "../components/Menu";
+import IArticle from "../domain/models/IArticle";
 
 const Home: React.FC = () => {
 

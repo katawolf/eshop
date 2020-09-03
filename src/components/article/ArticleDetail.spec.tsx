@@ -2,7 +2,7 @@ import {fireEvent, render, RenderResult} from "@testing-library/react"
 import {aCartArticle, anArticle} from "../../data.mock";
 import React from "react";
 import ArticleDetail, {IArticleDetailProps} from "./ArticleDetail";
-import Size from "../../models/Size";
+import Size from "../../domain/models/Size";
 
 const article = anArticle(
     {
@@ -36,7 +36,7 @@ describe('Article detail spec', () => {
             cleanAddCartArticleError.mockClear()
         })
         test('should display component', () => {
-            expect(articleDetail.queryByTestId('articleDetail')).toBeInTheDocument()
+            expect(articleDetail.queryByTestId('article-detail')).toBeInTheDocument()
         })
         test('should display main image', () => {
             expect(
@@ -107,7 +107,7 @@ describe('Article detail spec', () => {
         beforeEach(() => {
             cleanCartError.mockClear()
             articleDetail = componentRender({article, addCartArticle, cleanCartError})
-            fireEvent.change(articleDetail.getByTestId('sizeSelect'), {target: {value: size}})
+            fireEvent.change(articleDetail.getByTestId('size-select'), {target: {value: size}})
         })
         afterEach(() => {
             addCartArticle.mockClear()

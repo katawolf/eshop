@@ -1,12 +1,12 @@
 import React from "react";
-import ICartArticle from "../../models/ICartArticle";
+import ICartArticle from "../../domain/models/ICartArticle";
 
 interface IProps {
     cartArticles: ICartArticle[]
 }
 
 const CartSummary: React.FC<IProps> = ({cartArticles}) =>
-    <div data-testid={'cartSummary'}>
+    <div data-testid={'cart-summary'}>
         <div>{`Total amount : ${getTotalAmount(cartArticles)} €`}</div>
     </div>
 

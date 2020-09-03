@@ -2,7 +2,7 @@ import {render, RenderResult} from "@testing-library/react";
 import React from "react";
 import {Provider} from "react-redux";
 import configStore from "../../store/configStore";
-import CartSummaryConnector from "./CartSummaryConnector";
+import CartSummaryConnector from "./CartSummaryContainer";
 
 jest.mock('../../components/cart/CartSummary', () => () => <div data-testid={'cartSummary'}>CartSummary</div>)
 

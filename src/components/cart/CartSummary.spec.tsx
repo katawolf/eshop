@@ -16,7 +16,7 @@ describe('cart summary spec', () => {
             cartSummary = component({cartArticles})
         })
         test('should display component', () => {
-            expect(cartSummary.queryByTestId('cartSummary')).toBeInTheDocument()
+            expect(cartSummary.queryByTestId('cart-summary')).toBeInTheDocument()
         })
         test('should display total amount', () => {
             expect(cartSummary.queryByText('Total amount : 172.75 €')).toBeInTheDocument()

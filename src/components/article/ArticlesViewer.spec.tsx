@@ -2,9 +2,9 @@ import {render, RenderResult} from "@testing-library/react";
 import React from "react";
 import ArticlesViewer from "./ArticlesViewer";
 import {anArticle} from "../../data.mock";
-import IArticle from "../../models/IArticle";
+import IArticle from "../../domain/models/IArticle";
 
-jest.mock('./ArticleCard', () => () => <div data-testid={'articleCard'}>ArticleCard</div>)
+jest.mock('./ArticleCard', () => () => <div data-testid={'article-card'}/>)
 
 const articles: IArticle[] = [
     anArticle({id: '1', name: 'IPhone'}),
@@ -20,10 +20,10 @@ describe('ArticlesViewer spec', () => {
             articlesViewer = component()
         })
         test('should display component', () => {
-            expect(articlesViewer.queryByTestId('articlesViewer')).toBeInTheDocument()
+            expect(articlesViewer.queryByTestId('articles-viewer')).toBeInTheDocument()
         })
         test('Should display article cards connector', () => {
-            expect(articlesViewer.queryAllByTestId('articleCard')).toHaveLength(2)
+            expect(articlesViewer.queryAllByTestId('article-card')).toHaveLength(2)
         })
     })
 

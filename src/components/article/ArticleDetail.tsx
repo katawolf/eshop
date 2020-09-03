@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
 import {Button, Form, Image} from "react-bootstrap";
-import IArticle from "../../models/IArticle";
-import {formatPrice} from "../../services/format.service";
-import ICartArticle from "../../models/ICartArticle";
-import Size from "../../models/Size";
+import IArticle from "../../domain/models/IArticle";
+import {formatPrice} from "../../domain/services/format.service";
+import ICartArticle from "../../domain/models/ICartArticle";
+import Size from "../../domain/models/Size";
 
 interface IProps {
     cartError?: string
@@ -24,13 +24,13 @@ const ArticleDetail: React.FC<IProps> = ({article, addCartArticle, cartError, cl
     useEffect(() => cleanCartError, [cleanCartError])
 
     const selectSizeRender = () =>
-        <Form.Control data-testid={'sizeSelect'} as="select"
+        <Form.Control data-testid={'size-select'} as="select"
                       onChange={(event: any) => setSizeSelected(event.target.value)}>
             <option key={-1} value=''>Select available size</option>
             {availableSizes.map((size, index) => <option key={index}>{size}</option>)}
         </Form.Control>
 
-    return <div data-testid={'articleDetail'}>
+    return <div data-testid={'article-detail'}>
         {displaySizeError && <div>{'Please select a size'}</div>}
         {cartError && <div>{cartError}</div>}
         <Image data-testid='img' src={imgSrc}/>
