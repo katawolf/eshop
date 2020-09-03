@@ -9,9 +9,9 @@ const connector = connect(mapState)
 
 type IProps = ConnectedProps<typeof connector>
 
-const CartSummaryConnector: React.FC<IProps> = (props: IProps) =>
-    <div data-testid={'cartSummaryConnector'}>
+const CartSummaryContainer: React.FC<IProps> = (props: IProps) =>
+    <div data-testid={'cart-summary-container'}>
         <CartSummary {...props}/>
     </div>
 
-export default connector(CartSummaryConnector)
+export default connector(CartSummaryContainer)

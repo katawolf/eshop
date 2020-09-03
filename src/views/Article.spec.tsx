@@ -1,15 +1,13 @@
 import {render, RenderResult} from "@testing-library/react"
-import * as articleService from "../services/article.service";
+import * as articleService from "../domain/services/article.service";
 import React from "react";
 import Article from "./Article";
 import {act} from "react-dom/test-utils";
-import {MemoryRouter, Route, Switch} from "react-router-dom";
+import {MemoryRouter, Route} from "react-router-dom";
 import {anArticle} from "../data.mock";
 
-jest.mock('../connectors/article/ArticleDetailConnector', () => () => <div
-    data-testid={'articleDetailConnector'}>ArticleDetailConnector</div>)
-
-jest.mock('./Menu', () => () => <div data-testid={'menu'}>Menu</div>)
+jest.mock('../containers/article/ArticleDetailContainer', () => () => <div data-testid={'article-detail-container'}/>)
+jest.mock('../components/Menu', () => () => <div data-testid={'menu'}/>)
 
 describe('Article page', () => {
     const mockGetArticle = jest.spyOn(articleService, 'getArticle')
@@ -26,16 +24,16 @@ describe('Article page', () => {
             mockGetArticle.mockClear()
         })
         test('should display component', () => {
-            expect(articlePage.queryByTestId('articlePage')).toBeInTheDocument()
+            expect(articlePage.queryByTestId('article')).toBeInTheDocument()
         })
-        test('should display menu', () => {
+        test('should display menu component', () => {
             expect(articlePage.queryByTestId('menu')).toBeInTheDocument()
         })
         test('should load article with id 2', () => {
             expect(mockGetArticle).toBeCalledWith('2')
         })
-        test('should display article detail', () => {
-            expect(articlePage.queryByTestId('articleDetailConnector')).toBeInTheDocument()
+        test('should display article detail container', () => {
+            expect(articlePage.queryByTestId('article-detail-container')).toBeInTheDocument()
         })
     })
 })

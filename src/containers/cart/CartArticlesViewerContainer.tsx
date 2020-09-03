@@ -15,9 +15,9 @@ const connector = connect(mapState, mapDispatch)
 
 type IProps = ConnectedProps<typeof connector>
 
-const CartArticlesViewerConnector: React.FC<IProps> = (props: IProps) =>
-    <div data-testid={'cartArticlesViewerConnector'}>
+const CartArticlesViewerContainer: React.FC<IProps> = (props: IProps) =>
+    <div data-testid={'cart-articles-viewer-container'}>
         <CartArticlesViewer {...props}/>
     </div>
 
-export default connector(CartArticlesViewerConnector)
+export default connector(CartArticlesViewerContainer)

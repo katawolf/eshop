@@ -2,8 +2,8 @@ import React, {useState} from "react";
 import BankCardForm from "../payment/BankCardForm";
 import UserForm from "../user/UserForm";
 import {Button} from "react-bootstrap";
-import IUser, {emptyUser} from "../../models/IUser";
-import IBankCard, {emptyBankCard} from "../../models/IBankCard";
+import IUser, {emptyUser} from "../../domain/models/IUser";
+import IBankCard, {emptyBankCard} from "../../domain/models/IBankCard";
 
 interface IProps {
     createCommand: (user: IUser, bankCard: IBankCard) => void
@@ -17,7 +17,7 @@ const CommandForm: React.FC<IProps> = ({createCommand}) => {
 
     const updateUser = (partialUser: Partial<IUser>) => setUser({...user, ...partialUser})
 
-    return <div data-testid={'commandForm'}>
+    return <div data-testid={'command-form'}>
         <UserForm updateUser={updateUser}/>
         <BankCardForm updateBankCard={updateBankCard}/>
         <Button onClick={() => createCommand(user, bankCard)}>Submit</Button>

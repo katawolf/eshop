@@ -4,7 +4,7 @@ import ArticleCard, {IArticleCardProps} from "./ArticleCard";
 import {anArticle} from "../../data.mock";
 import {Router} from "react-router-dom";
 import {createMemoryHistory} from "history";
-import IArticle from "../../models/IArticle";
+import IArticle from "../../domain/models/IArticle";
 
 const article: IArticle = anArticle({
     id: '1',
@@ -26,7 +26,7 @@ describe('Article card spec', () => {
             articleCard = component({article})
         })
         test('should display component', () => {
-            expect(articleCard.queryByTestId('articleCard')).toBeInTheDocument()
+            expect(articleCard.queryByTestId('article-card')).toBeInTheDocument()
         })
         test('Should display image', () => {
             expect(
@@ -47,7 +47,7 @@ describe('Article card spec', () => {
 
         beforeEach(() => {
             articleCard = component({article}, history)
-            fireEvent.click(articleCard.getByTestId('articleCard'))
+            fireEvent.click(articleCard.getByTestId('article-card'))
         })
         test('should redirect on article detail page', () => {
             expect(history.location.pathname).toBe('/article/1')

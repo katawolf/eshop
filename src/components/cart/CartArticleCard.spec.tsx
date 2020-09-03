@@ -23,7 +23,7 @@ describe('cart article card spec', () => {
             cartArticleCard = component({cartArticle})
         })
         test('should display component', () => {
-            expect(cartArticleCard.queryByTestId('cartArticleCard')).toBeInTheDocument()
+            expect(cartArticleCard.queryByTestId('cart-article-card')).toBeInTheDocument()
         })
         test('Should display image', () => {
             expect(
@@ -40,10 +40,10 @@ describe('cart article card spec', () => {
             expect(cartArticleCard.queryByText('Size : M')).toBeInTheDocument()
         })
         test('Should display quantity', () => {
-            expect((cartArticleCard.getByTestId('quantitySelect') as HTMLSelectElement).value).toEqual('8')
+            expect((cartArticleCard.getByTestId('quantity-select') as HTMLSelectElement).value).toEqual('8')
         })
         test('should propose only quantity option inferior or equal to max quantity by cart of article', () => {
-            expect(cartArticleCard.queryAllByTestId('quantityOption')).toHaveLength(20)
+            expect(cartArticleCard.queryAllByTestId('quantity-option')).toHaveLength(20)
         })
         test('should display "Details" button', () => {
             expect(cartArticleCard.queryByText('Details')).toBeInTheDocument()
@@ -72,7 +72,7 @@ describe('cart article card spec', () => {
         const updateCartArticle = jest.fn()
         beforeEach(() => {
             cartArticleCard = component({updateCartArticle})
-            fireEvent.change(cartArticleCard.getByTestId('quantitySelect'), {target: {value: `${quantity}`}})
+            fireEvent.change(cartArticleCard.getByTestId('quantity-select'), {target: {value: `${quantity}`}})
         })
         describe('and click on "Update" button', () => {
             beforeEach(() => {
@@ -85,7 +85,7 @@ describe('cart article card spec', () => {
                 expect(updateCartArticle).toBeCalledWith({...cartArticle, quantity})
             })
             test(`Should display quantity ${quantity}`, () => {
-                expect((cartArticleCard.getByTestId('quantitySelect') as HTMLSelectElement).value).toEqual(`${quantity}`)
+                expect((cartArticleCard.getByTestId('quantity-select') as HTMLSelectElement).value).toEqual(`${quantity}`)
             })
         })
     })

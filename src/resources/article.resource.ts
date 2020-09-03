@@ -1,5 +1,5 @@
 import {anArticle} from "../data.mock";
-import IArticle from "../models/IArticle";
+import IArticle from "../domain/models/IArticle";
 
 const articles = [
     anArticle({id: '1', name: 'IPhone'}),

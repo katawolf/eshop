@@ -1,7 +1,7 @@
 import {addCartArticle, cleanCartError} from "../../store/cart/action";
 import {connect, ConnectedProps} from "react-redux";
 import React from "react";
-import IArticle from "../../models/IArticle";
+import IArticle from "../../domain/models/IArticle";
 import ArticleDetail from "../../components/article/ArticleDetail";
 import {ICartState} from "../../store/cart/reducer";
 
@@ -18,9 +18,9 @@ interface IProps extends ConnectedProps<typeof connector> {
     article: IArticle,
 }
 
-const ArticleDetailConnector: React.FC<IProps> = (props: IProps) =>
-    <div data-testid={'articleDetailConnector'}>
+const ArticleDetailContainer: React.FC<IProps> = (props: IProps) =>
+    <div data-testid={'article-detail-container'}>
         <ArticleDetail {...props}/>
     </div>
 
-export default connector(ArticleDetailConnector)
+export default connector(ArticleDetailContainer)

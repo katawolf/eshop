@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Button, Card, Form} from "react-bootstrap";
-import {formatPrice} from "../../services/format.service";
-import ICartArticle from "../../models/ICartArticle";
+import {formatPrice} from "../../domain/services/format.service";
+import ICartArticle from "../../domain/models/ICartArticle";
 import {useHistory} from "react-router-dom";
 
 interface IProps {
@@ -19,7 +19,7 @@ const CartArticleCard: React.FC<IProps> = ({cartArticle : cartArticleFromProps, 
         setCartArticle({...cartArticle, quantity})
     }
 
-    return <Card data-testid={'cartArticleCard'}>
+    return <Card data-testid={'cart-article-card'}>
         <Card.Img data-testid='img' variant="top" src={imgSrc}/>
         <Card.Body>
             <Card.Title>{name} (shoes)</Card.Title>
@@ -27,10 +27,10 @@ const CartArticleCard: React.FC<IProps> = ({cartArticle : cartArticleFromProps, 
             <Card.Text>Size : {size}</Card.Text>
             <Card.Text>
                 Quantity :
-                <Form.Control data-testid={'quantitySelect'} value={quantity}
+                <Form.Control data-testid={'quantity-select'} value={quantity}
                               as={'select'}
                               onChange={event => updateQuantity(Number(event.target.value))}>
-                    {getAvailableQuantities(maxQuantityByCart).map(it => <option data-testid={`quantityOption`} key={it}>{it}</option>)}
+                    {getAvailableQuantities(maxQuantityByCart).map(it => <option data-testid={`quantity-option`} key={it}>{it}</option>)}
                 </Form.Control>
             </Card.Text>
             <Button onClick={() => history.push(`/article/${id}`)}>Details</Button>

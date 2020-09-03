@@ -6,7 +6,7 @@ import {createMemoryHistory} from "history";
 import {act} from "react-dom/test-utils";
 import {Router} from "react-router-dom";
 
-jest.mock('./CartArticleCard', () => () => <div data-testid={'cartArticleCard'} />)
+jest.mock('./CartArticleCard', () => () => <div data-testid={'cart-article-card'}/>)
 
 const cartArticles = [
     aCartArticle({id: '1'}),
@@ -21,10 +21,10 @@ describe('cart articles viewer spec', () => {
             cartArticleViewer = component()
         })
         test('should display component', () => {
-            expect(cartArticleViewer.queryByTestId('cartArticlesViewer')).toBeInTheDocument()
+            expect(cartArticleViewer.queryByTestId('cart-articles-viewer')).toBeInTheDocument()
         })
         test('should display 3 cart article card', () => {
-            expect(cartArticleViewer.queryAllByTestId('cartArticleCard')).toHaveLength(3)
+            expect(cartArticleViewer.queryAllByTestId('cart-article-card')).toHaveLength(3)
         })
         test('should display "Command" button', () => {
             expect(cartArticleViewer.queryByText('Command')).toBeInTheDocument()

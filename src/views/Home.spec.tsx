@@ -1,13 +1,13 @@
 import {render, RenderResult, wait} from "@testing-library/react";
 import React from "react";
 import {anArticle} from "../data.mock";
-import * as articleService from "../services/article.service";
+import * as articleService from "../domain/services/article.service";
 import {act} from "react-dom/test-utils";
 import Home from "./Home";
-import IArticle from "../models/IArticle";
+import IArticle from "../domain/models/IArticle";
 
-jest.mock('./article/ArticlesViewer', () => () => <div data-testid={'articlesViewer'}>ArticlesViewer</div>)
-jest.mock('./Menu', () => () => <div data-testid={'menu'}>Menu</div>)
+jest.mock('../components/article/ArticlesViewer', () => () => <div data-testid={'articles-viewer'}/>)
+jest.mock('../components/Menu', () => () => <div data-testid={'menu'}/>)
 
 const articles: IArticle[] = [
     anArticle({id: '1', name: 'IPhone'}),
@@ -31,7 +31,7 @@ describe('Home spec', () => {
         test('should display component', () => {
             expect(homeComponent.queryByTestId('home')).toBeInTheDocument()
         })
-        test('should display menu', () => {
+        test('should display menu component', () => {
             expect(homeComponent.queryByTestId('menu')).toBeInTheDocument()
         })
         test('Should load articles', async () => {
@@ -39,8 +39,8 @@ describe('Home spec', () => {
                 expect(mockGetArticles).toBeCalledTimes(1)
             })
         })
-        test('Should display articles viewer', () => {
-            expect(homeComponent.queryByTestId('articlesViewer')).toBeInTheDocument()
+        test('Should display articles viewer component', () => {
+            expect(homeComponent.queryByTestId('articles-viewer')).toBeInTheDocument()
         })
     })
 })

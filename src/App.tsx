@@ -1,14 +1,14 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Home from "./components/Home";
+import Home from "./views/Home";
 import {Provider} from "react-redux";
 import store from "./store/configStore";
 import {Route, Switch} from 'react-router-dom';
-import Article from "./components/Article";
-import NotFound from "./components/NotFound";
-import Cart from "./components/Cart";
-import Command from "./components/Command";
-import CommandSuccess from "./components/CommandSuccess";
+import Article from "./views/Article";
+import NotFound from "./views/NotFound";
+import Cart from "./views/Cart";
+import Command from "./views/Command";
+import CommandSuccess from "./views/CommandSuccess";
 
 const App: React.FC = () => {
     return (

@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
-import IArticle from "../models/IArticle";
-import {getArticle} from "../services/article.service";
-import ArticleDetailConnector from "../connectors/article/ArticleDetailConnector";
+import IArticle from "../domain/models/IArticle";
+import {getArticle} from "../domain/services/article.service";
+import ArticleDetailConnector from "../containers/article/ArticleDetailContainer";
 import {useParams} from "react-router-dom";
-import Menu from "./Menu";
+import Menu from "../components/Menu";
 
 const Article: React.FC = () => {
     const [article, setArticle] = useState(undefined as IArticle | undefined)
@@ -13,7 +13,7 @@ const Article: React.FC = () => {
         getArticle(id).then(setArticle)
     }, [id])
 
-    return <div data-testid={'articlePage'}>
+    return <div data-testid={'article'}>
         <Menu/>
         {article && <ArticleDetailConnector article={article}/>}
     </div>
