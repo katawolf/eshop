@@ -10,7 +10,7 @@ const connector = connect(mapState)
 type IProps = ConnectedProps<typeof connector>
 
 const CartSummaryContainer: React.FC<IProps> = (props: IProps) =>
-    <div data-testid={'cartSummaryConnector'}>
+    <div data-testid={'cart-summary-container'}>
         <CartSummary {...props}/>
     </div>
 

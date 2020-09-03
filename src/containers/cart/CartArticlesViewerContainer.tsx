@@ -16,7 +16,7 @@ const connector = connect(mapState, mapDispatch)
 type IProps = ConnectedProps<typeof connector>
 
 const CartArticlesViewerContainer: React.FC<IProps> = (props: IProps) =>
-    <div data-testid={'cartArticlesViewerConnector'}>
+    <div data-testid={'cart-articles-viewer-container'}>
         <CartArticlesViewer {...props}/>
     </div>
 

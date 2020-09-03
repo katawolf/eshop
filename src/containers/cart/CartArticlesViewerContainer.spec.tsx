@@ -4,20 +4,20 @@ import ArticlesViewerConnector from "./CartArticlesViewerContainer";
 import {Provider} from "react-redux";
 import configStore from "../../store/configStore";
 
-jest.mock('../../components/cart/CartArticlesViewer', () => () => <div data-testid={'cartArticlesViewer'}>CartArticleViewer</div>)
+jest.mock('../../components/cart/CartArticlesViewer', () => () => <div data-testid={'cart-articles-viewer'}/>)
 
-describe('cart articles viewer connector spec', () => {
-    let articlesViewerConnector: RenderResult
+describe('cart articles viewer container spec', () => {
+    let articlesViewerContainer: RenderResult
 
     describe('on init', () => {
         beforeEach(() => {
-            articlesViewerConnector = component()
+            articlesViewerContainer = component()
         })
-        test('should display component', () => {
-            expect(articlesViewerConnector.queryByTestId('cartArticlesViewerConnector')).toBeInTheDocument()
+        test('should display container', () => {
+            expect(articlesViewerContainer.queryByTestId('cart-articles-viewer-container')).toBeInTheDocument()
         })
         test('should display cart articles viewer component', () => {
-            expect(articlesViewerConnector.queryByTestId('cartArticlesViewer')).toBeInTheDocument()
+            expect(articlesViewerContainer.queryByTestId('cart-articles-viewer')).toBeInTheDocument()
         })
     })
 })

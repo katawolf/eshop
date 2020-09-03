@@ -12,7 +12,7 @@ const connector = connect(undefined, mapDispatch)
 type IProps = ConnectedProps<typeof connector>
 
 const CommandFormContainer: React.FC<IProps> = (props: IProps) =>
-    <div data-testid={'commandFormConnector'}>
+    <div data-testid={'command-form-container'}>
         <CommandForm {...props}/>
     </div>
 

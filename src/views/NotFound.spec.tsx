@@ -9,6 +9,9 @@ describe('not found spec', () => {
         beforeEach(() => {
             notFound = component()
         })
+        test('should display component', () => {
+            expect(notFound.queryByTestId('not-found')).toBeInTheDocument()
+        })
         test('should display "404 - page not found"', () => {
             expect(notFound.queryByText('404 - page not found')).toBeInTheDocument()
         })

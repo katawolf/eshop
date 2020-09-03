@@ -4,20 +4,20 @@ import {Provider} from "react-redux";
 import configStore from "../../store/configStore";
 import CartSummaryConnector from "./CartSummaryContainer";
 
-jest.mock('../../components/cart/CartSummary', () => () => <div data-testid={'cartSummary'}>CartSummary</div>)
+jest.mock('../../components/cart/CartSummary', () => () => <div data-testid={'cart-summary'}/>)
 
-describe('cart summary connector spec', () => {
-    let cartSummaryConnector: RenderResult
+describe('cart summary container spec', () => {
+    let cartSummaryContainer: RenderResult
 
     describe('on init', () => {
         beforeEach(() => {
-            cartSummaryConnector = component()
+            cartSummaryContainer = component()
         })
-        test('should display component', () => {
-            expect(cartSummaryConnector.queryByTestId('cartSummaryConnector')).toBeInTheDocument()
+        test('should display container', () => {
+            expect(cartSummaryContainer.queryByTestId('cart-summary-container')).toBeInTheDocument()
         })
-        test('should display cart payment component', () => {
-            expect(cartSummaryConnector.queryByTestId('cartSummary')).toBeInTheDocument()
+        test('should display cart summary component', () => {
+            expect(cartSummaryContainer.queryByTestId('cart-summary')).toBeInTheDocument()
         })
     })
 })

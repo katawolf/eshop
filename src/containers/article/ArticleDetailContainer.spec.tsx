@@ -9,17 +9,17 @@ jest.mock('../../components/article/ArticleDetail', () => () => <div data-testid
 
 const article = anArticle()
 
-describe('article detail connector spec', () => {
-    let articleDetailConnector: RenderResult
+describe('article detail container spec', () => {
+    let articleDetailContainer: RenderResult
     describe('on init', () => {
         beforeEach(() => {
-            articleDetailConnector = component()
+            articleDetailContainer = component()
         })
-        test('should display component', () => {
-            expect(articleDetailConnector.queryByTestId('article-detail-container')).toBeInTheDocument()
+        test('should display container', () => {
+            expect(articleDetailContainer.queryByTestId('article-detail-container')).toBeInTheDocument()
         })
         test('should display article detail component', () => {
-            expect(articleDetailConnector.queryByTestId('article-detail')).toBeInTheDocument()
+            expect(articleDetailContainer.queryByTestId('article-detail')).toBeInTheDocument()
         })
     })
 })

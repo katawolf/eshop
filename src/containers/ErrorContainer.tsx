@@ -15,7 +15,7 @@ const connector = connect(mapState, mapDispatch)
 type IProps = ConnectedProps<typeof connector>
 
 const ErrorContainer: React.FC<IProps> = (props: IProps) =>
-    <div data-testid={'errorConnector'}>
+    <div data-testid={'error-container'}>
         <Error {...props}/>
     </div>
 

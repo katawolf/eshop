@@ -4,20 +4,20 @@ import {Provider} from "react-redux";
 import configStore from "../../store/configStore";
 import CartPaymentConnector from "./CommandFormContainer";
 
-jest.mock('../../components/command/CommandForm', () => () => <div data-testid={'commandForm'} />)
+jest.mock('../../components/command/CommandForm', () => () => <div data-testid={'command-form'} />)
 
-describe('command form connector spec', () => {
-    let commandFormConnector: RenderResult
+describe('command form container spec', () => {
+    let commandFormContainer: RenderResult
 
     describe('on init', () => {
         beforeEach(() => {
-            commandFormConnector = component()
+            commandFormContainer = component()
         })
-        test('should display component', () => {
-            expect(commandFormConnector.queryByTestId('commandFormConnector')).toBeInTheDocument()
+        test('should display container', () => {
+            expect(commandFormContainer.queryByTestId('command-form-container')).toBeInTheDocument()
         })
         test('should display command form component', () => {
-            expect(commandFormConnector.queryByTestId('commandForm')).toBeInTheDocument()
+            expect(commandFormContainer.queryByTestId('command-form')).toBeInTheDocument()
         })
     })
 })

@@ -6,18 +6,18 @@ import ErrorConnector from "./ErrorContainer";
 
 jest.mock('../components/Error', () => () => <div data-testid={'error'} />)
 
-describe('error connector spec', () => {
-    let commandFormConnector: RenderResult
+describe('error container spec', () => {
+    let commandFormContainer: RenderResult
 
     describe('on init', () => {
         beforeEach(() => {
-            commandFormConnector = component()
+            commandFormContainer = component()
         })
-        test('should display component', () => {
-            expect(commandFormConnector.queryByTestId('errorConnector')).toBeInTheDocument()
+        test('should display container', () => {
+            expect(commandFormContainer.queryByTestId('error-container')).toBeInTheDocument()
         })
         test('should display error component', () => {
-            expect(commandFormConnector.queryByTestId('error')).toBeInTheDocument()
+            expect(commandFormContainer.queryByTestId('error')).toBeInTheDocument()
         })
     })
 })
