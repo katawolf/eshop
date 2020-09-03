@@ -1,5 +1,5 @@
-import {addCartArticle, cleanCartError, removeCartArticle, updateCartArticle} from "./action";
-import {aCartArticle} from "../../data.mock";
+import {addCartArticle, cleanCartError, createCommand, removeCartArticle, updateCartArticle} from "./action";
+import {aBankCard, aCartArticle, aUser} from "../../data.mock";
 
 describe('Article actions spec', () => {
     describe('add cart article', () => {
@@ -38,6 +38,18 @@ describe('Article actions spec', () => {
                 cleanCartError()
             ).toEqual({
                 type: 'CLEAN_CART_ERROR',
+            })
+        })
+    })
+    describe('should create command', () => {
+        test('should create action CREATE_COMMAND', () => {
+            const user = aUser()
+            const bankCard = aBankCard()
+            expect(
+                createCommand(user, bankCard)
+            ).toEqual({
+                type: 'CREATE_COMMAND',
+                payload: {user, bankCard}
             })
         })
     })

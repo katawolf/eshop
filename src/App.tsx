@@ -7,6 +7,8 @@ import {Route, Switch} from 'react-router-dom';
 import Article from "./components/Article";
 import NotFound from "./components/NotFound";
 import Cart from "./components/Cart";
+import Command from "./components/Command";
+import CommandSuccess from "./components/CommandSuccess";
 
 const App: React.FC = () => {
     return (
@@ -15,6 +17,8 @@ const App: React.FC = () => {
                 <Switch>
                     <Route exact path={'/article/:id'} component={Article}/>
                     <Route exact path={'/cart'} component={Cart}/>
+                    <Route exact path={'/command'} component={Command}/>
+                    <Route exact path={'/command-success'} component={CommandSuccess}/>
                     <Route exact path={'/'} component={Home}/>
                     <Route path={'*'} component={NotFound}/>
                 </Switch>
