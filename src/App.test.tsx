@@ -5,9 +5,10 @@ import { MemoryRouter } from 'react-router-dom';
 
 jest.mock('./components/Home', () => () => <div data-testid={'home'} />)
 jest.mock('./components/Article', () => () => <div data-testid={'article'} />)
-jest.mock('./components/NotFound', () => () => <div data-testid={'notFound'} />)
+jest.mock('./components/NotFound', () => () => <div data-testid={'not-found'} />)
 jest.mock('./components/Cart', () => () => <div data-testid={'cart'} />)
 jest.mock('./components/Command', () => () => <div data-testid={'command'} />)
+jest.mock('./components/CommandSuccess', () => () => <div data-testid={'command-success'} />)
 
 describe('App component', () => {
     let app: RenderResult
@@ -27,14 +28,19 @@ describe('App component', () => {
             expect(app.queryByTestId('cart')).not.toBeInTheDocument()
         })
     }
-    const shouldNotDisplayPaymentPage = () => {
+    const shouldNotDisplayCommandPage = () => {
         test('should not display command page', () => {
             expect(app.queryByTestId('command')).not.toBeInTheDocument()
         })
     }
+    const shouldNotDisplayCommandSuccessPage = () => {
+        test('should not display command success page', () => {
+            expect(app.queryByTestId('command-success')).not.toBeInTheDocument()
+        })
+    }
     const shouldNotDisplayNotFoundPage = () => {
         test('should not display not found page', () => {
-            expect(app.queryByTestId('notFound')).not.toBeInTheDocument()
+            expect(app.queryByTestId('not-found')).not.toBeInTheDocument()
         })
     }
 
@@ -47,7 +53,8 @@ describe('App component', () => {
         })
         shouldNotDisplayArticlePage()
         shouldNotDisplayCartPage()
-        shouldNotDisplayPaymentPage()
+        shouldNotDisplayCommandPage()
+        shouldNotDisplayCommandSuccessPage()
         shouldNotDisplayNotFoundPage()
     })
     describe('path as /article/2', () => {
@@ -59,7 +66,8 @@ describe('App component', () => {
         })
         shouldNotDisplayHomePage()
         shouldNotDisplayCartPage()
-        shouldNotDisplayPaymentPage()
+        shouldNotDisplayCommandPage()
+        shouldNotDisplayCommandSuccessPage()
         shouldNotDisplayNotFoundPage()
     })
     describe('path as /cart', () => {
@@ -71,7 +79,8 @@ describe('App component', () => {
         })
         shouldNotDisplayHomePage()
         shouldNotDisplayArticlePage()
-        shouldNotDisplayPaymentPage()
+        shouldNotDisplayCommandPage()
+        shouldNotDisplayCommandSuccessPage()
         shouldNotDisplayNotFoundPage()
     })
     describe('path as /command', () => {
@@ -84,6 +93,20 @@ describe('App component', () => {
         shouldNotDisplayHomePage()
         shouldNotDisplayArticlePage()
         shouldNotDisplayCartPage()
+        shouldNotDisplayCommandSuccessPage()
+        shouldNotDisplayNotFoundPage()
+    })
+    describe('path as /command-success', () => {
+        beforeEach(() => {
+            app = component('/command-success')
+        })
+        test('should display command page', () => {
+            expect(app.queryByTestId('command-success')).toBeInTheDocument()
+        })
+        shouldNotDisplayHomePage()
+        shouldNotDisplayArticlePage()
+        shouldNotDisplayCartPage()
+        shouldNotDisplayCommandPage()
         shouldNotDisplayNotFoundPage()
     })
     describe('path as /unknown', () => {
@@ -91,12 +114,13 @@ describe('App component', () => {
             app = component('/unknown')
         })
         test('should display not found page', () => {
-            expect(app.queryByTestId('notFound')).toBeInTheDocument()
+            expect(app.queryByTestId('not-found')).toBeInTheDocument()
         })
         shouldNotDisplayHomePage()
         shouldNotDisplayArticlePage()
         shouldNotDisplayCartPage()
-        shouldNotDisplayPaymentPage()
+        shouldNotDisplayCommandPage()
+        shouldNotDisplayCommandSuccessPage()
     })
 
 })
