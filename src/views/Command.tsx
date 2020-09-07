@@ -1,15 +1,16 @@
 import React from "react";
 import Menu from "../components/Menu";
-import CartSummaryConnector from "../containers/cart/CartSummaryContainer";
-import CommandFormConnector from "../containers/command/CommandFormContainer";
+import CartSummaryContainer from "../containers/cart/CartSummaryContainer";
+import CommandFormContainer from "../containers/command/CommandFormContainer";
 import ErrorConnector from "../containers/ErrorContainer";
+import createCommand from "../domain/services/command.service";
 
 const Command: React.FC = () => {
     return <div data-testid={'command'}>
         <Menu/>
         <ErrorConnector/>
-        <CartSummaryConnector/>
-        <CommandFormConnector/>
+        <CartSummaryContainer/>
+        <CommandFormContainer createCommand={createCommand}/>
     </div>
 }
 

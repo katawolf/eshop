@@ -24,6 +24,6 @@ describe('command form container spec', () => {
 
 const component = () => render(
     <Provider store={configStore}>
-        <CartPaymentConnector/>
+        <CartPaymentConnector createCommand={jest.fn()}/>
     </Provider>
 )

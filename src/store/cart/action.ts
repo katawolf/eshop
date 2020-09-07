@@ -1,7 +1,5 @@
 import {CartActionType} from "./type";
 import ICartArticle from "../../domain/models/ICartArticle";
-import IUser from "../../domain/models/IUser";
-import IBankCard from "../../domain/models/IBankCard";
 
 export const addCartArticle = (cartArticle: ICartArticle): CartActionType => ({
     type: "ADD_CART_ARTICLE",
@@ -22,7 +20,6 @@ export const cleanCartError = (): CartActionType => ({
     type: "CLEAN_CART_ERROR"
 })
 
-export const createCommand = (user: IUser, bankCard: IBankCard): CartActionType => ({
-    type: "CREATE_COMMAND",
-    payload: {user, bankCard}
+export const resetCart = (): CartActionType => ({
+    type: "RESET_CART"
 })

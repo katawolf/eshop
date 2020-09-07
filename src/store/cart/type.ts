@@ -1,6 +1,4 @@
 import ICartArticle from "../../domain/models/ICartArticle";
-import IUser from "../../domain/models/IUser";
-import IBankCard from "../../domain/models/IBankCard";
 
 interface IAddCartArticleAction {
     type: 'ADD_CART_ARTICLE'
@@ -21,9 +19,13 @@ interface ICleanCartErrorAction {
     type: 'CLEAN_CART_ERROR'
 }
 
-interface ICreateCommandAction {
-    type: 'CREATE_COMMAND',
-    payload: {user: IUser, bankCard: IBankCard}
+interface IResetCartAction {
+    type: 'RESET_CART'
 }
 
-export type CartActionType = IAddCartArticleAction | IRemoveCartArticleAction | IUpdateCartArticleAction | ICleanCartErrorAction | ICreateCommandAction
+export type CartActionType =
+    IAddCartArticleAction
+    | IRemoveCartArticleAction
+    | IUpdateCartArticleAction
+    | ICleanCartErrorAction
+    | IResetCartAction
