@@ -1,4 +1,3 @@
-import Size from "./Size";
 import IPrice from "./IPrice";
 
 interface IArticle {
@@ -7,7 +6,6 @@ interface IArticle {
     price: IPrice
     imgSrc: string
     description: string
-    availableSizes: Size[]
     maxQuantityByCart: number
 }
 

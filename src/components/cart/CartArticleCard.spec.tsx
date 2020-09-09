@@ -11,7 +11,6 @@ const cartArticle = aCartArticle({
     name: 'Shoes blue',
     imgSrc: 'path/to/img.jpg',
     price: {value: 128, currency: "EUR"},
-    size: 'M',
     quantity: 8,
     maxQuantityByCart: 20
 })
@@ -35,9 +34,6 @@ describe('cart article card spec', () => {
         })
         test('Should display price', () => {
             expect(cartArticleCard.queryByText('Price : 128 €')).toBeInTheDocument()
-        })
-        test('Should display size', () => {
-            expect(cartArticleCard.queryByText('Size : M')).toBeInTheDocument()
         })
         test('Should display quantity', () => {
             expect((cartArticleCard.getByTestId('quantity-select') as HTMLSelectElement).value).toEqual('8')

@@ -2,7 +2,6 @@ import {fireEvent, render, RenderResult} from "@testing-library/react"
 import {aCartArticle, anArticle} from "../../data.mock";
 import React from "react";
 import ArticleDetail, {IArticleDetailProps} from "./ArticleDetail";
-import Size from "../../domain/models/Size";
 
 const article = anArticle(
     {
@@ -11,7 +10,6 @@ const article = anArticle(
         price: {value: 125, currency: 'EUR'},
         imgSrc: '/src/img',
         description: 'a description',
-        availableSizes: ['XS', "S", "M"]
     })
 
 const cartArticle = aCartArticle({
@@ -20,8 +18,6 @@ const cartArticle = aCartArticle({
     price: {value: 125, currency: 'EUR'},
     imgSrc: '/src/img',
     description: 'a description',
-    availableSizes: ['XS', "S", "M"],
-    size: 'M'
 })
 
 describe('Article detail spec', () => {
@@ -52,9 +48,6 @@ describe('Article detail spec', () => {
         test('should display description', () => {
             expect(articleDetail.queryByText('a description')).toBeInTheDocument()
         })
-        test.each(['XS', 'S', 'M'] as Size[])('should propose %s available sizes', (size: Size) => {
-            expect(articleDetail.queryByText(size)).toBeInTheDocument()
-        })
         test('should display "Add on cart" button', () => {
             expect(articleDetail.queryByText('Add on cart')).toBeInTheDocument()
         })
@@ -81,48 +74,17 @@ describe('Article detail spec', () => {
             })
         })
     })
-    describe('when not selected size', () => {
+    describe('when click on "Add to cart" button', () => {
         const addCartArticle = jest.fn()
         beforeEach(() => {
             articleDetail = componentRender({article, addCartArticle})
+            fireEvent.click(articleDetail.getByText('Add on cart'))
         })
         afterEach(() => {
             addCartArticle.mockClear()
         })
-        describe('and click on "Add to cart" button', () => {
-            beforeEach(() => {
-                fireEvent.click(articleDetail.getByText('Add on cart'))
-            })
-            test('should display "Please select size" text', () => {
-                expect(articleDetail.queryByText('Please select a size')).toBeInTheDocument()
-            })
-            test('should not call addCartArticle', () => {
-                expect(addCartArticle).not.toBeCalled()
-            })
-        })
-    })
-    describe.each(['XS', 'S', 'M'] as Size[])('when selected %s size', (size: Size) => {
-        const addCartArticle = jest.fn()
-        const cleanCartError = jest.fn()
-        beforeEach(() => {
-            cleanCartError.mockClear()
-            articleDetail = componentRender({article, addCartArticle, cleanCartError})
-            fireEvent.change(articleDetail.getByTestId('size-select'), {target: {value: size}})
-        })
-        afterEach(() => {
-            addCartArticle.mockClear()
-            cleanCartError.mockClear()
-        })
-        describe('and click on "Add to cart" button', () => {
-            beforeEach(() => {
-                fireEvent.click(articleDetail.getByText('Add on cart'))
-            })
-            test('should not display "Please select size" text', () => {
-                expect(articleDetail.queryByText('Please select a size')).not.toBeInTheDocument()
-            })
-            test('should call addCartArticle', () => {
-                expect(addCartArticle).toBeCalledWith({...cartArticle, size, quantity: 1})
-            })
+        test('should call addCartArticle', () => {
+            expect(addCartArticle).toBeCalledWith({...cartArticle, quantity: 1})
         })
     })
 })

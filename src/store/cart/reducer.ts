@@ -91,8 +91,7 @@ const updateCartArticle = (cartArticles: ICartArticle[], cartArticle: ICartArtic
         ? [...removeCartArticle(cartArticles, cartArticle), cartArticle]
         : [...cartArticles]
 
-const cartArticlesAreEquals = (cartArticle1: ICartArticle, cartArticle2: ICartArticle) =>
-    cartArticle1.id === cartArticle2.id && cartArticle1.size === cartArticle2.size
+const cartArticlesAreEquals = (cartArticle1: ICartArticle, cartArticle2: ICartArticle) => cartArticle1.id === cartArticle2.id
 
 const concatCardArticle = (cartArticle: ICartArticle, {quantity}: ICartArticle) => ({
     ...cartArticle,
