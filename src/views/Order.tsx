@@ -1,16 +1,16 @@
 import React from "react";
 import Menu from "../components/Menu";
 import CartSummaryContainer from "../containers/cart/CartSummaryContainer";
-import CommandFormContainer from "../containers/command/CommandFormContainer";
+import OrderFormContainer from "../containers/order/OrderFormContainer";
 import ErrorContainer from "../containers/ErrorContainer";
 
-const Command: React.FC = () => {
-    return <div data-testid={'command'}>
+const Order: React.FC = () => {
+    return <div data-testid={'order'}>
         <Menu/>
         <ErrorContainer/>
         <CartSummaryContainer/>
-        <CommandFormContainer/>
+        <OrderFormContainer/>
     </div>
 }
 
-export default Command
+export default Order

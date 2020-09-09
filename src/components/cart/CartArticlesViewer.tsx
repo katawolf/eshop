@@ -18,7 +18,7 @@ const CartArticlesViewer: React.FC<IProps> = ({cartArticles, updateCartArticle, 
                 <CartArticleCard {...{cartArticle, updateCartArticle, removeCartArticle}}/>
             </div>)}
         </CardColumns>
-        <Button onClick={() => history.push('/command')}>{'Command'}</Button>
+        <Button onClick={() => history.push('/order')}>{'Order'}</Button>
     </div>
 }
 

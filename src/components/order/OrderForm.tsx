@@ -9,11 +9,11 @@ import {useHistory} from "react-router-dom";
 
 interface IProps {
     cartArticles: ICartArticle[]
-    createCommand: (cartArticles: ICartArticle[], user: IUser, bankCard: IBankCard) => Promise<String>
+    createOrder: (cartArticles: ICartArticle[], user: IUser, bankCard: IBankCard) => Promise<String>
     resetCart: () => void
 }
 
-const CommandForm: React.FC<IProps> = ({cartArticles, createCommand, resetCart}) => {
+const OrderForm: React.FC<IProps> = ({cartArticles, createOrder, resetCart}) => {
     const [user, setUser] = useState(emptyUser())
     const [bankCard, setBankCard] = useState(emptyBankCard())
     const [error, setError] = useState(undefined)
@@ -21,9 +21,9 @@ const CommandForm: React.FC<IProps> = ({cartArticles, createCommand, resetCart})
     const history = useHistory()
 
     const submit = () => {
-        createCommand(cartArticles, user, bankCard).then(() => {
+        createOrder(cartArticles, user, bankCard).then(() => {
             resetCart()
-            history.push('/command-success')
+            history.push('/order-success')
         }).catch((e) => {
             setError(e.message || e)
         })
@@ -33,7 +33,7 @@ const CommandForm: React.FC<IProps> = ({cartArticles, createCommand, resetCart})
 
     const updateUser = (partialUser: Partial<IUser>) => setUser({...user, ...partialUser})
 
-    return <div data-testid={'command-form'}>
+    return <div data-testid={'order-form'}>
         {error && <div>{error}</div>}
         <UserForm updateUser={updateUser}/>
         <BankCardForm updateBankCard={updateBankCard}/>
@@ -41,5 +41,5 @@ const CommandForm: React.FC<IProps> = ({cartArticles, createCommand, resetCart})
     </div>
 }
 
-export default CommandForm
-export type ICommandFormProps = IProps
+export default OrderForm
+export type IOrderFormProps = IProps
