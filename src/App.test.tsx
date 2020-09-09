@@ -7,8 +7,8 @@ jest.mock('./views/Home', () => () => <div data-testid={'home'} />)
 jest.mock('./views/Article', () => () => <div data-testid={'article'} />)
 jest.mock('./views/NotFound', () => () => <div data-testid={'not-found'} />)
 jest.mock('./views/Cart', () => () => <div data-testid={'cart'} />)
-jest.mock('./views/Command', () => () => <div data-testid={'command'} />)
-jest.mock('./views/CommandSuccess', () => () => <div data-testid={'command-success'} />)
+jest.mock('./views/Order', () => () => <div data-testid={'order'} />)
+jest.mock('./views/OrderSuccess', () => () => <div data-testid={'order-success'} />)
 
 describe('App component', () => {
     let app: RenderResult
@@ -28,14 +28,14 @@ describe('App component', () => {
             expect(app.queryByTestId('cart')).not.toBeInTheDocument()
         })
     }
-    const shouldNotDisplayCommandPage = () => {
-        test('should not display command page', () => {
-            expect(app.queryByTestId('command')).not.toBeInTheDocument()
+    const shouldNotDisplayOrderPage = () => {
+        test('should not display order page', () => {
+            expect(app.queryByTestId('order')).not.toBeInTheDocument()
         })
     }
-    const shouldNotDisplayCommandSuccessPage = () => {
-        test('should not display command success page', () => {
-            expect(app.queryByTestId('command-success')).not.toBeInTheDocument()
+    const shouldNotDisplayOrderSuccessPage = () => {
+        test('should not display order success page', () => {
+            expect(app.queryByTestId('order-success')).not.toBeInTheDocument()
         })
     }
     const shouldNotDisplayNotFoundPage = () => {
@@ -53,8 +53,8 @@ describe('App component', () => {
         })
         shouldNotDisplayArticlePage()
         shouldNotDisplayCartPage()
-        shouldNotDisplayCommandPage()
-        shouldNotDisplayCommandSuccessPage()
+        shouldNotDisplayOrderPage()
+        shouldNotDisplayOrderSuccessPage()
         shouldNotDisplayNotFoundPage()
     })
     describe('path as /article/2', () => {
@@ -66,8 +66,8 @@ describe('App component', () => {
         })
         shouldNotDisplayHomePage()
         shouldNotDisplayCartPage()
-        shouldNotDisplayCommandPage()
-        shouldNotDisplayCommandSuccessPage()
+        shouldNotDisplayOrderPage()
+        shouldNotDisplayOrderSuccessPage()
         shouldNotDisplayNotFoundPage()
     })
     describe('path as /cart', () => {
@@ -79,34 +79,34 @@ describe('App component', () => {
         })
         shouldNotDisplayHomePage()
         shouldNotDisplayArticlePage()
-        shouldNotDisplayCommandPage()
-        shouldNotDisplayCommandSuccessPage()
+        shouldNotDisplayOrderPage()
+        shouldNotDisplayOrderSuccessPage()
         shouldNotDisplayNotFoundPage()
     })
-    describe('path as /command', () => {
+    describe('path as /order', () => {
         beforeEach(() => {
-            app = component('/command')
+            app = component('/order')
         })
-        test('should display command page', () => {
-            expect(app.queryByTestId('command')).toBeInTheDocument()
+        test('should display order page', () => {
+            expect(app.queryByTestId('order')).toBeInTheDocument()
         })
         shouldNotDisplayHomePage()
         shouldNotDisplayArticlePage()
         shouldNotDisplayCartPage()
-        shouldNotDisplayCommandSuccessPage()
+        shouldNotDisplayOrderSuccessPage()
         shouldNotDisplayNotFoundPage()
     })
-    describe('path as /command-success', () => {
+    describe('path as /order-success', () => {
         beforeEach(() => {
-            app = component('/command-success')
+            app = component('/order-success')
         })
-        test('should display command page', () => {
-            expect(app.queryByTestId('command-success')).toBeInTheDocument()
+        test('should display order page', () => {
+            expect(app.queryByTestId('order-success')).toBeInTheDocument()
         })
         shouldNotDisplayHomePage()
         shouldNotDisplayArticlePage()
         shouldNotDisplayCartPage()
-        shouldNotDisplayCommandPage()
+        shouldNotDisplayOrderPage()
         shouldNotDisplayNotFoundPage()
     })
     describe('path as /unknown', () => {
@@ -119,8 +119,8 @@ describe('App component', () => {
         shouldNotDisplayHomePage()
         shouldNotDisplayArticlePage()
         shouldNotDisplayCartPage()
-        shouldNotDisplayCommandPage()
-        shouldNotDisplayCommandSuccessPage()
+        shouldNotDisplayOrderPage()
+        shouldNotDisplayOrderSuccessPage()
     })
 
 })

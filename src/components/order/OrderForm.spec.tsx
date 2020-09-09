@@ -1,6 +1,6 @@
 import {fireEvent, render, RenderResult} from "@testing-library/react"
 import React from "react";
-import CommandForm, {ICommandFormProps} from "./CommandForm";
+import OrderForm, {IOrderFormProps} from "./OrderForm";
 import {IUserFormProps} from "../user/UserForm";
 import {IBankCardFormProps} from "../payment/BankCardForm";
 import {aBankCard, aCartArticle, aUser} from "../../data.mock";
@@ -15,27 +15,27 @@ jest.mock('../payment/BankCardForm', () => ({updateBankCard}: IBankCardFormProps
 jest.mock('../user/UserForm', () => ({updateUser}: IUserFormProps) =>
     <input data-testid={'user-form'} onChange={event => updateUser(JSON.parse(event.target.value))}/>)
 
-describe('command form spec', () => {
-    let commandForm: RenderResult
+describe('order form spec', () => {
+    let orderForm: RenderResult
     describe('on init', () => {
         beforeEach(() => {
-            commandForm = component()
+            orderForm = component()
         })
         test('should display component', () => {
-            expect(commandForm.queryByTestId('command-form')).toBeInTheDocument()
+            expect(orderForm.queryByTestId('order-form')).toBeInTheDocument()
         })
         test('should display user form component', () => {
-            expect(commandForm.queryByTestId('user-form')).toBeInTheDocument()
+            expect(orderForm.queryByTestId('user-form')).toBeInTheDocument()
         })
         test('should display bank card form component', () => {
-            expect(commandForm.queryByTestId('bank-card-form')).toBeInTheDocument()
+            expect(orderForm.queryByTestId('bank-card-form')).toBeInTheDocument()
         })
         test('should display submit button', () => {
-            expect(commandForm.queryByText('Submit')).toBeInTheDocument()
+            expect(orderForm.queryByText('Submit')).toBeInTheDocument()
         })
     })
     describe('When click on submit button', () => {
-        const createCommand = jest.fn()
+        const createOrder = jest.fn()
         const cartArticles = [
             aCartArticle({id: '1'}),
             aCartArticle({id: '2'})
@@ -43,22 +43,22 @@ describe('command form spec', () => {
         const resetCart = jest.fn()
         let history: any
         beforeEach(async () => {
-            createCommand.mockResolvedValue('')
-            history = createMemoryHistory({initialEntries: ['/command']})
+            createOrder.mockResolvedValue('')
+            history = createMemoryHistory({initialEntries: ['/order']})
         })
         afterEach(() => {
-            createCommand.mockClear()
+            createOrder.mockClear()
             resetCart.mockClear()
         })
         describe('and the user and the bank card are not updated', () => {
             beforeEach(async () => {
                 await act(async () => {
-                    commandForm = component({cartArticles, createCommand, resetCart}, history)
+                    orderForm = component({cartArticles, createOrder, resetCart}, history)
                 })
-                fireEvent.click(commandForm.getByText('Submit'))
+                fireEvent.click(orderForm.getByText('Submit'))
             })
-            test('should call create command function with args', () => {
-                expect(createCommand).toBeCalledWith(cartArticles, emptyUser(), emptyBankCard())
+            test('should call create order function with args', () => {
+                expect(createOrder).toBeCalledWith(cartArticles, emptyUser(), emptyBankCard())
             })
         })
         describe('and the user and the bank card are updated', () => {
@@ -67,58 +67,58 @@ describe('command form spec', () => {
 
             beforeEach(async () => {
                 await act(async () => {
-                    commandForm = component({cartArticles, createCommand, resetCart}, history)
+                    orderForm = component({cartArticles, createOrder, resetCart}, history)
                 })
-                fireEvent.change(commandForm.getByTestId('user-form'), {target: {value: JSON.stringify(user)}})
-                fireEvent.change(commandForm.getByTestId('bank-card-form'), {target: {value: JSON.stringify(bankCard)}})
-                fireEvent.click(commandForm.getByText('Submit'))
+                fireEvent.change(orderForm.getByTestId('user-form'), {target: {value: JSON.stringify(user)}})
+                fireEvent.change(orderForm.getByTestId('bank-card-form'), {target: {value: JSON.stringify(bankCard)}})
+                fireEvent.click(orderForm.getByText('Submit'))
             })
             test('should call create command function with args', () => {
-                expect(createCommand).toBeCalledWith(cartArticles, user, bankCard)
+                expect(createOrder).toBeCalledWith(cartArticles, user, bankCard)
             })
         })
-        describe('and there are an error when call create command function', () => {
+        describe('and there are an error when call create order function', () => {
             beforeEach(async () => {
-                createCommand.mockRejectedValue('an error')
+                createOrder.mockRejectedValue('an error')
                 await act(async () => {
-                    commandForm = component({cartArticles, createCommand, resetCart}, history)
-                    fireEvent.click(commandForm.getByText('Submit'))
+                    orderForm = component({cartArticles, createOrder, resetCart}, history)
+                    fireEvent.click(orderForm.getByText('Submit'))
                 })
             })
             test('should not call clean cart function', () => {
                 expect(resetCart).not.toBeCalled()
             })
-            test('should not redirect on command success page', () => {
-                expect(history.location.pathname).toBe('/command')
+            test('should not redirect on order success page', () => {
+                expect(history.location.pathname).toBe('/order')
             })
             test('should display error', () => {
-                expect(commandForm.queryByText('an error')).toBeInTheDocument()
+                expect(orderForm.queryByText('an error')).toBeInTheDocument()
             })
         })
-        describe('and there are no error when call create command function', () => {
+        describe('and there are no error when call create order function', () => {
             beforeEach(async () => {
-                createCommand.mockResolvedValue('')
+                createOrder.mockResolvedValue('')
                 await act(async () => {
-                    commandForm = component({cartArticles, createCommand, resetCart}, history)
+                    orderForm = component({cartArticles, createOrder: createOrder, resetCart}, history)
                 })
-                fireEvent.click(commandForm.getByText('Submit'))
+                fireEvent.click(orderForm.getByText('Submit'))
             })
             test('should call clean cart function', () => {
                 expect(resetCart).toBeCalled()
             })
-            test('should redirect on command success page', () => {
-                expect(history.location.pathname).toBe('/command-success')
+            test('should redirect on order success page', () => {
+                expect(history.location.pathname).toBe('/order-success')
             })
         })
     })
 })
 
-const component = (partialProps: Partial<ICommandFormProps> = {}, history = createMemoryHistory()) =>
+const component = (partialProps: Partial<IOrderFormProps> = {}, history = createMemoryHistory()) =>
     render(
         <Router history={history}>
-            <CommandForm {...{
+            <OrderForm {...{
                 cartArticles: [],
-                createCommand: () => Promise.resolve(''), resetCart: () => {
+                createOrder: () => Promise.resolve(''), resetCart: () => {
                 }, ...partialProps
             }}/>
         </Router>)

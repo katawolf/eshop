@@ -26,21 +26,21 @@ describe('cart articles viewer spec', () => {
         test('should display 3 cart article card', () => {
             expect(cartArticleViewer.queryAllByTestId('cart-article-card')).toHaveLength(3)
         })
-        test('should display "Command" button', () => {
-            expect(cartArticleViewer.queryByText('Command')).toBeInTheDocument()
+        test('should display "Order" button', () => {
+            expect(cartArticleViewer.queryByText('Order')).toBeInTheDocument()
         })
     })
-    describe('When click on "Command" button', () => {
+    describe('When click on "Order" button', () => {
         const history = createMemoryHistory()
 
         beforeEach(async () => {
             await act(async () => {
                 cartArticleViewer = component({}, history)
-                fireEvent.click(cartArticleViewer.getByText('Command'))
+                fireEvent.click(cartArticleViewer.getByText('Order'))
             })
         })
         test('should redirect on command page', () => {
-            expect(history.location.pathname).toBe('/command')
+            expect(history.location.pathname).toBe('/order')
         })
     })
 })
