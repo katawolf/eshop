@@ -89,7 +89,7 @@ describe('command form spec', () => {
                 expect(resetCart).not.toBeCalled()
             })
             test('should not redirect on command success page', () => {
-                // expect(history.location.pathname).toBe('/command')
+                expect(history.location.pathname).toBe('/command')
             })
             test('should display error', () => {
                 expect(commandForm.queryByText('an error')).toBeInTheDocument()

@@ -1,11 +1,11 @@
 import React from "react";
 import Menu from "../components/Menu";
-import ArticlesViewerConnector from "../containers/cart/CartArticlesViewerContainer";
+import ArticlesViewerContainer from "../containers/cart/CartArticlesViewerContainer";
 
 const Cart: React.FC = () =>
     <div data-testid={'cart'}>
         <Menu/>
-        <ArticlesViewerConnector/>
+        <ArticlesViewerContainer/>
     </div>
 
 export default Cart

@@ -25,7 +25,7 @@ const CommandForm: React.FC<IProps> = ({cartArticles, createCommand, resetCart})
             resetCart()
             history.push('/command-success')
         }).catch((e) => {
-            setError(e)
+            setError(e.message || e)
         })
     }
 
