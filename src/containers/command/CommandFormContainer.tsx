@@ -1,19 +1,23 @@
 import React from "react";
 import {connect, ConnectedProps} from "react-redux";
-import {createCommand} from "../../store/cart/action";
 import CommandForm from "../../components/command/CommandForm";
+import {resetCart} from "../../store/cart/action";
+import {ICartState} from "../../store/cart/reducer";
+import createCommand from "../../domain/services/command.service";
+
+const mapState = ({cartArticles}: ICartState) => ({cartArticles})
 
 const mapDispatch = {
-    createCommand,
+    resetCart,
 }
 
-const connector = connect(undefined, mapDispatch)
+const connector = connect(mapState, mapDispatch)
 
 type IProps = ConnectedProps<typeof connector>
 
 const CommandFormContainer: React.FC<IProps> = (props: IProps) =>
     <div data-testid={'command-form-container'}>
-        <CommandForm {...props}/>
+        <CommandForm {...{createCommand: createCommand, ...props}}/>
     </div>
 
 export default connector(CommandFormContainer)

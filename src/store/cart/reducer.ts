@@ -1,7 +1,5 @@
 import {CartActionType} from "./type";
 import ICartArticle from "../../domain/models/ICartArticle";
-import IUser from "../../domain/models/IUser";
-import IBankCard from "../../domain/models/IBankCard";
 
 const initialState: ICartState = {
     cartArticles: []
@@ -29,15 +27,8 @@ const cartReducer = (state = initialState, action: CartActionType): ICartState =
                 ...state,
                 error: undefined
             }
-        case "CREATE_COMMAND":
-            if(userIsValid(action.payload.user) && bankCardIsValid(action.payload.bankCard)) {
-                return initialState
-            } else {
-                return {
-                    ...state,
-                    error: 'An error occurred while creating the order.'
-                }
-            }
+        case "RESET_CART":
+            return {...initialState}
         default:
             return {...state}
     }
@@ -107,10 +98,5 @@ const concatCardArticle = (cartArticle: ICartArticle, {quantity}: ICartArticle) 
     ...cartArticle,
     quantity: cartArticle.quantity + quantity
 })
-
-const userIsValid = ({firstName, lastName, email, address}: IUser) =>
-    firstName && lastName && email && address
-
-const bankCardIsValid = ({number, expirationDate, secretCode}: IBankCard) => number && expirationDate && secretCode
 
 export default cartReducer

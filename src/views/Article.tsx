@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import IArticle from "../domain/models/IArticle";
 import {getArticle} from "../domain/services/article.service";
-import ArticleDetailConnector from "../containers/article/ArticleDetailContainer";
+import ArticleDetailContainer from "../containers/article/ArticleDetailContainer";
 import {useParams} from "react-router-dom";
 import Menu from "../components/Menu";
 
@@ -15,7 +15,7 @@ const Article: React.FC = () => {
 
     return <div data-testid={'article'}>
         <Menu/>
-        {article && <ArticleDetailConnector article={article}/>}
+        {article && <ArticleDetailContainer article={article}/>}
     </div>
 }
 

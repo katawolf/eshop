@@ -2,7 +2,7 @@ import React from "react";
 import IBankCard from "../../domain/models/IBankCard";
 
 interface IProps {
-    updateBankCard: (value: Partial<IBankCard>) => void
+    updateBankCard: (partialBankCard: Partial<IBankCard>) => void
 }
 
 const BankCardForm: React.FC<IProps> = ({updateBankCard}) =>

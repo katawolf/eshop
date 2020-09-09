@@ -1,6 +1,6 @@
 import cartReducer from "./reducer";
 import {CartActionType} from "./type";
-import {aBankCard, aCartArticle, aUser} from "../../data.mock";
+import {aCartArticle} from "../../data.mock";
 
 describe('reducer spec', () => {
     describe('default handle', () => {
@@ -278,40 +278,19 @@ describe('reducer spec', () => {
             })
         })
     })
-    describe('handle "CREATE COMMAND"', () => {
-        const defaultState = {cartArticles: [
-            aCartArticle({id: '2', name: 'X1 carbon', size: 'S', quantity: 5})
-        ]}
-        test('should initiate state when create command', () => {
-            expect(cartReducer(defaultState, {
-                type: "CREATE_COMMAND",
-                payload: {user: aUser(), bankCard: aBankCard()}
-            })).toEqual({cartArticles: []})
-        })
-        describe.each(['firstName', 'lastName', 'email', 'address'])('When user is not valid', (key: string) => {
-            test('should return error when %s is empty', () => {
-                expect(cartReducer(defaultState, {
-                    type: "CREATE_COMMAND",
-                    payload: {user: aUser({[key]: ''}), bankCard: aBankCard()}
-                })).toEqual({
-                    error: `An error occurred while creating the order.`,
+    describe('handle "RESET CART"', () => {
+        test('should reset cart', () => {
+            expect(
+                cartReducer({
+                    error: 'An error',
                     cartArticles: [
                         aCartArticle({id: '2', name: 'X1 carbon', size: 'S', quantity: 5})
                     ]
+                }, {
+                    type: 'RESET_CART',
                 })
-            })
-        })
-        describe.each(['number', 'expirationDate', 'secretCode'])('When bank card is not valid', (key: string) => {
-            test('should return error when %s is empty', () => {
-                expect(cartReducer(defaultState, {
-                    type: "CREATE_COMMAND",
-                    payload: {user: aUser(), bankCard: aBankCard({[key]: ''})}
-                })).toEqual({
-                    error: `An error occurred while creating the order.`,
-                    cartArticles: [
-                        aCartArticle({id: '2', name: 'X1 carbon', size: 'S', quantity: 5})
-                    ]
-                })
+            ).toEqual({
+                cartArticles: []
             })
         })
     })
