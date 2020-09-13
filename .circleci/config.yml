@@ -38,14 +38,14 @@ jobs:
             echo $GCP_DEPLOY_ENDPOINT
           name: Cloud Run Deploy
 workflows:
-    "default":
-      jobs:
-        - "build and test":
+  "default":
+    jobs:
+      - "build and test":
           filters:
             branches:
               ignore:
                 - master
-        - "Deploy on cloud run":
+      - "Deploy on cloud run":
           filters:
             branches:
               only:
