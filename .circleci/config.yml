@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
   node: circleci/node@1.1.6
+  cloudrun: circleci/gcp-cloud-run@1.0.2
 jobs:
   "build and test":
     executor:
@@ -12,7 +13,40 @@ jobs:
             - run: yarn install
             - run: yarn test:ci
             - run: yarn build
+  "Deploy on cloud run":
+    docker:
+      - image: 'cimg/base:stable'
+    steps:
+      - checkout
+      - cloudrun/init
+      - cloudrun/build:
+          tag: 'eu.gcr.io/${GOOGLE_PROJECT_ID}/eshop:${CIRCLE_SHA1}'
+      - run:
+          command: >
+            gcloud beta run deploy eshop \
+              --image "eu.gcr.io/${GOOGLE_PROJECT_ID}/eshop:${CIRCLE_SHA1}" \
+              --platform managed \
+              --region ${GOOGLE_COMPUTE_ZONE} \
+              --port 80
+            echo
+            echo "Service deployed"
+            echo
+            gcloud beta run services add-iam-policy-binding --region=${GOOGLE_COMPUTE_ZONE} --member=allUsers --role=roles/run.invoker eshop
+            GET_GCP_DEPLOY_ENDPOINT=$(gcloud beta run services describe eshop --platform managed --region ${GOOGLE_COMPUTE_ZONE} --format="value(status.address.url)")
+            echo "export GCP_DEPLOY_ENDPOINT=$GET_GCP_DEPLOY_ENDPOINT" >> $BASH_ENV
+            source $BASH_ENV
+            echo $GCP_DEPLOY_ENDPOINT
+          name: Cloud Run Deploy
 workflows:
-    "default":
-      jobs:
-        - "build and test"
+  "default":
+    jobs:
+      - "build and test":
+          filters:
+            branches:
+              ignore:
+                - master
+      - "Deploy on cloud run":
+          filters:
+            branches:
+              only:
+                - master
