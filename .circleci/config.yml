@@ -28,6 +28,7 @@ jobs:
               --platform managed \
               --region ${GOOGLE_COMPUTE_ZONE} \
               --port 80
+              --no-allow-unauthenticated
             echo
             echo "Service deployed"
             echo
