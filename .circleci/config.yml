@@ -27,7 +27,7 @@ jobs:
               --image "eu.gcr.io/${GOOGLE_PROJECT_ID}/eshop:${CIRCLE_SHA1}" \
               --platform managed \
               --region ${GOOGLE_COMPUTE_ZONE} \
-              --port 80
+              --port 80 \
               --no-allow-unauthenticated
             echo
             echo "Service deployed"
